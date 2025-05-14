@@ -43,6 +43,7 @@ cd backend
 # Start the frontend
 cd ../frontend
 open index.html  # or use a local server like Live Server
+```
 
 ## 🗂️ Project Structure
 
