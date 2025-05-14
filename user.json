@@ -1,0 +1,82 @@
+[
+    {
+      "_id": "507f1f77bcf86cd799439011",
+      "username": "john_doe",
+      "password": "$2a$10$XURP2Z3j7L2mW2fZ9z7L2u",
+      "email": "john.doe@example.com",
+      "goal": "burn_500_calories",
+      "createdAt": "2025-05-01T10:00:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439012",
+      "username": "sarah_smith",
+      "password": "$2a$10$Y4kP3Z4j8M3nX3gZ0z8M3v",
+      "email": "sarah.smith@example.com",
+      "goal": "manage_diabetes",
+      "createdAt": "2025-01-15T14:30:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439013",
+      "username": "michael_chen",
+      "password": "$2a$10$Z5lQ4A5k9N4oY4hA1y9N4w",
+      "email": "michael.chen@example.com",
+      "goal": "improve_sleep",
+      "createdAt": "2025-05-10T09:15:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439014",
+      "username": "emily_davis",
+      "password": "$2a$10$A6mR5B6l0O5pZ5iB2z0O5x",
+      "email": "emily.davis@example.com",
+      "goal": "reduce_stress",
+      "createdAt": "2025-03-20T11:45:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439015",
+      "username": "david_wilson",
+      "password": "$2a$10$B7nS6C7m1P6qA6jC3a1P6y",
+      "email": "david.wilson@example.com",
+      "goal": "track_blood_pressure",
+      "createdAt": "2025-05-12T16:20:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439016",
+      "username": "laura_adams",
+      "password": "$2a$10$C8oT7D8n2Q7rB7kD4b2Q7z",
+      "email": "laura.adams@example.com",
+      "goal": "increase_water_intake",
+      "createdAt": "2025-05-05T08:50:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439017",
+      "username": "james_brown",
+      "password": "$2a$10$D9pU8E9o3R8sC8lE5c3R8a",
+      "email": "james.brown@example.com",
+      "goal": "walk_10000_steps",
+      "createdAt": "2025-02-10T13:10:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439018",
+      "username": "anna_taylor",
+      "password": "$2a$10$E0qV9F0p4S9tD9mF6d4S9b",
+      "email": "anna.taylor@example.com",
+      "goal": "maintain_weight",
+      "createdAt": "2025-04-01T15:25:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439019",
+      "username": "robert_lee",
+      "password": "$2a$10$F1rW0G1q5T0uE0nG7e5T0c",
+      "email": "robert.lee@example.com",
+      "goal": "quit_smoking",
+      "createdAt": "2025-05-13T12:00:00Z"
+    },
+    {
+      "_id": "507f1f77bcf86cd799439020",
+      "username": "megan_clark",
+      "password": "$2a$10$G2sX1H2r6U1vF1oH8f6U1d",
+      "email": "megan.clark@example.com",
+      "goal": "improve_mental_health",
+      "createdAt": "2025-05-08T17:35:00Z"
+    }
+  ]

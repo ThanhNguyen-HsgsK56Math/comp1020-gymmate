@@ -1,0 +1,122 @@
+[
+    {
+      "_id": "507f1f77bcf86cd799439031",
+      "name": "Grilled Chicken Salad",
+      "description": "Grilled chicken breast with mixed greens, cherry tomatoes, cucumber, and olive oil vinaigrette.",
+      "calories": 400,
+      "prepTime": 20,
+      "parameters": {
+        "weight_loss": 8,
+        "muscle_gain": 7,
+        "general_health": 8
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439032",
+      "name": "Salmon Quinoa Bowl",
+      "description": "Baked salmon with quinoa, steamed broccoli, and avocado slices, drizzled with lemon-tahini dressing.",
+      "calories": 550,
+      "prepTime": 30,
+      "parameters": {
+        "weight_loss": 6,
+        "muscle_gain": 8,
+        "general_health": 9
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439033",
+      "name": "Vegetarian Stir-Fry",
+      "description": "Tofu, bell peppers, zucchini, and snap peas stir-fried with soy-ginger sauce, served with brown rice.",
+      "calories": 450,
+      "prepTime": 25,
+      "parameters": {
+        "weight_loss": 7,
+        "muscle_gain": 5,
+        "general_health": 8
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439034",
+      "name": "Turkey and Sweet Potato Skillet",
+      "description": "Ground turkey with roasted sweet potatoes, spinach, and spices, cooked in one pan.",
+      "calories": 500,
+      "prepTime": 30,
+      "parameters": {
+        "weight_loss": 6,
+        "muscle_gain": 8,
+        "general_health": 7
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439035",
+      "name": "Greek Yogurt Parfait",
+      "description": "Greek yogurt layered with fresh berries, granola, and a drizzle of honey for breakfast or a snack.",
+      "calories": 300,
+      "prepTime": 10,
+      "parameters": {
+        "weight_loss": 7,
+        "muscle_gain": 6,
+        "general_health": 8
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439036",
+      "name": "Lentil and Vegetable Soup",
+      "description": "Hearty soup with lentils, carrots, celery, and kale, seasoned with herbs.",
+      "calories": 350,
+      "prepTime": 40,
+      "parameters": {
+        "weight_loss": 8,
+        "muscle_gain": 4,
+        "general_health": 9
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439037",
+      "name": "Beef and Broccoli Stir-Fry",
+      "description": "Lean beef strips with broccoli, garlic, and oyster sauce, served with jasmine rice.",
+      "calories": 600,
+      "prepTime": 25,
+      "parameters": {
+        "weight_loss": 5,
+        "muscle_gain": 9,
+        "general_health": 6
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439038",
+      "name": "Chickpea Curry",
+      "description": "Spicy chickpea curry with coconut milk, tomatoes, and spinach, served with naan or rice.",
+      "calories": 500,
+      "prepTime": 35,
+      "parameters": {
+        "weight_loss": 6,
+        "muscle_gain": 5,
+        "general_health": 8
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439039",
+      "name": "Egg and Veggie Scramble",
+      "description": "Scrambled eggs with diced bell peppers, onions, and spinach, paired with whole-grain toast.",
+      "calories": 350,
+      "prepTime": 15,
+      "parameters": {
+        "weight_loss": 7,
+        "muscle_gain": 7,
+        "general_health": 8
+      }
+    },
+    {
+      "_id": "507f1f77bcf86cd799439040",
+      "name": "Shrimp and Zucchini Noodles",
+      "description": "Sautéed shrimp with zucchini noodles, cherry tomatoes, and garlic in a light lemon sauce.",
+      "calories": 300,
+      "prepTime": 20,
+      "parameters": {
+        "weight_loss": 9,
+        "muscle_gain": 6,
+        "general_health": 7
+      }
+    }
+  ]
