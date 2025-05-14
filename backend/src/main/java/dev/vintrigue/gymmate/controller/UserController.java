@@ -15,6 +15,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @GetMapping
+    public ResponseEntity<String> getUsers() {
+        return ResponseEntity.ok("User API is running");
+    }
+
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) {
         User savedUser = userService.register(user); // This will save the user to the database
