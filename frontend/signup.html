@@ -101,7 +101,7 @@
             <h2>Sign Up</h2>
             <form id="signup-form" action="" method="post">
                 <div class="form-group">
-                    <input type="text" class="form-control" id="fullname" placeholder="Full Name" required>
+                    <input type="text" class="form-control" id="username" placeholder="Username" required>
                 </div>
                 <div class="form-group">
                     <input type="email" class="form-control" id="email" placeholder="Email Address" required>
@@ -137,5 +137,46 @@
 
     <!-- Global Init -->
     <script src="assets/js/custom.js"></script>
+    
+    <script>
+        document.getElementById('signup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            try {
+                const response = await fetch('http://localhost:8080/api/users/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        username: username,
+                        email: email,
+                        password: password
+                    })
+                });
+                
+                if (response.ok) {
+                    alert('Registration successful! Please sign in.');
+                    window.location.href = 'signin.html';
+                } else {
+                    const errorData = await response.text();
+                    alert('Registration failed: ' + errorData);
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            }
+        });
+    </script>
 </body>
 </html> 
