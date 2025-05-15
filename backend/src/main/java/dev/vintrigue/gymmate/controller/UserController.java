@@ -8,8 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/users")
+@CrossOrigin(origins = "http://localhost:3000")
 public class UserController {
 
     @Autowired
@@ -21,17 +24,34 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        User savedUser = userService.register(user); // This will save the user to the database
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<?> register(@RequestBody User user) {
+        try {
+            // Check if user already exists
+            if (userService.findByUsername(user.getUsername()).isPresent()) {
+                return ResponseEntity.badRequest().body("Username already exists");
+            }
+            
+            User savedUser = userService.register(user);
+            return ResponseEntity.ok(savedUser);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Registration failed: " + e.getMessage());
+        }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        boolean isAuthenticated = userService.login(user.getUsername(), user.getPassword());
-        if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+    public ResponseEntity<?> login(@RequestBody User user) {
+        try {
+            boolean isAuthenticated = userService.login(user.getUsername(), user.getPassword());
+            if (isAuthenticated) {
+                // You might want to generate a JWT token here
+                return ResponseEntity.ok().body(Map.of(
+                    "message", "Login successful",
+                    "username", user.getUsername()
+                ));
+            }
+            return ResponseEntity.status(401).body("Invalid credentials");
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Login failed: " + e.getMessage());
         }
-        return ResponseEntity.status(401).body("Invalid credentials");
     }
 }

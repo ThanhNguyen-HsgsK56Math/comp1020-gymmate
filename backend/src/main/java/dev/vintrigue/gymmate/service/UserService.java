@@ -1,11 +1,13 @@
 package dev.vintrigue.gymmate.service;
 
-import dev.vintrigue.gymmate.model.User;
-import dev.vintrigue.gymmate.repository.UserRepository;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import dev.vintrigue.gymmate.model.User;
+import dev.vintrigue.gymmate.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -37,5 +39,9 @@ public class UserService {
             return passwordEncoder.matches(password, user.get().getPassword());
         }
         return false;
+    }
+
+    public Optional<User> findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 }
