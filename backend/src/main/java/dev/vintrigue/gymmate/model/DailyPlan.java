@@ -8,13 +8,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Document(collection = "dailyplan")
-@Data
+@Data // This annotation is used to generate getters and setters for the class
 public class DailyPlan {
     @Id
     private String id;
     private String userId;
     private LocalDate date;
-    private List<String> exerciseSequence; // List of exercise IDs
+    private List<ExerciseDetails> exerciseSequence; // List of exercise details including name and description
     private int totalCalories; // Total calories burned
     private int totalTime; // Total time in minutes
 }
