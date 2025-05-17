@@ -2,6 +2,7 @@ package dev.vintrigue.gymmate.service;
 
 import dev.vintrigue.gymmate.model.DailyPlan;
 import dev.vintrigue.gymmate.model.Exercise;
+import dev.vintrigue.gymmate.model.ExerciseDetails;
 import dev.vintrigue.gymmate.model.User;
 import dev.vintrigue.gymmate.repository.DailyPlanRepository;
 import dev.vintrigue.gymmate.repository.ExerciseRepository;
@@ -28,14 +29,15 @@ public class DailyPlanService {
     public DailyPlan generatePlan(String userId) {
         // Fetch user and parse goal
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new RuntimeException("Sorry, we couldn't find your account. Please make sure you're logged in."));
         String goalStr = user.getGoal(); // "burn_500_calories"
         int goalCalories = Integer.parseInt(goalStr.split("_")[1]); // 500
 
-        // Fetch all exercises
+        // Fetch all exercises from MongoDB
         List<Exercise> exercises = exerciseRepository.findAll();
+        
         if (exercises.isEmpty()) {
-            throw new RuntimeException("No exercises available");
+            throw new RuntimeException("No exercises found in database. Please ensure MongoDB is properly configured and exercise data is loaded.");
         }
 
         // Generate plan using Dijkstra's algorithm

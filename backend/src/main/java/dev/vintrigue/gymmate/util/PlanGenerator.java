@@ -3,15 +3,16 @@ package dev.vintrigue.gymmate.util;
 import java.util.*;
 
 import dev.vintrigue.gymmate.model.Exercise;
+import dev.vintrigue.gymmate.model.ExerciseDetails;
 
 public class PlanGenerator {
 
     public static class PlanResult {
-        public List<String> exerciseSequence;
+        public List<ExerciseDetails> exerciseSequence;
         public int totalCalories;
         public int totalTime;
 
-        public PlanResult(List<String> exerciseSequence, int totalCalories, int totalTime) {
+        public PlanResult(List<ExerciseDetails> exerciseSequence, int totalCalories, int totalTime) {
             this.exerciseSequence = exerciseSequence;
             this.totalCalories = totalCalories;
             this.totalTime = totalTime;
@@ -23,8 +24,8 @@ public class PlanGenerator {
         Map<Integer, Integer> dist = new HashMap<>();
         // Previous state map: current state -> previous state
         Map<Integer, Integer> prevState = new HashMap<>();
-        // Previous exercise map: current state -> exercise ID that led here
-        Map<Integer, String> prevExercise = new HashMap<>();
+        // Previous exercise map: current state -> exercise index that led here
+        Map<Integer, Integer> prevExerciseIndex = new HashMap<>();
         // Priority queue to process states with minimal time
         PriorityQueue<Node> pq = new PriorityQueue<>(Comparator.comparingInt(node -> node.dist));
 
@@ -39,11 +40,16 @@ public class PlanGenerator {
 
             // If goal is reached or exceeded, reconstruct the plan
             if (state >= goalCalories) {
-                List<String> sequence = new ArrayList<>();
+                List<ExerciseDetails> sequence = new ArrayList<>();
                 int currentState = state;
                 while (currentState != 0) {
-                    String exerciseId = prevExercise.get(currentState);
-                    sequence.add(exerciseId);
+                    int exerciseIndex = prevExerciseIndex.get(currentState);
+                    Exercise exercise = exercises.get(exerciseIndex);
+                    
+                    // Create ExerciseDetails from the Exercise
+                    ExerciseDetails details = ExerciseDetails.fromExercise(exercise);
+                    sequence.add(details);
+                    
                     currentState = prevState.get(currentState);
                 }
                 Collections.reverse(sequence);
@@ -54,14 +60,15 @@ public class PlanGenerator {
             if (dist.getOrDefault(state, Integer.MAX_VALUE) < currentDist) continue;
 
             // Explore next states by adding each exercise
-            for (Exercise exercise : exercises) {
-                int nextState = state + exercise.getCaloriesBurned();
-                int nextDist = currentDist + exercise.getTimeRequired();
+            for (int i = 0; i < exercises.size(); i++) { // Iterate through all exercises
+                Exercise exercise = exercises.get(i); // Get the exercise at index i
+                int nextState = state + exercise.getCaloriesBurned(); // Calculate the next state by adding the calories burned of the current exercise
+                int nextDist = currentDist + exercise.getTimeRequired(); // Calculate the next distance by adding the time required of the current exercise
 
                 if (nextDist < dist.getOrDefault(nextState, Integer.MAX_VALUE)) {
                     dist.put(nextState, nextDist);
                     prevState.put(nextState, state);
-                    prevExercise.put(nextState, exercise.getId());
+                    prevExerciseIndex.put(nextState, i);
                     pq.offer(new Node(nextState, nextDist));
                 }
             }

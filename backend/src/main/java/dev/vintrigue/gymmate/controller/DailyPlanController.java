@@ -14,8 +14,12 @@ public class DailyPlanController {
     private DailyPlanService dailyPlanService;
 
     @GetMapping
-    public ResponseEntity<DailyPlan> getDailyPlan(@RequestParam String userId) { // This will generate the daily plan for the user
-        DailyPlan plan = dailyPlanService.generatePlan(userId); 
-        return ResponseEntity.ok(plan);
+    public ResponseEntity<?> getDailyPlan(@RequestParam String userId) {
+        try {
+            DailyPlan plan = dailyPlanService.generatePlan(userId);
+            return ResponseEntity.ok(plan);
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(404).body("Error: " + e.getMessage());
+        }
     }
 }

@@ -21,9 +21,15 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<User> register(@RequestBody User user) {
-        User savedUser = userService.register(user); // This will save the user to the database
-        return ResponseEntity.ok(savedUser);
+    public ResponseEntity<?> register(@RequestBody User user) {
+        try {
+            User savedUser = userService.register(user);
+            return ResponseEntity.ok(savedUser);
+        } catch (UserService.UserAlreadyExistsException e) {
+            return ResponseEntity
+                .status(400)
+                .body("This user already exists!");
+        }
     }
 
     @PostMapping("/login")
@@ -32,6 +38,31 @@ public class UserController {
         if (isAuthenticated) {
             return ResponseEntity.ok("Login successful");
         }
-        return ResponseEntity.status(401).body("Invalid credentials");
+        return ResponseEntity.status(401).body("Cannot login. Please check your username or password!");
+    }
+
+    @GetMapping("/{userId}")
+    public ResponseEntity<User> getUserById(@PathVariable String userId) {
+        User user = userService.findById(userId);
+        return ResponseEntity.ok(user);
+    }
+
+    // Error response class
+    private static class ErrorResponse {
+        private String error;
+        private String message;
+
+        public ErrorResponse(String error, String message) {
+            this.error = error;
+            this.message = message;
+        }
+
+        public String getError() {
+            return error;
+        }
+
+        public String getMessage() {
+            return message;
+        }
     }
 }
