@@ -24,7 +24,7 @@ public class MealGenerator {
      * 
      * @param targetCalories The target calorie intake for the meal plan
      * @param meals Available meals to choose from
-     * @param weightLossPreference A value from 1-10 indicating importance of weight loss (higher = more important)
+     * @param weightLossPreference A value from 1-10 indicating importance of weight loss
      * @param muscleBuildingPreference A value from 1-10 for muscle building importance
      * @param generalHealthPreference A value from 1-10 for general health importance
      * @return A meal plan meeting the calorie target and optimized for preferences
@@ -49,7 +49,15 @@ public class MealGenerator {
         Map<Integer, Double> mealScores = new HashMap<>();
         for (int i = 0; i < meals.size(); i++) {
             Meal meal = meals.get(i);
-            double score = calculateMealScore(meal, weightLossPreference, muscleBuildingPreference, generalHealthPreference);
+            List<String> goals = new ArrayList<>();
+            if (weightLossPreference > 0) goals.add("weight_loss");
+            if (muscleBuildingPreference > 0) goals.add("muscle_gain");
+            if (generalHealthPreference > 0) {
+                goals.add("endurance_building");
+                goals.add("healthy_lifestyle");
+            }
+            
+            double score = FitnessCalculator.calculateSuitabilityScore(meal.getParameters(), goals);
             mealScores.put(i, score);
         }
 
@@ -93,7 +101,7 @@ public class MealGenerator {
                 // Factor in meal scores - adjust prep time based on preference match
                 // (Better matches are "faster" to prepare in our algorithm)
                 double mealScore = mealScores.get(i);
-                double scoreAdjustment = 1.0 - (mealScore / 10.0); // 0.0 for perfect score, 0.9 for worst
+                double scoreAdjustment = 1.0 - (mealScore / 5.0); // 0.0 for perfect score, 0.8 for worst
                 int adjustedPrepTime = (int) Math.round(meal.getPrepTime() * scoreAdjustment);
                 
                 // Ensure minimum prep time of 1 minute
@@ -137,39 +145,6 @@ public class MealGenerator {
         Collections.reverse(sequence);
         
         return new MealPlanResult(sequence, bestState, actualPrepTime);
-    }
-    
-    /**
-     * Calculate a score for how well a meal matches user preferences
-     * Higher scores indicate better matches
-     */
-    private static double calculateMealScore(
-            Meal meal, 
-            int weightLossPreference, 
-            int muscleBuildingPreference, 
-            int generalHealthPreference) {
-        
-        Map<String, Integer> parameters = meal.getParameters();
-        
-        // Default values in case parameters are missing
-        int weightLossParam = parameters.getOrDefault("weight_loss", 5);
-        int muscleGainParam = parameters.getOrDefault("muscle_gain", 5);
-        int generalHealthParam = parameters.getOrDefault("general_health", 5);
-        
-        // Calculate weighted score (0-10 scale)
-        double score = 0;
-        int totalWeight = weightLossPreference + muscleBuildingPreference + generalHealthPreference;
-        
-        if (totalWeight > 0) {
-            score += (weightLossParam * weightLossPreference) / (double) totalWeight;
-            score += (muscleGainParam * muscleBuildingPreference) / (double) totalWeight;
-            score += (generalHealthParam * generalHealthPreference) / (double) totalWeight;
-        } else {
-            // If no preferences, use average of all parameters
-            score = (weightLossParam + muscleGainParam + generalHealthParam) / 3.0;
-        }
-        
-        return score;
     }
 
     static class Node {

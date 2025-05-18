@@ -1,0 +1,362 @@
+{
+  "Scrambled eggs with turkey and spinach": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 207,
+    "follow-up_meals": [
+      "Grilled chicken breast with mixed greens salad",
+      "Baked salmon with spinach and quinoa"
+    ]
+  },
+  "Chicken sausage with sautéed bell peppers": {
+    "type": "breakfast",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 4,
+    "calories": 170,
+    "follow-up_meals": [
+      "Turkey wrap with lettuce and tomatoes",
+      "Tuna salad with cucumber and chickpeas"
+    ]
+  },
+  "Ham and tomato omelet": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 195,
+    "follow-up_meals": [
+      "Grilled chicken breast with mixed greens salad",
+      "Baked salmon with spinach and quinoa"
+    ]
+  },
+  "Grilled bacon and kale on whole-grain toast": {
+    "type": "breakfast",
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 4,
+    "calories": 193,
+    "follow-up_meals": [
+      "Grilled chicken breast with mixed greens salad",
+      "Tuna salad with cucumber and chickpeas"
+    ]
+  },
+  "Turkey bacon with steamed broccoli and eggs": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 265,
+    "follow-up_meals": [
+      "Grilled pork chop with sautéed green beans",
+      "Chicken shawarma bowl with lettuce and carrots"
+    ]
+  },
+  "Smoked salmon and avocado on rye bread": {
+    "type": "breakfast",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 266,
+    "follow-up_meals": [
+      "Grilled chicken breast with mixed greens salad",
+      "Tuna salad with cucumber and chickpeas"
+    ]
+  },
+  "Chicken breast with roasted sweet potato and zucchini": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 240,
+    "follow-up_meals": [
+      "Baked salmon with spinach and quinoa",
+      "Ground turkey chili with bell peppers"
+    ]
+  },
+  "Ground beef breakfast hash with mushrooms": {
+    "type": "breakfast",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 220,
+    "follow-up_meals": [
+      "Turkey wrap with lettuce and tomatoes",
+      "Grilled pork chop with sautéed green beans"
+    ]
+  },
+  "Tuna and cucumber on whole-wheat crackers": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 165,
+    "follow-up_meals": [
+      "Grilled chicken breast with mixed greens salad",
+      "Chicken shawarma bowl with lettuce and carrots"
+    ]
+  },
+  "Egg muffin with turkey ham and kale": {
+    "type": "breakfast",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 138,
+    "follow-up_meals": [
+      "Grilled pork chop with sautéed green beans",
+      "Roast beef sandwich with arugula"
+    ]
+  },
+  "Grilled chicken breast with mixed greens salad": {
+    "type": "lunch",
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 250,
+    "follow-up_meals": [
+      "Grilled lamb with green beans",
+      "Tilapia with sautéed zucchini and quinoa"
+    ]
+  },
+  "Beef stir-fry with broccoli and brown rice": {
+    "type": "lunch",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 375,
+    "follow-up_meals": [
+      "Pork tenderloin with steamed bok choy",
+      "Turkey meatballs with marinara sauce and broccoli"
+    ]
+  },
+  "Turkey wrap with lettuce and tomatoes": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 195,
+    "follow-up_meals": [
+      "Beef stew with carrots and potatoes",
+      "Shrimp stir-fry with bell peppers and rice"
+    ]
+  },
+  "Baked salmon with spinach and quinoa": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 317,
+    "follow-up_meals": [
+      "Grilled lamb with green beans",
+      "Pork tenderloin with steamed bok choy"
+    ]
+  },
+  "Grilled pork chop with sautéed green beans": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 260,
+    "follow-up_meals": [
+      "Tilapia with sautéed zucchini and quinoa",
+      "Turkey meatballs with marinara sauce and broccoli"
+    ]
+  },
+  "Tuna salad with cucumber and chickpeas": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 255,
+    "follow-up_meals": [
+      "Beef stew with carrots and potatoes",
+      "Shrimp stir-fry with bell peppers and rice"
+    ]
+  },
+  "Chicken shawarma bowl with lettuce and carrots": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 225,
+    "follow-up_meals": [
+      "Grilled lamb with green beans",
+      "Salmon teriyaki with baby carrots"
+    ]
+  },
+  "Roast beef sandwich with arugula": {
+    "type": "lunch",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 265,
+    "follow-up_meals": [
+      "Baked chicken thigh with roasted Brussels sprouts",
+      "Tilapia with sautéed zucchini and quinoa"
+    ]
+  },
+  "Ground turkey chili with bell peppers": {
+    "type": "lunch",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 285,
+    "follow-up_meals": [
+      "Beef stew with carrots and potatoes",
+      "Chicken curry with spinach"
+    ]
+  },
+  "Shrimp and asparagus pasta": {
+    "type": "lunch",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 4,
+    "calories": 325,
+    "follow-up_meals": [
+      "Grilled lamb with green beans",
+      "Pork tenderloin with steamed bok choy"
+    ]
+  },
+  "Baked chicken thigh with roasted Brussels sprouts": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 295,
+    "follow-up_meals": [
+      "Smoked salmon and avocado on rye bread",
+      "Tuna and cucumber on whole-wheat crackers"
+    ]
+  },
+  "Beef stew with carrots and potatoes": {
+    "type": "dinner",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 365,
+    "follow-up_meals": [
+      "Scrambled eggs with turkey and spinach",
+      "Egg muffin with turkey ham and kale"
+    ]
+  },
+  "Grilled lamb with green beans": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 290,
+    "follow-up_meals": [
+      "Turkey bacon with steamed broccoli and eggs",
+      "Ham and tomato omelet"
+    ]
+  },
+  "Chicken curry with spinach": {
+    "type": "dinner",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 287,
+    "follow-up_meals": [
+      "Smoked salmon and avocado on rye bread",
+      "Ground beef breakfast hash with mushrooms"
+    ]
+  },
+  "Pork tenderloin with steamed bok choy": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 180,
+    "follow-up_meals": [
+      "Scrambled eggs with turkey and spinach",
+      "Egg muffin with turkey ham and kale"
+    ]
+  },
+  "Tilapia with sautéed zucchini and quinoa": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 240,
+    "follow-up_meals": [
+      "Turkey bacon with steamed broccoli and eggs",
+      "Chicken breast with roasted sweet potato and zucchini"
+    ]
+  },
+  "Turkey meatballs with marinara sauce and broccoli": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 325,
+    "follow-up_meals": [
+      "Smoked salmon and avocado on rye bread",
+      "Ground beef breakfast hash with mushrooms"
+    ]
+  },
+  "Shrimp stir-fry with bell peppers and rice": {
+    "type": "dinner",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 215,
+    "follow-up_meals": [
+      "Scrambled eggs with turkey and spinach",
+      "Egg muffin with turkey ham and kale"
+    ]
+  },
+  "Duck breast with roasted cauliflower": {
+    "type": "dinner",
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 245,
+    "follow-up_meals": [
+      "Turkey bacon with steamed broccoli and eggs",
+      "Ham and tomato omelet"
+    ]
+  },
+  "Salmon teriyaki with baby carrots": {
+    "type": "dinner",
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories": 255,
+    "follow-up_meals": [
+      "Tuna and cucumber on whole-wheat crackers",
+      "Ground beef breakfast hash with mushrooms"
+    ]
+  }
+}

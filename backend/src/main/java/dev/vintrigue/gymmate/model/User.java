@@ -5,8 +5,9 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Document(collection = "user")
+@Document(collection = "users")
 @Data
 public class User {
     @Id
@@ -14,6 +15,11 @@ public class User {
     private String username;
     private String password; // Hashed
     private String email;
-    private String goal; // e.g., "burn_500_calories"
+    private List<String> goal;
+    private String activityLevel; // e.g., "sedentary", "lightly_active", "moderately_active", "very_active", "super_active"
     private LocalDateTime createdAt;
+    private String gender; 
+    private double weight; // in kg
+    private double height; // in cm
+    private int age;
 }
