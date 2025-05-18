@@ -183,36 +183,55 @@
                 </div>
             </div>
 
+            <!-- Category List Section -->
             <div class="row">
-                <!-- Category List Column -->
-                <div class="col-lg-4">
+                <div class="col-12">
                     <div class="training-categories">
-                        <div class="category-item" data-filter="strength">
-                            <i class="fas fa-dumbbell"></i>
-                            <span>Strength Training</span>
-                        </div>
-                        <div class="category-item" data-filter="cardio">
-                            <i class="fas fa-running"></i>
-                            <span>Cardio Exercises</span>
-                        </div>
-                        <div class="category-item" data-filter="flexibility">
-                            <i class="fas fa-child"></i>
-                            <span>Flexibility Workouts</span>
-                        </div>
-                        <div class="category-item" data-filter="all">
-                            <i class="fas fa-th-large"></i>
-                            <span>View All Exercises</span>
-                        </div>
-                        <div class="view-all-button">
-                            <button type="button" class="main-button" id="create-plan">
-                                <i class="fa fa-check-circle"></i> Create My Workout Plan
-                            </button>
+                        <div class="category-container">
+                            <div class="category-item" data-filter="all">
+                                <i class="fas fa-th-large"></i>
+                                <span>All</span>
+                            </div>
+                            <div class="category-item" data-filter="cardio">
+                                <i class="fas fa-running"></i>
+                                <span>Cardio</span>
+                            </div>
+                            <div class="category-item" data-filter="strength">
+                                <i class="fas fa-dumbbell"></i>
+                                <span>Strength</span>
+                            </div>
+                            <div class="category-item" data-filter="hiit">
+                                <i class="fas fa-bolt"></i>
+                                <span>HIIT</span>
+                            </div>
+                            <div class="category-item" data-filter="core">
+                                <i class="fas fa-bullseye"></i>
+                                <span>Core</span>
+                            </div>
+                            <div class="category-item" data-filter="flexibility">
+                                <i class="fas fa-child"></i>
+                                <span>Flexibility</span>
+                            </div>
+                            <div class="category-item" data-filter="equipment">
+                                <i class="fas fa-cog"></i>
+                                <span>Equipment</span>
+                            </div>
+                            <div class="category-item" data-filter="bodyweight">
+                                <i class="fas fa-user"></i>
+                                <span>Bodyweight</span>
+                            </div>
+                            <div class="category-item" data-filter="recovery">
+                                <i class="fas fa-heart"></i>
+                                <span>Recovery</span>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Exercise Grid Column -->
-                <div class="col-lg-8">
+            <!-- Exercise Content -->
+            <div class="row mt-4">
+                <div class="col-12">
                     <div class="exercise-content-wrapper">
                         <!-- Search Box -->
                         <div class="search-box">
@@ -222,7 +241,7 @@
 
                         <!-- Exercise Grid -->
                         <div class="exercise-grid">
-                            <!-- Treadmill Running -->
+                            <!-- Row 1: Basic Cardio -->
                             <div class="exercise-card" data-category="cardio">
                                 <div class="exercise-content">
                                     <div class="exercise-icon">
@@ -247,7 +266,7 @@
                                         <div class="difficulty">
                                             <i class="fas fa-star"></i>
                                             <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                             <i class="far fa-star"></i>
                                         </div>
@@ -259,44 +278,6 @@
                                 </div>
                             </div>
 
-                            <!-- Squat with Dumbbells -->
-                            <div class="exercise-card" data-category="strength">
-                                <div class="exercise-content">
-                                    <div class="exercise-icon">
-                                        <i class="fas fa-dumbbell"></i>
-                                    </div>
-                                    <h3 class="exercise-title">Squat with Dumbbells</h3>
-                                    <div class="exercise-details">
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-bullseye"></i>
-                                            <span>Target: Quads, Glutes, Hamstrings</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-clock"></i>
-                                            <span>Duration: 20 minutes</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-fire-alt"></i>
-                                            <span>Calories: ~200 per session</span>
-                                        </div>
-                                    </div>
-                                    <div class="exercise-actions">
-                                        <div class="difficulty">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="squat-dumbbells">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Cycling (Stationary) -->
                             <div class="exercise-card" data-category="cardio">
                                 <div class="exercise-content">
                                     <div class="exercise-icon">
@@ -326,125 +307,13 @@
                                             <i class="far fa-star"></i>
                                         </div>
                                         <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="cycling-stationary">
+                                            <input type="checkbox" name="selected_exercises[]" value="cycling">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
                                 </div>
                             </div>
 
-                            <!-- Push-Ups -->
-                            <div class="exercise-card" data-category="strength">
-                                <div class="exercise-content">
-                                    <div class="exercise-icon">
-                                        <i class="fas fa-hand-rock"></i>
-                                    </div>
-                                    <h3 class="exercise-title">Push-Ups</h3>
-                                    <div class="exercise-details">
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-bullseye"></i>
-                                            <span>Target: Chest, Shoulders, Triceps</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-clock"></i>
-                                            <span>Duration: 15 minutes</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-fire-alt"></i>
-                                            <span>Calories: ~150 per session</span>
-                                        </div>
-                                    </div>
-                                    <div class="exercise-actions">
-                                        <div class="difficulty">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="push-ups">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- HIIT -->
-                            <div class="exercise-card" data-category="cardio">
-                                <div class="exercise-content">
-                                    <div class="exercise-icon">
-                                        <i class="fas fa-bolt"></i>
-                                    </div>
-                                    <h3 class="exercise-title">High-Intensity Interval Training</h3>
-                                    <div class="exercise-details">
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-stopwatch"></i>
-                                            <span>Alternating Sprints & Rest</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-clock"></i>
-                                            <span>Duration: 25 minutes</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-fire-alt"></i>
-                                            <span>Calories: ~400 per session</span>
-                                        </div>
-                                    </div>
-                                    <div class="exercise-actions">
-                                        <div class="difficulty">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                        </div>
-                                        <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="hiit">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Deadlifts -->
-                            <div class="exercise-card" data-category="strength">
-                                <div class="exercise-content">
-                                    <div class="exercise-icon">
-                                        <i class="fas fa-dumbbell"></i>
-                                    </div>
-                                    <h3 class="exercise-title">Deadlifts</h3>
-                                    <div class="exercise-details">
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-bullseye"></i>
-                                            <span>Target: Back, Glutes, Hamstrings</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-clock"></i>
-                                            <span>Duration: 20 minutes</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-fire-alt"></i>
-                                            <span>Calories: ~220 per session</span>
-                                        </div>
-                                    </div>
-                                    <div class="exercise-actions">
-                                        <div class="difficulty">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="deadlifts">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Swimming -->
                             <div class="exercise-card" data-category="cardio">
                                 <div class="exercise-content">
                                     <div class="exercise-icon">
@@ -481,8 +350,153 @@
                                 </div>
                             </div>
 
-                            <!-- Plank Hold -->
+                            <!-- Row 2: Strength Training -->
                             <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Squat with Dumbbells</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Quads, Glutes, Hamstrings</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 20 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~200 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="squats">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Deadlifts</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Back, Glutes, Hamstrings</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 20 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~220 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="deadlifts">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-hand-rock"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Push-Ups</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Chest, Shoulders, Triceps</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 15 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~150 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="pushups">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Row 3: HIIT and Core -->
+                            <div class="exercise-card" data-category="hiit">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <h3 class="exercise-title">HIIT Training</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-stopwatch"></i>
+                                            <span>Alternating Sprints & Rest</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 25 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~400 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="hiit">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="exercise-card" data-category="core">
                                 <div class="exercise-content">
                                     <div class="exercise-icon">
                                         <i class="fas fa-child"></i>
@@ -518,44 +532,6 @@
                                 </div>
                             </div>
 
-                            <!-- Jump Rope -->
-                            <div class="exercise-card" data-category="cardio">
-                                <div class="exercise-content">
-                                    <div class="exercise-icon">
-                                        <i class="fas fa-fire"></i>
-                                    </div>
-                                    <h3 class="exercise-title">Jump Rope</h3>
-                                    <div class="exercise-details">
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-tachometer-alt"></i>
-                                            <span>Intensity: Moderate</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-clock"></i>
-                                            <span>Duration: 20 minutes</span>
-                                        </div>
-                                        <div class="exercise-detail">
-                                            <i class="fas fa-fire-alt"></i>
-                                            <span>Calories: ~280 per session</span>
-                                        </div>
-                                    </div>
-                                    <div class="exercise-actions">
-                                        <div class="difficulty">
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="fas fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                            <i class="far fa-star"></i>
-                                        </div>
-                                        <label class="exercise-checkbox">
-                                            <input type="checkbox" name="selected_exercises[]" value="jump-rope">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Yoga -->
                             <div class="exercise-card" data-category="flexibility">
                                 <div class="exercise-content">
                                     <div class="exercise-icon">
