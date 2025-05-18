@@ -23,28 +23,42 @@ public class UserController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
         try {
-            User savedUser = userService.register(user);
-            return ResponseEntity.ok(savedUser);
+            User registeredUser = userService.register(user);
+            return ResponseEntity.ok(registeredUser);
         } catch (UserService.UserAlreadyExistsException e) {
-            return ResponseEntity
-                .status(400)
-                .body("This user already exists!");
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
 
     @PostMapping("/login")
-    public ResponseEntity<String> login(@RequestBody User user) {
-        boolean isAuthenticated = userService.login(user.getUsername(), user.getPassword());
+    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        boolean isAuthenticated = userService.login(username, password);
         if (isAuthenticated) {
-            return ResponseEntity.ok("Login successful");
+            return ResponseEntity.ok().body("Login successful");
         }
-        return ResponseEntity.status(401).body("Cannot login. Please check your username or password!");
+        return ResponseEntity.badRequest().body("Invalid credentials");
     }
 
     @GetMapping("/{userId}")
     public ResponseEntity<User> getUserById(@PathVariable String userId) {
         User user = userService.findById(userId);
         return ResponseEntity.ok(user);
+    }
+
+    @PutMapping("/{userId}/activity-level")
+    public ResponseEntity<?> updateActivityLevel(
+            @PathVariable String userId,
+            @RequestParam String activityLevel) {
+        try {
+            User updatedUser = userService.updateActivityLevel(userId, activityLevel);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     // Error response class

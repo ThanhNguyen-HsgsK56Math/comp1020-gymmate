@@ -1,0 +1,242 @@
+{
+  "Treadmill running": {
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 300,
+    "follow-up exercises": ["Squats (barbell or bodyweight)", "Bench press", "Plank"]
+  },
+  "Stationary cycling": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 210,
+    "follow-up exercises": ["Deadlifts", "Push-ups", "Russian twists"]
+  },
+  "Rowing machine": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 210,
+    "follow-up exercises": ["Lunges (walking or static)", "Dumbbell rows", "Plank"]
+  },
+  "Jump rope": {
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 300,
+    "follow-up exercises": ["Leg press", "Pull-ups", "Russian twists"]
+  },
+  "Kettlebell swings": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 400,
+    "follow-up exercises": ["Squats (barbell or bodyweight)", "Bench press", "Plank"]
+  },
+  "Battle ropes": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 285,
+    "follow-up exercises": ["Deadlifts", "Push-ups", "Russian twists"]
+  },
+  "Burpees": {
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 300,
+    "follow-up exercises": ["Lunges (walking or static)", "Dumbbell shoulder press", "Plank"]
+  },
+  "Box jumps": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 270,
+    "follow-up exercises": ["Leg press", "Pull-ups", "Russian twists"]
+  },
+  "Deadlifts": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 180,
+    "follow-up exercises": ["Treadmill running", "Bench press", "Plank"]
+  },
+  "Squats (barbell or bodyweight)": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 165,
+    "follow-up exercises": ["Stationary cycling", "Pull-ups", "Russian twists"]
+  },
+  "Lunges (walking or static)": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 165,
+    "follow-up exercises": ["Rowing machine", "Dumbbell shoulder press", "Plank"]
+  },
+  "Leg press": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 150,
+    "follow-up exercises": ["Jump rope", "Bench press", "Russian twists"]
+  },
+  "Bench press": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 135,
+    "follow-up exercises": ["Treadmill running", "Deadlifts", "Plank"]
+  },
+  "Push-ups": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 150,
+    "follow-up exercises": ["Stationary cycling", "Dumbbell rows", "Russian twists"]
+  },
+  "Pull-ups": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 165,
+    "follow-up exercises": ["Rowing machine", "Squats (barbell or bodyweight)", "Plank"]
+  },
+  "Lat pulldown": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 135,
+    "follow-up exercises": ["Jump rope", "Lunges (walking or static)", "Russian twists"]
+  },
+  "Dumbbell shoulder press": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 135,
+    "follow-up exercises": ["Treadmill running", "Deadlifts", "Plank"]
+  },
+  "Dumbbell rows": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 2,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 135,
+    "follow-up exercises": ["Stationary cycling", "Bench press", "Russian twists"]
+  },
+  "Cable chest fly": {
+    "suitability_weight_loss": 1,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 1,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 120,
+    "follow-up exercises": ["Rowing machine", "Squats (barbell or bodyweight)", "Plank"]
+  },
+  "Plank": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 90,
+    "follow-up exercises": ["Jump rope", "Lunges (walking or static)"]
+  },
+  "Russian twists": {
+    "suitability_weight_loss": 2,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 3,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 90,
+    "follow-up exercises": ["Treadmill running", "Bench press"]
+  },
+  "Medicine ball slams": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 3,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 240,
+    "follow-up exercises": ["Deadlifts", "Push-ups", "Plank"]
+  },
+  "TRX suspension training": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 180,
+    "follow-up exercises": ["Squats (barbell or bodyweight)", "Dumbbell shoulder press", "Russian twists"]
+  },
+  "Stair climber machine": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 270,
+    "follow-up exercises": ["Lunges (walking or static)", "Pull-ups", "Plank"]
+  },
+  "Elliptical trainer": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 1,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 270,
+    "follow-up exercises": ["Leg press", "Dumbbell rows", "Russian twists"]
+  },
+  "Clean and press": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 5,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 240,
+    "follow-up exercises": ["Treadmill running", "Bench press", "Plank"]
+  },
+  "Farmer’s carry": {
+    "suitability_weight_loss": 3,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 180,
+    "follow-up exercises": ["Stationary cycling", "Push-ups", "Russian twists"]
+  },
+  "Mountain climbers": {
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 240,
+    "follow-up exercises": ["Squats (barbell or bodyweight)", "Bench press", "Plank"]
+  },
+  "High knees": {
+    "suitability_weight_loss": 5,
+    "suitability_muscle_gain": 2,
+    "suitability_endurance_building": 5,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 240,
+    "follow-up exercises": ["Deadlifts", "Pull-ups", "Russian twists"]
+  },
+  "Sled push/pull": {
+    "suitability_weight_loss": 4,
+    "suitability_muscle_gain": 4,
+    "suitability_endurance_building": 4,
+    "suitability_healthy_lifestyle": 5,
+    "calories_burnt": 270,
+    "follow-up exercises": ["Treadmill running", "Dumbbell shoulder press", "Plank"]
+  }
+}

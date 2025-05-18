@@ -6,6 +6,7 @@ import dev.vintrigue.gymmate.model.User;
 import dev.vintrigue.gymmate.repository.MealPlanRepository;
 import dev.vintrigue.gymmate.repository.MealRepository;
 import dev.vintrigue.gymmate.repository.UserRepository;
+import dev.vintrigue.gymmate.util.FitnessCalculator;
 import dev.vintrigue.gymmate.util.MealGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -54,11 +55,28 @@ public class MealPlanService {
             targetCalories = 2000; // Default daily calorie intake
         }
 
+        // Calculate BMR and TDEE
+        double bmr = FitnessCalculator.calculateBMR(
+            user.getWeight(),
+            user.getHeight(),
+            user.getAge(),
+            user.getGender()
+        );
+        double tdee = FitnessCalculator.calculateTDEE(bmr, user.getActivityLevel());
+
         // Fetch all meals
         List<Meal> meals = mealRepository.findAll();
         if (meals.isEmpty()) {
             System.out.println("No meals found in database. Creating sample meals for this session.");
-            meals = createSampleMeals();
+            //meals = createSampleMeals();
+        }
+
+        // Calculate suitability scores and weights for each meal
+        List<String> userGoals = user.getGoal();
+        for (Meal meal : meals) {
+            double suitability = FitnessCalculator.calculateSuitabilityScore(meal.getParameters(), userGoals);
+            double weight = FitnessCalculator.calculateMealWeight(suitability, meal.getCalories(), bmr);
+            meal.getParameters().put("calculated_weight", (int)(weight * 100)); // Store as integer percentage
         }
 
         // Generate meal plan using the algorithm
@@ -82,53 +100,5 @@ public class MealPlanService {
         plan.setTotalPrepTime(result.totalPrepTime);
 
         return mealPlanRepository.save(plan);
-    }
-    
-    /**
-     * Creates a list of sample meals for testing when no meals exist in the database
-     */
-    private List<Meal> createSampleMeals() {
-        List<Meal> meals = new ArrayList<>();
-        
-        // Meal 1: Grilled Chicken Salad
-        Meal chickenSalad = new Meal();
-        chickenSalad.setName("Grilled Chicken Salad");
-        chickenSalad.setDescription("Grilled chicken breast with mixed greens, cherry tomatoes, cucumber, and olive oil vinaigrette.");
-        chickenSalad.setCalories(400);
-        chickenSalad.setPrepTime(20);
-        Map<String, Integer> chickenSaladParams = new HashMap<>();
-        chickenSaladParams.put("weight_loss", 8);
-        chickenSaladParams.put("muscle_gain", 7);
-        chickenSaladParams.put("general_health", 8);
-        chickenSalad.setParameters(chickenSaladParams);
-        meals.add(chickenSalad);
-        
-        // Meal 2: Salmon Quinoa Bowl
-        Meal salmonQuinoa = new Meal();
-        salmonQuinoa.setName("Salmon Quinoa Bowl");
-        salmonQuinoa.setDescription("Baked salmon with quinoa, steamed broccoli, and avocado slices, drizzled with lemon-tahini dressing.");
-        salmonQuinoa.setCalories(550);
-        salmonQuinoa.setPrepTime(30);
-        Map<String, Integer> salmonQuinoaParams = new HashMap<>();
-        salmonQuinoaParams.put("weight_loss", 6);
-        salmonQuinoaParams.put("muscle_gain", 8);
-        salmonQuinoaParams.put("general_health", 9);
-        salmonQuinoa.setParameters(salmonQuinoaParams);
-        meals.add(salmonQuinoa);
-        
-        // Meal 3: Greek Yogurt Parfait
-        Meal yogurtParfait = new Meal();
-        yogurtParfait.setName("Greek Yogurt Parfait");
-        yogurtParfait.setDescription("Greek yogurt layered with fresh berries, granola, and a drizzle of honey for breakfast or a snack.");
-        yogurtParfait.setCalories(300);
-        yogurtParfait.setPrepTime(10);
-        Map<String, Integer> yogurtParfaitParams = new HashMap<>();
-        yogurtParfaitParams.put("weight_loss", 7);
-        yogurtParfaitParams.put("muscle_gain", 6);
-        yogurtParfaitParams.put("general_health", 8);
-        yogurtParfait.setParameters(yogurtParfaitParams);
-        meals.add(yogurtParfait);
-        
-        return meals;
     }
 } 
