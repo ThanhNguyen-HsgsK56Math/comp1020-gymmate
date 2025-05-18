@@ -1,0 +1,295 @@
+.exercise-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 40px;
+}
+
+.exercise-card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    overflow: hidden;
+    transition: all 0.3s;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.exercise-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.exercise-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exercise-category {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(237, 86, 59, 0.9);
+    color: #fff;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.exercise-content {
+    padding: 25px;
+}
+
+.exercise-icon {
+    width: 50px;
+    height: 50px;
+    background: rgba(237, 86, 59, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.exercise-icon i {
+    font-size: 24px;
+    color: #ed563b;
+}
+
+.exercise-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: #232d39;
+    margin-bottom: 10px;
+}
+
+.exercise-details {
+    margin: 15px 0;
+}
+
+.exercise-detail {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    font-size: 14px;
+    color: #7a7a7a;
+}
+
+.exercise-detail i {
+    width: 20px;
+    margin-right: 8px;
+    color: #ed563b;
+}
+
+.exercise-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.difficulty {
+    display: flex;
+    align-items: center;
+}
+
+.difficulty i {
+    color: #ffd700;
+    font-size: 14px;
+    margin-right: 2px;
+}
+
+.exercise-checkbox {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.exercise-checkbox input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.exercise-checkbox .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 24px;
+    height: 24px;
+    background-color: #fff;
+    border: 2px solid #ed563b;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.exercise-checkbox input[type="checkbox"]:checked ~ .checkmark {
+    background-color: #ed563b;
+}
+
+.exercise-checkbox .checkmark:after {
+    content: '\f00c';
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    position: absolute;
+    display: none;
+    color: #fff;
+    font-size: 14px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.exercise-checkbox input[type="checkbox"]:checked ~ .checkmark:after {
+    display: block;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    background: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #232d39;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: #ed563b;
+    color: #fff;
+}
+
+.filter-btn i {
+    margin-right: 8px;
+}
+
+.search-box {
+    position: relative;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 12px 20px;
+    padding-right: 40px;
+    border: none;
+    border-radius: 25px;
+    background: #fff;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7a7a7a;
+}
+
+.exercise-filter-bar {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.exercise-filter-bar.sticky {
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+}
+
+@media (max-width: 768px) {
+    .exercise-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-buttons {
+        margin-bottom: 20px;
+    }
+    
+    .search-box {
+        max-width: 100%;
+    }
+}
+
+.training-categories {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+}
+
+.category-item {
+    display: flex;
+    align-items: center;
+    padding: 20px;
+    margin-bottom: 15px;
+    background: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: 1px solid #eee;
+}
+
+.category-item:hover {
+    transform: translateX(10px);
+    background: rgba(237, 86, 59, 0.05);
+    border-color: #ed563b;
+}
+
+.category-item.active {
+    background: rgba(237, 86, 59, 0.1);
+    border-color: #ed563b;
+}
+
+.category-item i {
+    font-size: 24px;
+    color: #ed563b;
+    margin-right: 15px;
+    width: 30px;
+    text-align: center;
+}
+
+.category-item span {
+    font-size: 16px;
+    font-weight: 500;
+    color: #232d39;
+}
+
+.view-all-button {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.exercise-content-wrapper {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    height: 100%;
+} 

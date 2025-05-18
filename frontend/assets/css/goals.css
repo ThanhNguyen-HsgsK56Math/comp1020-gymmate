@@ -1,0 +1,158 @@
+/* Fitness Goals Section */
+.fitness-goals {
+    padding: 100px 0;
+    background-color: #f8f9fa;
+}
+
+.goals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.goal-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+}
+
+.goal-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.goal-card.selected {
+    border-color: #ed563b;
+    background: rgba(237, 86, 59, 0.02);
+}
+
+.goal-card.selected::after {
+    content: '\f00c';
+    font-family: 'FontAwesome';
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: #ed563b;
+    font-size: 20px;
+}
+
+.goal-icon {
+    width: 70px;
+    height: 70px;
+    background: rgba(237, 86, 59, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.goal-icon i {
+    font-size: 30px;
+    color: #ed563b;
+}
+
+.goal-card h3 {
+    font-size: 24px;
+    color: #232d39;
+    margin-bottom: 15px;
+}
+
+.goal-card p {
+    color: #666;
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* What We Offer Section */
+.what-we-offer {
+    padding: 100px 0;
+    background: linear-gradient(rgba(35,45,57,0.9), rgba(35,45,57,0.9)), url('../images/offer-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.offer-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.offer-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.offer-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(237, 86, 59, 0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.offer-icon i {
+    font-size: 24px;
+    color: #ed563b;
+}
+
+.offer-card h3 {
+    font-size: 20px;
+    color: #fff;
+    margin-bottom: 15px;
+}
+
+.offer-card p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    .goals-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .offer-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .offer-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .goal-card h3 {
+        font-size: 20px;
+    }
+
+    .goal-card p {
+        font-size: 14px;
+    }
+} 

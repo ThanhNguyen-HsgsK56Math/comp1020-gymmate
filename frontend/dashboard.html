@@ -1,0 +1,1099 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
+
+    <title>GymMate - Dashboard</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
+    <link rel="stylesheet" href="assets/css/dashboard.css">
+    <link rel="stylesheet" href="assets/css/exercises.css">
+</head>
+
+<body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+        <div class="preloader-inner">
+            <span class="dot"></span>
+            <div class="dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="index.html" class="logo">Gym<em> Mate</em></a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+                            <li><a href="#my-plans">My Plans</a></li>
+                            <li><a href="#progress">Progress</a></li>
+                            <li><a href="#settings">Settings</a></li>
+                            <li class="main-button"><a href="index.html">Sign Out</a></li>
+                        </ul>
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <!-- ***** Welcome Section Start ***** -->
+    <section class="section" id="welcome">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="welcome-content">
+                        <h1>Welcome, <em id="user-name">John</em>!</h1>
+                        <p>Let's build your personalized fitness journey. Update your profile or explore your tailored plans.</p>
+                        <div class="welcome-buttons">
+                            <div class="main-button">
+                                <a href="#profile-form">Update Profile</a>
+                            </div>
+                            <div class="secondary-button">
+                                <a href="#my-plans">View My Plans</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Welcome Section End ***** -->
+
+    <!-- ***** Profile Form Start ***** -->
+    <section class="section" id="profile-form">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="section-heading">
+                        <h2>Tell Us About <em>You</em></h2>
+                        <img src="assets/images/line-dec.png" alt="waves">
+                        <p>Help us create the perfect plan by sharing your details. All data is securely stored and used to calculate your BMI, BMR, and nutritional needs.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="profile-form-container">
+                        <form id="profile-update" action="" method="post">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="height">Height (cm) <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="Your height in centimeters"></i></label>
+                                        <input type="number" id="height" name="height" required min="100" max="250">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="weight">Weight (kg) <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="Your current weight in kilograms"></i></label>
+                                        <input type="number" id="weight" name="weight" required min="30" max="300">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="age">Age <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="Your current age in years"></i></label>
+                                        <input type="number" id="age" name="age" required min="13" max="100">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="activity">Activity Level <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="Your typical daily activity level"></i></label>
+                                        <select id="activity" name="activity" required>
+                                            <option value="">Select Activity Level</option>
+                                            <option value="sedentary">Sedentary</option>
+                                            <option value="light">Lightly Active</option>
+                                            <option value="moderate">Moderately Active</option>
+                                            <option value="very">Very Active</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="goal">Fitness Goal <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="What you want to achieve with GymMate"></i></label>
+                                        <select id="goal" name="goal" required>
+                                            <option value="">Select Fitness Goal</option>
+                                            <option value="weight-loss">Weight Loss</option>
+                                            <option value="muscle-gain">Muscle Gain</option>
+                                            <option value="general">General Fitness</option>
+                                            <option value="endurance">Endurance</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="diet">Dietary Preferences <i class="fa fa-info-circle tooltip-icon" data-toggle="tooltip" title="Your dietary restrictions or preferences"></i></label>
+                                        <select id="diet" name="diet" required>
+                                            <option value="">Select Diet Type</option>
+                                            <option value="none">None</option>
+                                            <option value="vegetarian">Vegetarian</option>
+                                            <option value="vegan">Vegan</option>
+                                            <option value="keto">Keto</option>
+                                            <option value="gluten-free">Gluten-Free</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-footer">
+                                <div id="loading-spinner" class="spinner-border text-primary" role="status" style="display: none;">
+                                    <span class="sr-only">Loading...</span>
+                                </div>
+                                <button type="submit" class="main-button">Generate My Plan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Profile Form End ***** -->
+
+    <!-- ***** Exercise Selection Start ***** -->
+    <section class="section" id="exercise-selection">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="section-heading">
+                        <h2>Choose Your <em>Fitness Goals</em></h2>
+                        <img src="assets/images/line-dec.png" alt="waves">
+                        <p>Select exercises that match your fitness goals. Our smart algorithm will create a personalized plan based on your selections.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Category List Column -->
+                <div class="col-lg-4">
+                    <div class="training-categories">
+                        <div class="category-item" data-filter="strength">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Strength Training</span>
+                        </div>
+                        <div class="category-item" data-filter="cardio">
+                            <i class="fas fa-running"></i>
+                            <span>Cardio Exercises</span>
+                        </div>
+                        <div class="category-item" data-filter="flexibility">
+                            <i class="fas fa-child"></i>
+                            <span>Flexibility Workouts</span>
+                        </div>
+                        <div class="category-item" data-filter="all">
+                            <i class="fas fa-th-large"></i>
+                            <span>View All Exercises</span>
+                        </div>
+                        <div class="view-all-button">
+                            <button type="button" class="main-button" id="create-plan">
+                                <i class="fa fa-check-circle"></i> Create My Workout Plan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Exercise Grid Column -->
+                <div class="col-lg-8">
+                    <div class="exercise-content-wrapper">
+                        <!-- Search Box -->
+                        <div class="search-box">
+                            <input type="text" id="exercise-search" placeholder="Find an exercise...">
+                            <i class="fas fa-search"></i>
+                        </div>
+
+                        <!-- Exercise Grid -->
+                        <div class="exercise-grid">
+                            <!-- Treadmill Running -->
+                            <div class="exercise-card" data-category="cardio">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-running"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Treadmill Running</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-heartbeat"></i>
+                                            <span>Intensity: Moderate</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 30 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~300 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="treadmill-running">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Squat with Dumbbells -->
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Squat with Dumbbells</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Quads, Glutes, Hamstrings</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 20 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~200 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="squat-dumbbells">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Cycling (Stationary) -->
+                            <div class="exercise-card" data-category="cardio">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-bicycle"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Cycling (Stationary)</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                            <span>Speed: 15 mph</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 30 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~250 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="cycling-stationary">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Push-Ups -->
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-hand-rock"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Push-Ups</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Chest, Shoulders, Triceps</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 15 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~150 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="push-ups">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- HIIT -->
+                            <div class="exercise-card" data-category="cardio">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-bolt"></i>
+                                    </div>
+                                    <h3 class="exercise-title">High-Intensity Interval Training</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-stopwatch"></i>
+                                            <span>Alternating Sprints & Rest</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 25 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~400 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="hiit">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Deadlifts -->
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-dumbbell"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Deadlifts</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Back, Glutes, Hamstrings</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 20 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~220 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="deadlifts">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Swimming -->
+                            <div class="exercise-card" data-category="cardio">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-swimmer"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Swimming (Freestyle)</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-water"></i>
+                                            <span>Style: Freestyle</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 40 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~350 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="swimming">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Plank Hold -->
+                            <div class="exercise-card" data-category="strength">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-child"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Plank Hold</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-bullseye"></i>
+                                            <span>Target: Core Muscles</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 10 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~100 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="plank">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Jump Rope -->
+                            <div class="exercise-card" data-category="cardio">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-fire"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Jump Rope</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-tachometer-alt"></i>
+                                            <span>Intensity: Moderate</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 20 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~280 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="jump-rope">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Yoga -->
+                            <div class="exercise-card" data-category="flexibility">
+                                <div class="exercise-content">
+                                    <div class="exercise-icon">
+                                        <i class="fas fa-pray"></i>
+                                    </div>
+                                    <h3 class="exercise-title">Yoga (Vinyasa)</h3>
+                                    <div class="exercise-details">
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-balance-scale"></i>
+                                            <span>Style: Flowing Sequence</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-clock"></i>
+                                            <span>Duration: 45 minutes</span>
+                                        </div>
+                                        <div class="exercise-detail">
+                                            <i class="fas fa-fire-alt"></i>
+                                            <span>Calories: ~180 per session</span>
+                                        </div>
+                                    </div>
+                                    <div class="exercise-actions">
+                                        <div class="difficulty">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                        <label class="exercise-checkbox">
+                                            <input type="checkbox" name="selected_exercises[]" value="yoga">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Exercise Selection End ***** -->
+
+    <!-- ***** Plan Preview Start ***** -->
+    <section class="section" id="plan-preview">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="section-heading">
+                        <h2>Your Custom <em>Fitness Plan</em></h2>
+                        <img src="assets/images/line-dec.png" alt="waves">
+                        <p>Here's a preview of your tailored workout and meal plan based on your profile and selected exercises. Plans are optimized for weekly progress.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Plan Navigation -->
+            <div class="plan-navigation">
+                <div class="plan-tabs">
+                    <button class="plan-tab active" data-plan="workout">Workout Plan</button>
+                    <button class="plan-tab" data-plan="meal">Meal Plan</button>
+                </div>
+                <div class="plan-actions">
+                    <button class="secondary-button" id="downloadPlan">
+                        <i class="fa fa-download"></i> Download Plan
+                    </button>
+                    <a href="#progress" class="main-button">
+                        <i class="fa fa-chart-line"></i> Track Progress
+                    </a>
+                </div>
+            </div>
+
+            <!-- Workout Plan -->
+            <div class="plan-content active" id="workout-plan">
+                <div class="weekly-calendar">
+                    <div class="calendar-header">
+                        <h3>Weekly Workout Schedule</h3>
+                        <div class="week-navigation">
+                            <button class="nav-button" id="prevWeek">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            <span class="current-week">Week of May 1, 2024</span>
+                            <button class="nav-button" id="nextWeek">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="calendar-grid">
+                        <div class="day-column">
+                            <div class="day-header">Monday</div>
+                            <div class="workout-slot">
+                                <div class="workout-item strength">
+                                    <span class="workout-time">09:00 AM</span>
+                                    <h4>Push-Ups</h4>
+                                    <p>3 sets × 12 reps</p>
+                                    <span class="intensity">Moderate</span>
+                                </div>
+                                <div class="workout-item cardio">
+                                    <span class="workout-time">09:30 AM</span>
+                                    <h4>Running</h4>
+                                    <p>20 minutes</p>
+                                    <span class="intensity">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Tuesday</div>
+                            <div class="workout-slot">
+                                <div class="workout-item flexibility">
+                                    <span class="workout-time">08:00 AM</span>
+                                    <h4>Yoga Flow</h4>
+                                    <p>30 minutes</p>
+                                    <span class="intensity">Low</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Wednesday</div>
+                            <div class="workout-slot">
+                                <div class="workout-item strength">
+                                    <span class="workout-time">07:00 AM</span>
+                                    <h4>Squats</h4>
+                                    <p>4 sets × 10 reps</p>
+                                    <span class="intensity">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Thursday</div>
+                            <div class="workout-slot rest-day">
+                                <div class="rest-indicator">
+                                    <i class="fa fa-bed"></i>
+                                    <span>Rest Day</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Friday</div>
+                            <div class="workout-slot">
+                                <div class="workout-item cardio">
+                                    <span class="workout-time">06:30 AM</span>
+                                    <h4>Cycling</h4>
+                                    <p>45 minutes</p>
+                                    <span class="intensity">Moderate</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Saturday</div>
+                            <div class="workout-slot">
+                                <div class="workout-item strength">
+                                    <span class="workout-time">10:00 AM</span>
+                                    <h4>Full Body Circuit</h4>
+                                    <p>3 rounds</p>
+                                    <span class="intensity">High</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="day-column">
+                            <div class="day-header">Sunday</div>
+                            <div class="workout-slot rest-day">
+                                <div class="rest-indicator">
+                                    <i class="fa fa-bed"></i>
+                                    <span>Rest Day</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meal Plan -->
+            <div class="plan-content" id="meal-plan">
+                <div class="meal-schedule">
+                    <div class="meal-header">
+                        <h3>Daily Meal Plan</h3>
+                        <div class="day-navigation">
+                            <button class="nav-button" id="prevDay">
+                                <i class="fa fa-chevron-left"></i>
+                            </button>
+                            <span class="current-day">Monday, May 1</span>
+                            <button class="nav-button" id="nextDay">
+                                <i class="fa fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="daily-summary">
+                        <div class="macro-chart">
+                            <canvas id="macroChart"></canvas>
+                        </div>
+                        <div class="daily-totals">
+                            <div class="total-item">
+                                <span class="label">Total Calories</span>
+                                <span class="value">2,200 kcal</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="label">Protein</span>
+                                <span class="value">165g</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="label">Carbs</span>
+                                <span class="value">220g</span>
+                            </div>
+                            <div class="total-item">
+                                <span class="label">Fat</span>
+                                <span class="value">73g</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="meals-grid">
+                        <div class="meal-card breakfast">
+                            <div class="meal-header">
+                                <h4><i class="fa fa-sun"></i> Breakfast</h4>
+                                <span class="meal-time">8:00 AM</span>
+                            </div>
+                            <div class="meal-content">
+                                <div class="meal-item">
+                                    <span class="item-name">Oatmeal with Berries</span>
+                                    <div class="item-macros">
+                                        <span class="calories">300 kcal</span>
+                                        <span class="macro">50g C</span>
+                                        <span class="macro">10g P</span>
+                                        <span class="macro">5g F</span>
+                                    </div>
+                                </div>
+                                <div class="meal-item">
+                                    <span class="item-name">Greek Yogurt</span>
+                                    <div class="item-macros">
+                                        <span class="calories">150 kcal</span>
+                                        <span class="macro">6g C</span>
+                                        <span class="macro">20g P</span>
+                                        <span class="macro">4g F</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="meal-card lunch">
+                            <div class="meal-header">
+                                <h4><i class="fa fa-cloud-sun"></i> Lunch</h4>
+                                <span class="meal-time">1:00 PM</span>
+                            </div>
+                            <div class="meal-content">
+                                <div class="meal-item">
+                                    <span class="item-name">Grilled Chicken Salad</span>
+                                    <div class="item-macros">
+                                        <span class="calories">450 kcal</span>
+                                        <span class="macro">15g C</span>
+                                        <span class="macro">45g P</span>
+                                        <span class="macro">28g F</span>
+                                    </div>
+                                </div>
+                                <div class="meal-item">
+                                    <span class="item-name">Quinoa</span>
+                                    <div class="item-macros">
+                                        <span class="calories">220 kcal</span>
+                                        <span class="macro">39g C</span>
+                                        <span class="macro">8g P</span>
+                                        <span class="macro">4g F</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="meal-card dinner">
+                            <div class="meal-header">
+                                <h4><i class="fa fa-moon"></i> Dinner</h4>
+                                <span class="meal-time">7:00 PM</span>
+                            </div>
+                            <div class="meal-content">
+                                <div class="meal-item">
+                                    <span class="item-name">Salmon with Sweet Potato</span>
+                                    <div class="item-macros">
+                                        <span class="calories">580 kcal</span>
+                                        <span class="macro">45g C</span>
+                                        <span class="macro">42g P</span>
+                                        <span class="macro">28g F</span>
+                                    </div>
+                                </div>
+                                <div class="meal-item">
+                                    <span class="item-name">Steamed Vegetables</span>
+                                    <div class="item-macros">
+                                        <span class="calories">100 kcal</span>
+                                        <span class="macro">20g C</span>
+                                        <span class="macro">4g P</span>
+                                        <span class="macro">1g F</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="meal-card snacks">
+                            <div class="meal-header">
+                                <h4><i class="fa fa-apple-alt"></i> Snacks</h4>
+                                <span class="meal-time">Various</span>
+                            </div>
+                            <div class="meal-content">
+                                <div class="meal-item">
+                                    <span class="item-name">Protein Shake</span>
+                                    <div class="item-macros">
+                                        <span class="calories">240 kcal</span>
+                                        <span class="macro">25g C</span>
+                                        <span class="macro">30g P</span>
+                                        <span class="macro">3g F</span>
+                                    </div>
+                                </div>
+                                <div class="meal-item">
+                                    <span class="item-name">Mixed Nuts</span>
+                                    <div class="item-macros">
+                                        <span class="calories">160 kcal</span>
+                                        <span class="macro">8g C</span>
+                                        <span class="macro">6g P</span>
+                                        <span class="macro">14g F</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Plan Preview End ***** -->
+
+    <!-- ***** Progress Tracking Start ***** -->
+    <section class="section" id="progress">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 offset-lg-2">
+                    <div class="section-heading">
+                        <h2>Track Your <em>Journey</em></h2>
+                        <img src="assets/images/line-dec.png" alt="waves">
+                        <p>Log your workouts and monitor your health metrics to stay on track with your fitness goals.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <!-- Progress Overview -->
+                <div class="col-lg-4">
+                    <div class="progress-card">
+                        <div class="achievement-badge">
+                            <i class="fa fa-trophy"></i>
+                            <span>7-Day Streak!</span>
+                        </div>
+                        <div class="daily-quote">
+                            <i class="fa fa-quote-left"></i>
+                            <p id="motivational-quote">Small steps lead to big results!</p>
+                        </div>
+                        <div class="quick-stats">
+                            <div class="stat-item">
+                                <span class="stat-label">Workouts This Week</span>
+                                <span class="stat-value">5</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-label">Monthly Goal Progress</span>
+                                <span class="stat-value">75%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Log Workout -->
+                <div class="col-lg-8">
+                    <div class="tracking-container">
+                        <div class="tracking-tabs">
+                            <button class="tab-button active" data-tab="log-workout">Log Workout</button>
+                            <button class="tab-button" data-tab="health-metrics">Health Metrics</button>
+                        </div>
+
+                        <!-- Log Workout Tab -->
+                        <div class="tab-content active" id="log-workout">
+                            <form id="workout-log">
+                                <div class="form-group">
+                                    <label>Today's Exercises</label>
+                                    <div class="exercise-checklist">
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="completed_exercises[]" value="push-ups">
+                                            Push-ups
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="completed_exercises[]" value="squats">
+                                            Squats
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="checkbox-item">
+                                            <input type="checkbox" name="completed_exercises[]" value="running">
+                                            Running
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="workout-notes">Notes</label>
+                                    <textarea id="workout-notes" placeholder="How was your workout?"></textarea>
+                                </div>
+                                <button type="submit" class="main-button">Save Workout</button>
+                            </form>
+                        </div>
+
+                        <!-- Health Metrics Tab -->
+                        <div class="tab-content" id="health-metrics">
+                            <form id="metrics-log">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="current-weight">Current Weight (kg)</label>
+                                            <input type="number" id="current-weight" step="0.1" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="energy-level">Energy Level (1-10)</label>
+                                            <input type="range" id="energy-level" min="1" max="10" value="5">
+                                            <span class="range-value">5</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="health-notes">Health Notes</label>
+                                    <textarea id="health-notes" placeholder="How are you feeling today?"></textarea>
+                                </div>
+                                <button type="submit" class="main-button">Save Metrics</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Progress Charts -->
+            <div class="row mt-5">
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h4>Weight Progress</h4>
+                        <canvas id="weightChart"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="chart-container">
+                        <h4>Workout Consistency</h4>
+                        <canvas id="workoutChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- View Full Progress Button -->
+            <div class="row mt-4">
+                <div class="col-lg-12 text-center">
+                    <a href="analytics.html" class="main-button">View Full Progress</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ***** Progress Tracking End ***** -->
+
+    <!-- jQuery -->
+    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <!-- Bootstrap -->
+    <script src="assets/js/popper.js"></script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- Plugins -->
+    <script src="assets/js/scrollreveal.min.js"></script>
+    <script src="assets/js/waypoints.min.js"></script>
+    <script src="assets/js/jquery.counterup.min.js"></script>
+    <script src="assets/js/imgfix.min.js"></script>
+    <script src="assets/js/mixitup.js"></script>
+    <script src="assets/js/accordions.js"></script>
+    <!-- Global Init -->
+    <script src="assets/js/custom.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Dashboard specific -->
+    <script src="assets/js/dashboard.js"></script>
+
+    <style>
+    .training-categories {
+        background: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .category-item {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+        margin-bottom: 15px;
+        background: #fff;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.3s;
+        border: 1px solid #eee;
+    }
+
+    .category-item:hover {
+        transform: translateX(10px);
+        background: rgba(237, 86, 59, 0.05);
+        border-color: #ed563b;
+    }
+
+    .category-item.active {
+        background: rgba(237, 86, 59, 0.1);
+        border-color: #ed563b;
+    }
+
+    .category-item i {
+        font-size: 24px;
+        color: #ed563b;
+        margin-right: 15px;
+        width: 30px;
+        text-align: center;
+    }
+
+    .category-item span {
+        font-size: 16px;
+        font-weight: 500;
+        color: #232d39;
+    }
+
+    .view-all-button {
+        margin-top: 30px;
+        text-align: center;
+    }
+
+    .exercise-content-wrapper {
+        background: #fff;
+        border-radius: 15px;
+        padding: 30px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    }
+
+    .search-box {
+        margin-bottom: 30px;
+    }
+    </style>
+
+</body>
+</html> 
