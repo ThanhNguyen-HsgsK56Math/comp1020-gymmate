@@ -1409,17 +1409,17 @@ responsive
 
 .feature-box {
     background: #fff;
-    padding: 40px 30px;
+    padding: 30px;
     border-radius: 15px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    height: 100%;
     text-align: center;
-    transition: all 0.3s;
-    margin-bottom: 30px;
 }
 
 .feature-box:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
 }
 
 .feature-icon {
@@ -1430,35 +1430,24 @@ responsive
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 0 auto 25px;
-    transition: all 0.3s;
-}
-
-.feature-box:hover .feature-icon {
-    background: #ed563b;
+    margin: 0 auto 20px;
 }
 
 .feature-icon i {
     font-size: 32px;
     color: #ed563b;
-    transition: all 0.3s;
-}
-
-.feature-box:hover .feature-icon i {
-    color: #fff;
 }
 
 .feature-box h4 {
-    font-size: 22px;
-    font-weight: 600;
-    margin-bottom: 15px;
+    font-size: 20px;
     color: #232d39;
+    margin-bottom: 15px;
 }
 
 .feature-box p {
+    color: #666;
     font-size: 15px;
-    line-height: 1.7;
-    color: #7a7a7a;
+    line-height: 1.6;
     margin: 0;
 }
 

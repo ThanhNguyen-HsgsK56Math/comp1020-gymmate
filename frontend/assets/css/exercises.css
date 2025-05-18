@@ -10,8 +10,9 @@
     border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     overflow: hidden;
-    transition: all 0.3s;
+    transition: transform 0.3s;
     height: 100%;
+    display: block;
 }
 
 .exercise-card:hover {
@@ -368,4 +369,112 @@
     border-radius: 15px;
     padding: 30px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.exercise-card.hidden {
+    display: none !important;
+}
+
+.read-more-container {
+    margin-top: 2rem;
+    text-align: center;
+    display: none;
+}
+
+.read-more-container.visible {
+    display: block;
+}
+
+.read-more-container button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+}
+
+.read-more-container button:hover {
+    transform: translateY(-2px);
+}
+
+.read-more-container button i {
+    transition: transform 0.3s ease;
+}
+
+.read-more-container button.active i {
+    transform: rotate(180deg);
+}
+
+.daily-totals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.total-item {
+    text-align: center;
+    padding: 10px;
+    background: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.total-item .label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.total-item .value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ed563b;
+    text-align: center;
+}
+
+/* Center the daily summary section */
+.daily-summary {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Ensure macro chart is centered */
+.macro-chart {
+    width: 100%;
+    height: 0px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .daily-totals {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 500px;
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .daily-totals {
+        grid-template-columns: 1fr;
+        max-width: 300px;
+    }
 } 

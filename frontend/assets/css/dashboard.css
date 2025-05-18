@@ -955,4 +955,103 @@ input[type="range"] {
     .daily-totals {
         grid-template-columns: 1fr;
     }
+}
+
+/* Meal Plan Specific Styles */
+.meal-slot {
+    padding: 10px;
+}
+
+.meal-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+}
+
+.meal-item.breakfast {
+    border-color: #FF9800;
+}
+
+.meal-item.lunch {
+    border-color: #4CAF50;
+}
+
+.meal-item.dinner {
+    border-color: #2196F3;
+}
+
+.meal-item .meal-time {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.meal-item h4 {
+    font-size: 14px;
+    margin: 0 0 5px;
+    color: #232d39;
+}
+
+.meal-item p {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 3px;
+}
+
+/* Update calendar grid for meal plan */
+#meal-plan .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+}
+
+#meal-plan .day-column {
+    min-height: 200px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#meal-plan .day-header {
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Responsive adjustments for meal plan */
+@media (max-width: 1200px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .meal-item {
+        padding: 10px;
+    }
+    
+    .meal-item h4 {
+        font-size: 13px;
+    }
+    
+    .meal-item p {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 576px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: 1fr;
+    }
 } 
