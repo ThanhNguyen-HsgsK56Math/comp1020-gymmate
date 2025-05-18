@@ -1,39 +1,5 @@
-/*
-
-TemplateMo 548 Training Studio
-
-https://templatemo.com/tm-548-training-studio
-
-*/
-
-/* ---------------------------------------------
-Table of contents
-------------------------------------------------
-01. font & reset css
-02. reset
-03. global styles
-04. header
-05. banner
-06. features
-07. testimonials
-08. contact
-09. footer
-10. preloader
-11. search
-12. portfolio
-
---------------------------------------------- */
-/* 
----------------------------------------------
-font & reset css
---------------------------------------------- 
-*/
 @import url("https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i");
-/* 
----------------------------------------------
-reset
---------------------------------------------- 
-*/
+
 html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, div
 pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q,
 s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li,
@@ -147,8 +113,8 @@ body {
 
 .section-heading {
   text-align: center;
-  margin-top: 140px;
-  margin-bottom: 80px;
+  margin-top: 40px;  /* Reduced from 80px */
+  margin-bottom: 40px;
 }
 
 .section-heading h2 {
@@ -759,7 +725,7 @@ subscribe
 */
 
 #call-to-action {
-  padding: 120px 0px;
+  padding: 80px 0px;
   background-image: url(../images/cta-bg.jpg);
   background-position: center center;
   background-repeat: no-repeat;
@@ -1052,7 +1018,7 @@ contact
 
 #contact-us {
   background-color: #f8f9fa;
-  padding: 100px 0;
+  padding: 60px 0;
 }
 
 .contact-info {
@@ -1434,7 +1400,7 @@ responsive
 
 #unique-features {
     background-color: #f8f9fa;
-    padding: 100px 0;
+    padding: 60px 0;
 }
 
 .features-row {
@@ -1523,7 +1489,7 @@ responsive
 
 #team {
     background-color: #fff;
-    padding: 100px 0;
+    padding: 60px 0;
 }
 
 .team-intro {
@@ -1865,5 +1831,221 @@ responsive
     
     .goal-features {
         grid-template-columns: 1fr;
+    }
+}
+
+/* Pre-login Pages Striped Theme */
+.pre-login-page {
+    position: relative;
+    background: repeating-linear-gradient(
+        45deg,
+        #ffffff 0px,
+        #ffffff 40px,
+        #f8f9fa 40px,
+        #f8f9fa 80px
+    );
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+}
+
+.pre-login-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.85);
+    z-index: 1;
+}
+
+.pre-login-page > * {
+    position: relative;
+    z-index: 2;
+}
+
+.pre-login-container {
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    padding: 50px 40px;
+    margin: 80px auto;
+    max-width: 500px;
+    position: relative;
+    overflow: hidden;
+}
+
+.pre-login-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #ed563b;
+}
+
+.pre-login-container h2 {
+    color: #232d39;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 35px;
+}
+
+.pre-login-form .form-group {
+    margin-bottom: 25px;
+}
+
+.pre-login-form label {
+    color: #232d39;
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+    font-size: 15px;
+}
+
+.pre-login-form input {
+    width: 100%;
+    height: 55px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    padding: 0 20px;
+    font-size: 15px;
+    color: #232d39;
+    transition: all 0.3s;
+    background: #fff;
+}
+
+.pre-login-form input:focus {
+    border-color: #ed563b;
+    box-shadow: 0 0 0 4px rgba(237, 86, 59, 0.1);
+    outline: none;
+}
+
+.pre-login-form .main-button {
+    width: 100%;
+    height: 55px;
+    border: none;
+    border-radius: 12px;
+    background: #ed563b;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    margin-top: 10px;
+}
+
+.pre-login-form .main-button:hover {
+    background: #f9735b;
+    transform: translateY(-2px);
+}
+
+.pre-login-links {
+    margin-top: 25px;
+    text-align: center;
+}
+
+.pre-login-links a {
+    color: #7a7a7a;
+    font-size: 14px;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.pre-login-links a:hover {
+    color: #ed563b;
+}
+
+.pre-login-divider {
+    text-align: center;
+    margin: 30px 0;
+    position: relative;
+}
+
+.pre-login-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #eee;
+}
+
+.pre-login-divider::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background: #eee;
+}
+
+.pre-login-divider span {
+    background: #fff;
+    color: #7a7a7a;
+    padding: 0 15px;
+    font-size: 14px;
+    position: relative;
+    z-index: 1;
+}
+
+.social-login {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.social-login-btn {
+    flex: 1;
+    height: 45px;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.social-login-btn i {
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.social-login-btn.google {
+    background: #DB4437;
+}
+
+.social-login-btn.facebook {
+    background: #4267B2;
+}
+
+.social-login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .pre-login-container {
+        margin: 20px;
+        padding: 30px;
+    }
+
+    .social-login {
+        flex-direction: column;
+    }
+
+    .social-login-btn {
+        width: 100%;
     }
 }

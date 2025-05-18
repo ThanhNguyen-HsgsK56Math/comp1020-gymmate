@@ -10,17 +10,15 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 
-    <title>Training Studio - Free CSS Template</title>
+    <title>GymMate - Homepage</title>
 <!--
 
 -->
     <!-- Additional CSS Files -->
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-
-    <link rel="stylesheet" type="text/css" href="assets/css/font-awesome.css">
-
-    <link rel="stylesheet" href="assets/css/templatemo-training-studio.css">
-    <link rel="stylesheet" href="assets/css/goals.css">
+    <link rel="stylesheet" type="text/css" href="frontend/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="frontend/assets/css/template.css">
+    <link rel="stylesheet" href="frontend/assets/css/goals.css">
 
     </head>
     
@@ -52,10 +50,10 @@
                         <ul class="nav">
                             <li class="scroll-to-section"><a href="#top" class="active">Home</a></li>
                             <li class="scroll-to-section"><a href="#features">About</a></li>
-                            <li class="scroll-to-section"><a href="#our-classes">Classes</a></li>
+                            <li class="scroll-to-section"><a href="#fitness-goal">Features</a></li>
                             <li class="scroll-to-section"><a href="#schedule">Schedules</a></li>
                             <li class="scroll-to-section"><a href="#contact-us">Contact</a></li> 
-                            <li class="main-button"><a href="signin.html">Sign In</a></li>
+                            <li class="main-button"><a href="frontend/signin.html">Sign In</a></li>
                         </ul>        
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -71,7 +69,7 @@
     <!-- ***** Main Banner Area Start ***** -->
     <div class="main-banner" id="top">
         <video autoplay muted loop id="bg-video">
-            <source src="assets/images/gym-video.mp4" type="video/mp4" />
+            <source src="frontend/assets/images/gym-video.mp4" type="video/mp4" />
         </video>
 
         <div class="video-overlay header-text">
@@ -80,7 +78,7 @@
                 <p>Discover personalized exercise and meal plans powered by cutting-edge technology that are tailored to your unique goals.</p>
                 <div class="banner-buttons">
                     <div class="main-button">
-                        <a href="signup.html">Get Started for Free</a>
+                        <a href="frontend/signup.html">Get Started for Free</a>
                     </div>
                     <div class="secondary-button">
                         <a href="#features">Learn More</a>
@@ -98,7 +96,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Why <em>GymMate?</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                     </div>
                 </div>
             </div>
@@ -120,18 +118,22 @@
                             </div>
                         </div>
                         <div class="main-button">
-                            <a href="signup.html">Start Your Journey</a>
+                            <a href="frontend/signup.html">Start Your Journey</a>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <div class="about-images">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                <img src="assets/images/diverse-training.jpg" alt="Diverse people exercising" class="rounded">
+                        <div class="col">
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <img src="frontend/assets/images/diverse-training.jpg" alt="Diverse people exercising" class="rounded w-100">
+                                </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6 col-6">
-                                <img src="assets/images/healthy-meal.jpg" alt="Healthy meal preparation" class="rounded">
+                            <div class="row">
+                                <div class="col-12">
+                                    <img src="frontend/assets/images/healthy-meal.jpg" alt="Healthy meal preparation" class="rounded w-100">
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -148,7 +150,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>What Makes GymMate <em>Unique</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                     </div>
                 </div>
             </div>
@@ -192,7 +194,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading text-center">
                         <h2>What We <em>Offer</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                         <p>Experience a comprehensive fitness journey with our cutting-edge features and expert guidance.</p>
                     </div>
                 </div>
@@ -225,70 +227,13 @@
     <!-- ***** What We Offer End ***** -->
 
     <!-- ***** Choose Your Fitness Goal Start ***** -->
-    <section class="section" id="fitness-goals">
-        <!-- <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading">
-                        <h2>Choose Your <em>Fitness Goal</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
-                        <p>Select your primary fitness objective and we'll create a personalized plan to help you achieve it.</p>
-                    </div>
-                            </div>
-                            </div>
-            <div class="row" id="goal-tabs">
-                <div class="col-lg-4">
-                    <ul>
-                        <li><a href='#tabs-1'><img src="assets/images/weight-loss-icon.png" alt="">Weight Loss Program</a></li>
-                        <li><a href='#tabs-2'><img src="assets/images/muscle-gain-icon.png" alt="">Muscle Gain Program</a></li>
-                        <li><a href='#tabs-3'><img src="assets/images/endurance-icon.png" alt="">Endurance Building</a></li>
-                        <li><a href='#tabs-4'><img src="assets/images/lifestyle-icon.png" alt="">Healthy Lifestyle</a></li>
-                    </ul>
-                </div>
-                <div class="col-lg-8">
-                    <section class='tabs-content'>
-                        <article id='tabs-1'>
-                            <img src="assets/images/weight-loss-program.jpg" alt="Weight Loss Program">
-                            <h4>Weight Loss Program</h4>
-                            <p>Transform your body with our scientifically-backed weight loss program. Our comprehensive approach combines calorie-smart meal plans with targeted workouts to help you shed fat while maintaining muscle mass. You'll receive personalized nutrition guidance, workout schedules, and progress tracking tools to ensure steady, sustainable results.</p>
-                            <div class="main-button">
-                                <a href="signup.html">Start Your Journey</a>
-                            </div>
-                        </article>
-                        <article id='tabs-2'>
-                            <img src="assets/images/muscle-gain-program.jpg" alt="Muscle Gain Program">
-                            <h4>Muscle Gain Program</h4>
-                            <p>Build strength and muscle with our hypertrophy-focused training program. We combine progressive overload principles with protein-rich meal plans to maximize your muscle growth potential. Our program includes detailed workout splits, form guidance, and recovery strategies to help you achieve your dream physique.</p>
-                            <div class="main-button">
-                                <a href="signup.html">Start Your Journey</a>
-                            </div>
-                        </article>
-                        <article id='tabs-3'>
-                            <img src="assets/images/endurance-program.jpg" alt="Endurance Program">
-                            <h4>Endurance Building Program</h4>
-                            <p>Boost your stamina and cardiovascular fitness with our endurance-focused program. Whether you're training for a marathon or looking to improve your overall fitness, our program provides structured cardio routines, interval training, and balanced nutrition plans to enhance your endurance capabilities.</p>
-                            <div class="main-button">
-                                <a href="signup.html">Start Your Journey</a>
-                            </div>
-                        </article>
-                        <article id='tabs-4'>
-                            <img src="assets/images/lifestyle-program.jpg" alt="Healthy Lifestyle">
-                            <h4>Healthy Lifestyle Program</h4>
-                            <p>Maintain a balanced and healthy lifestyle with our flexible fitness program. Perfect for those seeking overall wellness, this program offers a mix of strength training, cardio, and flexibility work. We'll help you develop sustainable habits with adaptable workout routines and flexible meal planning options.</p>
-                            <div class="main-button">
-                                <a href="signup.html">Start Your Journey</a>
-                            </div>
-                        </article>
-                    </section>
-                </div>
-            </div>
-        </div> -->
+    <section class="section" id="fitness-goal">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Choose Your <em>Fitness Goal</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                         <p>Select your primary fitness objective and we'll create a personalized plan to help you achieve it.</p>
                     </div>
                 </div>
@@ -296,39 +241,39 @@
             <div class="row" id="tabs">
               <div class="col-lg-4">
                 <ul>
-                  <li><a href='#tabs-1'><img src="assets/images/tabs-first-icon.png" alt="">Weight Loss Program</a></li>
-                  <li><a href='#tabs-2'><img src="assets/images/tabs-first-icon.png" alt="">Muscle Gain Program</a></a></li>
-                  <li><a href='#tabs-3'><img src="assets/images/tabs-first-icon.png" alt="">Endurance Building</a></a></li>
-                  <li><a href='#tabs-4'><img src="assets/images/tabs-first-icon.png" alt="">Healthy Lifestyle</a></a></li>
+                  <li><a href='#tabs-1'><img src="frontend/assets/images/tabs-first-icon.png" alt="">Weight Loss</a></li>
+                  <li><a href='#tabs-2'><img src="frontend/assets/images/tabs-first-icon.png" alt="">Muscle Gain</a></a></li>
+                  <li><a href='#tabs-3'><img src="frontend/assets/images/tabs-first-icon.png" alt="">Endurance Building</a></a></li>
+                  <li><a href='#tabs-4'><img src="frontend/assets/images/tabs-first-icon.png" alt="">Healthy Lifestyle</a></a></li>
                   <!-- <div class="main-rounded-button"><a href="#">View All Schedules</a></div> -->
                 </ul>
               </div>
               <div class="col-lg-8">
                 <section class='tabs-content'>
                   <article id='tabs-1'>
-                    <img src="assets/images/training-image-01.jpg" alt="First Class">
-                    <h4>Weight Loss Program</h4>
+                    <img src="frontend/assets/images/training-image-01.jpg" alt="First Class">
+                    <h4>Weight Loss</h4>
                     <p>Transform your body with our scientifically-backed weight loss program. Our comprehensive approach combines calorie-smart meal plans with targeted workouts to help you shed fat while maintaining muscle mass. You'll receive personalized nutrition guidance, workout schedules, and progress tracking tools to ensure steady, sustainable results.</p>
                     <div class="main-button">
                     </div>
                   </article>
                   <article id='tabs-2'>
-                    <img src="assets/images/training-image-03.jpg" alt="Second Training">
-                    <h4>Muscle Gain Program</h4>
+                    <img src="frontend/assets/images/training-image-03.jpg" alt="Second Training">
+                    <h4>Muscle Gain</h4>
                     <p>Build strength and muscle with our hypertrophy-focused training program. We combine progressive overload principles with protein-rich meal plans to maximize your muscle growth potential. Our program includes detailed workout splits, form guidance, and recovery strategies to help you achieve your dream physique.</p>
                     <div class="main-button">
                     </div>
                   </article>
                   <article id='tabs-3'>
-                    <img src="assets/images/training-image-02.jpg" alt="Third Class">
-                    <h4>Endurance Building Program</h4>
+                    <img src="frontend/assets/images/training-image-02.jpg" alt="Third Class">
+                    <h4>Endurance Building</h4>
                     <p>Boost your stamina and cardiovascular fitness with our endurance-focused program. Whether you're training for a marathon or looking to improve your overall fitness, our program provides structured cardio routines, interval training, and balanced nutrition plans to enhance your endurance capabilities.</p>
                     <div class="main-button">
                     </div>
                   </article>
                   <article id='tabs-4'>
-                    <img src="assets/images/training-image-04.jpg" alt="Fourth Training">
-                    <h4>Healthy Lifestyle Program</h4>
+                    <img src="frontend/assets/images/training-image-04.jpg" alt="Fourth Training">
+                    <h4>Healthy Lifestyle</h4>
                     <p>Maintain a balanced and healthy lifestyle with our flexible fitness program. Perfect for those seeking overall wellness, this program offers a mix of strength training, cardio, and flexibility work. We'll help you develop sustainable habits with adaptable workout routines and flexible meal planning options.</p>
                     <div class="main-button">
                     </div>
@@ -347,7 +292,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Meet the Team Behind <em>GymMate</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                     </div>
                 </div>
             </div>
@@ -355,7 +300,7 @@
                 <div class="col-lg-8 offset-lg-2">
                     <div class="team-intro text-center">
                         <p>GymMate is a passion project by students from VinUniversity's College of Engineering and Computer Science, guided by Prof. Sungdeok Cha and Dr. Pham Huy Hieu.</p>
-                        <img src="assets/images/vinuni-logo.png" alt="VinUniversity Logo" class="vinuni-logo">
+                        <img src="frontend/assets/images/vinuni-logo.png" alt="VinUniversity Logo" class="vinuni-logo">
                     </div>
                 </div>
             </div>
@@ -363,21 +308,10 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="assets/images/team-dang.jpg" alt="Cao Pham Minh Dang">
+                            <img src="frontend/assets/images/team-dang.jpg" alt="Cao Pham Minh Dang">
                         </div>
                         <div class="member-info">
                             <h4>Cao Pham Minh Dang</h4>
-                            <span>Full-stack Developer</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6">
-                    <div class="team-member">
-                        <div class="member-photo">
-                            <img src="assets/images/team-hieu.jpg" alt="Pham Dinh Hieu">
-                        </div>
-                        <div class="member-info">
-                            <h4>Pham Dinh Hieu</h4>
                             <span>Backend Developer</span>
                         </div>
                     </div>
@@ -385,7 +319,18 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="assets/images/team-thanh.jpg" alt="Nguyen Cung Thanh">
+                            <img src="frontend/assets/images/team-hieu.jpg" alt="Pham Dinh Hieu">
+                        </div>
+                        <div class="member-info">
+                            <h4>Pham Dinh Hieu</h4>
+                            <span>Algorithms Developer</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="frontend/assets/images/team-thanh.jpg" alt="Nguyen Cung Thanh">
                         </div>
                         <div class="member-info">
                             <h4>Nguyen Cung Thanh</h4>
@@ -396,11 +341,11 @@
                 <div class="col-lg-3 col-md-6">
                     <div class="team-member">
                         <div class="member-photo">
-                            <img src="assets/images/team-dung.jpg" alt="Duong Pham Minh Dung">
+                            <img src="frontend/assets/images/team-dung.jpg" alt="Duong Pham Minh Dung">
                         </div>
                         <div class="member-info">
                             <h4>Duong Pham Minh Dung</h4>
-                            <span>UI/UX Designer</span>
+                            <span>Full-stack Developer</span>
                         </div>
                     </div>
                 </div>
@@ -413,7 +358,7 @@
                             <div class="col-md-6">
                                 <div class="mentor">
                                     <div class="mentor-photo">
-                                        <img src="assets/images/mentor-cha.jpg" alt="Prof. Sungdeok Cha">
+                                        <img src="frontend/assets/images/mentor-cha.jpg" alt="Prof. Sungdeok Cha">
                                     </div>
                                     <h4>Prof. Sungdeok Cha</h4>
                                     <span>Project Supervisor</span>
@@ -422,7 +367,7 @@
                             <div class="col-md-6">
                                 <div class="mentor">
                                     <div class="mentor-photo">
-                                        <img src="assets/images/mentor-hieu.jpg" alt="Dr. Pham Huy Hieu">
+                                        <img src="frontend/assets/images/mentor-hieu.jpg" alt="Dr. Pham Huy Hieu">
                                     </div>
                                     <h4>Dr. Pham Huy Hieu</h4>
                                     <span>Technical Advisor</span>
@@ -453,78 +398,6 @@
         </div>
     </section>
     <!-- ***** Call to Action End ***** -->
-
-    <!-- ***** Testimonials Starts ***** -->
-    <section class="section" id="trainers">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-3">
-                    <div class="section-heading">
-                        <h2>Expert <em>Trainers</em></h2>
-                        <img src="assets/images/line-dec.png" alt="">
-                        <p>Nunc urna sem, laoreet ut metus id, aliquet consequat magna. Sed viverra ipsum dolor, ultricies fermentum massa consequat eu.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="assets/images/first-trainer.jpg" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Strength Trainer</span>
-                            <h4>Bret D. Bowers</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="assets/images/second-trainer.jpg" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Muscle Trainer</span>
-                            <h4>Hector T. Daigl</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="trainer-item">
-                        <div class="image-thumb">
-                            <img src="assets/images/third-trainer.jpg" alt="">
-                        </div>
-                        <div class="down-content">
-                            <span>Power Trainer</span>
-                            <h4>Paul D. Newman</h4>
-                            <p>Bitters cliche tattooed 8-bit distillery mustache. Keytar succulents gluten-free vegan church-key pour-over seitan flannel.</p>
-                            <ul class="social-icons">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                                <li><a href="#"><i class="fa fa-behance"></i></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- ***** Testimonials Ends ***** -->
     
     <!-- ***** Contact Us Area Starts ***** -->
     <section class="section" id="contact-us">
@@ -533,7 +406,7 @@
                 <div class="col-lg-6 offset-lg-3">
                     <div class="section-heading">
                         <h2>Get in <em>Touch</em></h2>
-                        <img src="assets/images/line-dec.png" alt="waves">
+                        <img src="frontend/assets/images/line-dec.png" alt="waves">
                         <p>Have questions or want to collaborate? Reach out to us!</p>
                     </div>
                 </div>
@@ -617,22 +490,22 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="assets/js/jquery-2.1.0.min.js"></script>
+    <script src="frontend/assets/js/jquery-2.1.0.min.js"></script>
 
     <!-- Bootstrap -->
-    <script src="assets/js/popper.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="frontend/assets/js/popper.js"></script>
+    <script src="frontend/assets/js/bootstrap.min.js"></script>
 
     <!-- Plugins -->
-    <script src="assets/js/scrollreveal.min.js"></script>
-    <script src="assets/js/waypoints.min.js"></script>
-    <script src="assets/js/jquery.counterup.min.js"></script>
-    <script src="assets/js/imgfix.min.js"></script> 
-    <script src="assets/js/mixitup.js"></script> 
-    <script src="assets/js/accordions.js"></script>
+    <script src="frontend/assets/js/scrollreveal.min.js"></script>
+    <script src="frontend/assets/js/waypoints.min.js"></script>
+    <script src="frontend/assets/js/jquery.counterup.min.js"></script>
+    <script src="frontend/assets/js/imgfix.min.js"></script> 
+    <script src="frontend/assets/js/mixitup.js"></script> 
+    <script src="frontend/assets/js/accordions.js"></script>
     
     <!-- Global Init -->
-    <script src="assets/js/custom.js"></script>
+    <script src="frontend/assets/js/custom.js"></script>
 
   </body>
 </html>

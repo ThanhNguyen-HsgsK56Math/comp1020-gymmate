@@ -9,6 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const exerciseCards = document.querySelectorAll('.exercise-card');
     const searchInput = document.getElementById('exercise-search');
 
+    // Add transition styles to exercise cards
+    exerciseCards.forEach(card => {
+        card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+        card.style.opacity = '1';
+        card.style.transform = 'scale(1)';
+    });
+
     // Filter exercises by category
     categoryItems.forEach(item => {
         item.addEventListener('click', () => {
@@ -20,16 +27,27 @@ document.addEventListener('DOMContentLoaded', function() {
             const filter = item.getAttribute('data-filter');
             
             exerciseCards.forEach(card => {
-                if (filter === 'all' || card.getAttribute('data-category') === filter) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 300);
             });
 
             // Re-apply search filter if there's a search term
             if (searchInput.value.trim()) {
-                filterBySearch(searchInput.value.trim().toLowerCase());
+                setTimeout(() => {
+                    filterBySearch(searchInput.value.trim().toLowerCase());
+                }, 350);
             }
         });
     });
@@ -41,21 +59,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 const exerciseTitle = card.querySelector('.exercise-title').textContent.toLowerCase();
                 const exerciseDetails = card.querySelector('.exercise-details').textContent.toLowerCase();
                 
-                if (exerciseTitle.includes(searchTerm) || exerciseDetails.includes(searchTerm)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.opacity = '0';
+                card.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    if (exerciseTitle.includes(searchTerm) || exerciseDetails.includes(searchTerm)) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }, 300);
             }
         });
     }
 
     // Search input handler
-    if (searchInput) {
-        searchInput.addEventListener('input', (e) => {
-            filterBySearch(e.target.value.trim().toLowerCase());
-        });
-    }
+    searchInput.addEventListener('input', (e) => {
+        filterBySearch(e.target.value.trim().toLowerCase());
+    });
 
     // Set first category as active by default
     if (categoryItems.length > 0) {
@@ -215,7 +240,5 @@ function initializeCharts() {
                 }
             }
         }
-    });
-} 
     });
 } 
