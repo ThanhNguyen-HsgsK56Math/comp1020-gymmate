@@ -17,6 +17,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User register(User user) throws UserAlreadyExistsException {
+        System.out.println("Register");
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         
         if (existingUser.isPresent()) {
@@ -67,6 +68,7 @@ public class UserService {
     }
 
     public boolean login(String username, String password) {
+        System.out.println("Log in"+username);
         return authenticateUser(username, password);
     }
 
