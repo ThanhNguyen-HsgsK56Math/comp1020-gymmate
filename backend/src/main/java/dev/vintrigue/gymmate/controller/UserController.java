@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        System.out.println("register");
         try {
             // Only require username and password for initial registration
             if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {

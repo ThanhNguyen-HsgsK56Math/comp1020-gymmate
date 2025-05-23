@@ -17,6 +17,7 @@ public class UserService {
     private PasswordEncoder passwordEncoder;
 
     public User register(User user) throws UserAlreadyExistsException {
+    
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         
         if (existingUser.isPresent()) {
@@ -138,4 +139,31 @@ public class UserService {
             super(message);
         }
     }
+
+    // private boolean isValidActivityLevel(String activityLevel) {
+    //     return activityLevel != null && (
+    //         activityLevel.equals("sedentary") ||
+    //         activityLevel.equals("lightly_active") ||
+    //         activityLevel.equals("moderately_active") ||
+    //         activityLevel.equals("very_active") ||
+    //         activityLevel.equals("super_active")
+    //     );
+    // }
+
+    // private boolean isValidGender(String gender) {
+    //     return gender != null && (
+    //         gender.equalsIgnoreCase("male") ||
+    //         gender.equalsIgnoreCase("female") ||
+    //         gender.equalsIgnoreCase("other")
+    //     );
+    // }
+
+    // private boolean isValidGoal(String goal) {
+    //     return goal != null && (
+    //         goal.equals("weight_loss") ||
+    //         goal.equals("muscle_gain") ||
+    //         goal.equals("endurance_building") ||
+    //         goal.equals("healthy_lifestyle")
+    //     );
+    // }
 }

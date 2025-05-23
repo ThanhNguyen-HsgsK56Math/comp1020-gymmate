@@ -4,6 +4,7 @@
 
 	$(function() {
         $("#tabs").tabs();
+        $("#goal-tabs").tabs();
     });
 
 	$(window).scroll(function() {
@@ -121,5 +122,44 @@
 		});
 	}
 
+
+	// Goal Selection Functionality
+	document.addEventListener('DOMContentLoaded', function() {
+	    const goalCards = document.querySelectorAll('.goal-card');
+	    let selectedGoal = null;
+
+	    goalCards.forEach(card => {
+	        card.addEventListener('click', function() {
+	            // Remove selected class from previously selected card
+	            if (selectedGoal) {
+	                selectedGoal.classList.remove('selected');
+	            }
+
+	            // If clicking the same card, deselect it
+	            if (selectedGoal === this) {
+	                selectedGoal = null;
+	            } else {
+	                // Select the new card
+	                this.classList.add('selected');
+	                selectedGoal = this;
+
+	                // Get the selected goal
+	                const goal = this.dataset.goal;
+	                
+	                // You can store the selected goal or trigger other actions here
+	                console.log('Selected goal:', goal);
+	            }
+	        });
+
+	        // Add hover effect sound
+	        card.addEventListener('mouseenter', function() {
+	            if (typeof Audio !== 'undefined') {
+	                const hoverSound = new Audio('assets/sounds/hover.mp3');
+	                hoverSound.volume = 0.2;
+	                hoverSound.play().catch(() => {});
+	            }
+	        });
+	    });
+	});
 
 })(window.jQuery);

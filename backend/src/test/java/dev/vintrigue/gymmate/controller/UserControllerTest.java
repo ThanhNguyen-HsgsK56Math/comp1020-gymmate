@@ -1,5 +1,6 @@
 package dev.vintrigue.gymmate.controller;
 
+import dev.vintrigue.gymmate.config.TestSecurityConfig;
 import dev.vintrigue.gymmate.model.User;
 import dev.vintrigue.gymmate.service.UserService;
 import dev.vintrigue.gymmate.config.TestSecurityConfig;
@@ -52,6 +53,62 @@ public class UserControllerTest {
                 .content("{\"username\":\"testuser\",\"password\":\"password123\"}"))
                 .andExpect(status().isOk())
                 .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\",\"profileCompleted\":false}"));
+    }
+
+    @Test
+    public void testRegisterUser_MissingActivityLevel() throws Exception {
+        // Mock the service to throw exception for missing activity level
+        when(userService.register(any(User.class)))
+            .thenThrow(new IllegalArgumentException("Please put in your activityLevel with one of the following: sedentary, lightly_active, moderately_active, very_active, super_active"));
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"gender\":\"male\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Please put in your activityLevel with one of the following: sedentary, lightly_active, moderately_active, very_active, super_active"));
+    }
+
+    @Test
+    public void testRegisterUser_InvalidActivityLevel() throws Exception {
+        // Mock the service to throw exception for invalid activity level
+        when(userService.register(any(User.class)))
+            .thenThrow(new IllegalArgumentException("Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active"));
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"invalid_level\",\"gender\":\"male\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active"));
+    }
+
+    @Test
+    public void testRegisterUser_MissingGender() throws Exception {
+        // Mock the service to throw exception for missing gender
+        when(userService.register(any(User.class)))
+            .thenThrow(new IllegalArgumentException("Please specify your gender (male/female/other)"));
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Please specify your gender (male/female/other)"));
+    }
+
+    @Test
+    public void testRegisterUser_InvalidGender() throws Exception {
+        // Mock the service to throw exception for invalid gender
+        when(userService.register(any(User.class)))
+            .thenThrow(new IllegalArgumentException("Invalid gender. Must be one of: male, female, other"));
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/register")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"invalid_gender\"}"))
+                .andExpect(status().isBadRequest())
+                .andExpect(content().string("Invalid gender. Must be one of: male, female, other"));
     }
 
     @Test
