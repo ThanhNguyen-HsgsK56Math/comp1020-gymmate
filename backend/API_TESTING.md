@@ -149,37 +149,19 @@ Expected: 404 Not Found
 
 ### 6. Get Exercise Plan
 ```bash
-curl -X GET "http://localhost:8080/api/exerciseplans?userId=68307b7e13a0891f5ed54334" \
+curl -X GET "http://localhost:8080/api/exerciseplans?userId=USER_ID" \
   -H "Content-Type: application/json"
 ```
-Note: Replace USER_ID with an actual user ID from your database
-Expected: Returns exercise plan or "User not found" if ID is invalid
+Expected: Returns exercise plan based on user's profile and goals
+Note: User must have completed their profile and have valid goals set
 
 ### 7. Get Meal Plan
-Test 1: Single goal meal plan
 ```bash
-curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID&targetCalories=2000&weightLoss=5&muscleBuilding=5&generalHealth=5" \
+curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID" \
   -H "Content-Type: application/json"
 ```
-
-Test 2: Two goals meal plan
-```bash
-curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID&targetCalories=1800&weightLoss=8&muscleBuilding=3&generalHealth=4" \
-  -H "Content-Type: application/json"
-```
-
-Test 3: Two goals meal plan (different combination)
-```bash
-curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID&targetCalories=2500&weightLoss=2&muscleBuilding=9&generalHealth=4" \
-  -H "Content-Type: application/json"
-```
-
-Test 4: Single goal meal plan (different goal)
-```bash
-curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID&targetCalories=2200&weightLoss=4&muscleBuilding=4&generalHealth=8" \
-  -H "Content-Type: application/json"
-```
-Expected: Returns JSON containing meal plan details
+Expected: Returns meal plan based on user's profile and goals
+Note: User must have completed their profile and have valid goals set
 
 ### 8. Exercise List
 Test 1: Get all available exercises

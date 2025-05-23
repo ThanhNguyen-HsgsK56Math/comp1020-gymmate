@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-@Document(collection = "exercises")
+@Document(collection = "exercise")
 @Data
 public class Exercise {
     @Id

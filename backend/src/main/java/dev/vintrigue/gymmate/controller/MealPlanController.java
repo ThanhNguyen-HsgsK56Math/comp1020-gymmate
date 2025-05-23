@@ -23,9 +23,12 @@ public class MealPlanController {
     public ResponseEntity<?> getMealPlan(@RequestParam String userId) {
         try {
             MealPlan plan = mealPlanService.generateMealPlan(userId);
+            if (plan == null) {
+                return ResponseEntity.badRequest().body("No suitable meal plan could be generated. Please ensure you have completed your profile and have valid goals set.");
+            }
             return ResponseEntity.ok(plan);
         } catch (RuntimeException e) {
-            return ResponseEntity.status(404).body("Error: " + e.getMessage());
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 } 
