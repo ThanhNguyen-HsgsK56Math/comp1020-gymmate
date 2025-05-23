@@ -24,6 +24,14 @@ public class UserController {
     public ResponseEntity<?> register(@RequestBody User user) {
         System.out.println("register");
         try {
+            // Only require username and password for initial registration
+            if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Username is required");
+            }
+            if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Password is required");
+            }
+            
             User registeredUser = userService.register(user);
             return ResponseEntity.ok(registeredUser);
         } catch (UserService.UserAlreadyExistsException e) {
@@ -35,12 +43,30 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-        System.out.println("Login"+ username);
-        boolean isAuthenticated = userService.login(username, password);
-        if (isAuthenticated) {
-            return ResponseEntity.ok().body("Login successful");
+        try {
+            User user = userService.login(username, password);
+            if (user != null) {
+                if (!user.isProfileCompleted()) {
+                    return ResponseEntity.ok().body("Profile setup required");
+                }
+                return ResponseEntity.ok().body("Login successful");
+            }
+            return ResponseEntity.badRequest().body("Invalid credentials");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.badRequest().body("Invalid credentials");
+    }
+
+    @PostMapping("/{userId}/complete-profile")
+    public ResponseEntity<?> completeProfile(@PathVariable String userId, @RequestBody User profileData) {
+        try {
+            User updatedUser = userService.completeProfile(userId, profileData);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{userId}")

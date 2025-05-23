@@ -6,6 +6,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 @Document(collection = "exercises")
 @Data
@@ -18,6 +19,10 @@ public class Exercise {
     private int duration; // Duration in minutes
     private Map<String, Integer> parameters; // e.g., {"suitability_weight_loss": 5, "suitability_muscle_gain": 2, ...}
     private List<String> followUpExercises; // List of recommended follow-up exercises
+
+    public Exercise() {
+        this.parameters = new HashMap<>();
+    }
 
     public String getId() {
         return id;
