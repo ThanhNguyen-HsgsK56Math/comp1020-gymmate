@@ -10,7 +10,24 @@ $(document).ready(function(){
 		signIn(requestBody);
 	})
 })
-
+function writeCookie(userId) {
+    // var date, expires;
+    document.cookie = 'userId' + "=" + userId;
+}
+function readCookie() {
+    var i, c, ca, nameEQ = "userId=";
+    ca = document.cookie.split(';');
+    for(i=0;i < ca.length;i++) {
+        c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1,c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length,c.length);
+        }
+    }
+    return '';
+}
 async function signIn(requestBody) {
     // Helper function to build the request body
 
@@ -27,8 +44,9 @@ async function signIn(requestBody) {
         body: JSON.stringify(requestBody)
       });
       
-      if (response.ok) {
+      if (response.status == 200) {
         const data = await response.text();
+        writeCookie(data);
         console.log("Login successful!", data);
         window.location.href = "./dashboard.html";
         // Store token or navigate user here
