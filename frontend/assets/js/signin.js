@@ -8,7 +8,6 @@ $(document).ready(function(){
           };
         console.log(requestBody)
 		signIn(requestBody);
-        window.location.href="./dashboard"
 	})
 })
 
