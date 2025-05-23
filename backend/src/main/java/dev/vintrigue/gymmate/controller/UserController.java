@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -42,9 +45,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
         try {
-            User user = userService.login(username, password);
+            User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
             if (user != null) {
                 if (!user.isProfileCompleted()) {
                     return ResponseEntity.ok().body("Profile setup required");
@@ -86,6 +89,27 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{userId}/test-profile")
+    public ResponseEntity<?> testUserProfile(@PathVariable String userId) {
+        try {
+            User user = userService.findById(userId);
+            Map<String, Object> profileInfo = new HashMap<>();
+            profileInfo.put("id", user.getId());
+            profileInfo.put("username", user.getUsername());
+            profileInfo.put("goals", user.getGoal());
+            profileInfo.put("activityLevel", user.getActivityLevel());
+            profileInfo.put("weight", user.getWeight());
+            profileInfo.put("height", user.getHeight());
+            profileInfo.put("age", user.getAge());
+            profileInfo.put("gender", user.getGender());
+            profileInfo.put("profileCompleted", user.isProfileCompleted());
+            
+            return ResponseEntity.ok(profileInfo);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 

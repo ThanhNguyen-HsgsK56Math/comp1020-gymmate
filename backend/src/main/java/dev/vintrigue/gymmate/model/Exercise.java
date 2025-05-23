@@ -3,25 +3,49 @@ package dev.vintrigue.gymmate.model;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 import java.util.Map;
 import java.util.HashMap;
 
-@Document(collection = "exercises")
+@Document(collection = "exercise")
 @Data
 public class Exercise {
     @Id
     private String id;
-    private String name;
-    private String description;
-    private int caloriesBurned; // Calories burned per session
-    private int duration; // Duration in minutes
-    private Map<String, Integer> parameters; // e.g., {"suitability_weight_loss": 5, "suitability_muscle_gain": 2, ...}
-    private List<String> followUpExercises; // List of recommended follow-up exercises
 
-    public Exercise() {
-        this.parameters = new HashMap<>();
+    private String name;
+
+    @Field("calories_burnt")
+    private int caloriesBurned;
+
+    @Field("suitability_weight_loss")
+    private int suitabilityWeightLoss;
+
+    @Field("suitability_muscle_gain")
+    private int suitabilityMuscleGain;
+
+    @Field("suitability_endurance_building")
+    private int suitabilityEnduranceBuilding;
+
+    @Field("suitability_healthy_lifestyle")
+    private int suitabilityHealthyLifestyle;
+
+    @Field("follow-up_exercises")
+    private List<String> followUpExercises;
+
+    // Default duration in minutes if not specified
+    private int duration = 30;
+
+    // Computed property for algorithm use
+    public Map<String, Integer> getParameters() {
+        Map<String, Integer> parameters = new HashMap<>();
+        parameters.put("suitability_weight_loss", suitabilityWeightLoss);
+        parameters.put("suitability_muscle_gain", suitabilityMuscleGain);
+        parameters.put("suitability_endurance_building", suitabilityEnduranceBuilding);
+        parameters.put("suitability_healthy_lifestyle", suitabilityHealthyLifestyle);
+        return parameters;
     }
 
     public String getId() {
@@ -40,14 +64,6 @@ public class Exercise {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public int getCaloriesBurned() {
         return caloriesBurned;
     }
@@ -62,14 +78,6 @@ public class Exercise {
 
     public void setDuration(int duration) {
         this.duration = duration;
-    }
-
-    public Map<String, Integer> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(Map<String, Integer> parameters) {
-        this.parameters = parameters;
     }
 
     public List<String> getFollowUpExercises() {

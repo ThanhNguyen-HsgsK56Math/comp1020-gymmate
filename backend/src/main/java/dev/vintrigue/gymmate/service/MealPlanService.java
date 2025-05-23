@@ -69,12 +69,16 @@ public class MealPlanService {
         }
         
         for (Meal meal : meals) {
-            if (meal.getParameters() == null) {
-                meal.setParameters(new HashMap<>());
-            }
             double suitability = FitnessCalculator.calculateSuitabilityScore(meal.getParameters(), userGoals);
             double weight = FitnessCalculator.calculateMealWeight(suitability, meal.getCalories(), bmr);
-            meal.getParameters().put("calculated_weight", (int)(weight * 100)); // Store as integer percentage
+            
+            if (meal.getParameters() == null) {
+                Map<String, Integer> parameters = new HashMap<>();
+                parameters.put("calculated_weight", (int)(weight * 100)); // Store as integer percentage
+                meal.setParameters(parameters);
+            } else {
+                meal.getParameters().put("calculated_weight", (int)(weight * 100));
+            }
         }
 
         // Generate meal plan using the algorithm

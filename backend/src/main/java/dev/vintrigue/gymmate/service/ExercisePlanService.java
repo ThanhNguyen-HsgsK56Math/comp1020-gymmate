@@ -10,6 +10,8 @@ import dev.vintrigue.gymmate.util.ExercisePlanGenerator;
 import dev.vintrigue.gymmate.util.FitnessCalculator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.time.LocalDate;
 import java.util.HashMap;
@@ -18,6 +20,7 @@ import java.util.Map;
 
 @Service
 public class ExercisePlanService {
+    private static final Logger logger = LoggerFactory.getLogger(ExercisePlanService.class);
 
     @Autowired
     private UserRepository userRepository;
@@ -40,6 +43,10 @@ public class ExercisePlanService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
+        logger.info("Generating exercise plan for user: {}", userId);
+        logger.info("User goals: {}", user.getGoal());
+        logger.info("User activity level: {}", user.getActivityLevel());
+
         // Calculate BMR and TDEE
         double bmr = FitnessCalculator.calculateBMR(
             user.getWeight(),
@@ -49,17 +56,23 @@ public class ExercisePlanService {
         );
         double tdee = FitnessCalculator.calculateTDEE(bmr, user.getActivityLevel());
 
+        logger.info("Calculated BMR: {}, TDEE: {}", bmr, tdee);
+
         // Calculate target calories to burn based on user's goals
         int targetCaloriesBurned = calculateTargetCaloriesBurned(user.getGoal(), tdee);
+        logger.info("Target calories to burn: {}", targetCaloriesBurned);
 
         // Calculate preference weights based on user's goals
         Map<String, Integer> preferences = calculatePreferences(user.getGoal());
+        logger.info("Preference weights: {}", preferences);
 
         // Fetch all exercises
         List<Exercise> exercises = exerciseRepository.findAll();
         if (exercises.isEmpty()) {
+            logger.error("No exercises found in database");
             throw new RuntimeException("No exercises found in database. Please ensure MongoDB is properly configured and exercise data is loaded.");
         }
+        logger.info("Found {} exercises in database", exercises.size());
 
         // Generate exercise plan using the algorithm
         ExercisePlanGenerator.ExercisePlanResult result = ExercisePlanGenerator.generateExercisePlan(
@@ -71,8 +84,13 @@ public class ExercisePlanService {
                 preferences.get("health"));
 
         if (result == null) {
+            logger.error("Failed to generate exercise plan. Target calories: {}, Available exercises: {}", 
+                targetCaloriesBurned, exercises.size());
             throw new RuntimeException("Cannot generate exercise plan to meet the target calories");
         }
+
+        logger.info("Successfully generated exercise plan with {} exercises, total calories: {}", 
+            result.exerciseSequence.size(), result.totalCaloriesBurned);
 
         // Create and save the exercise plan
         ExercisePlan plan = new ExercisePlan();
@@ -96,7 +114,10 @@ public class ExercisePlanService {
             calorieMultiplier = 0.35; // 35% of TDEE for endurance
         }
         
-        return (int)(tdee * calorieMultiplier);
+        int targetCalories = (int)(tdee * calorieMultiplier);
+        logger.info("Calculated target calories: {} (TDEE: {}, Multiplier: {})", 
+            targetCalories, tdee, calorieMultiplier);
+        return targetCalories;
     }
 
     private Map<String, Integer> calculatePreferences(List<String> goals) {
@@ -120,7 +141,7 @@ public class ExercisePlanService {
             preferences.put("endurance", 5);  // θ = 1.0
             preferences.put("health", 3);     // γ = 0.6
         }
-        if (goals.contains("general_health")) {
+        if (goals.contains("healthy_lifestyle")) {
             preferences.put("health", 5);     // γ = 1.0
             preferences.put("endurance", 3);  // θ = 0.6
         }

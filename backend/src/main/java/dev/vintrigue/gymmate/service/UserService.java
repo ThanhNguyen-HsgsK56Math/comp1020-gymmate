@@ -21,11 +21,7 @@ public class UserService {
         Optional<User> existingUser = userRepository.findByUsername(user.getUsername());
         
         if (existingUser.isPresent()) {
-            // Check if the password matches
-            if (passwordEncoder.matches(user.getPassword(), existingUser.get().getPassword())) {
-                throw new UserAlreadyExistsException("User with this username and password already exists");
-            }
-            // If username exists but password is different, allow registration
+            throw new UserAlreadyExistsException("Username already exists");
         }
         
         // Set default values for new registration
