@@ -42,9 +42,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
         try {
-            User user = userService.login(username, password);
+            User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
             if (user != null) {
                 if (!user.isProfileCompleted()) {
                     return ResponseEntity.ok().body("Profile setup required");

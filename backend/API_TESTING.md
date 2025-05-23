@@ -35,7 +35,12 @@ Expected: "User with this username and password already exists"
 ### 2. User Login
 Test 1: Login with incomplete profile
 ```bash
-curl -X POST "http://localhost:8080/api/users/login?username=newuser1&password=password123"
+curl -X POST http://localhost:8080/api/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "newuser1",
+    "password": "password123"
+  }'
 ```
 Expected: "Profile setup required"
 
@@ -103,13 +108,23 @@ Expected: "Invalid goal. Must be one of: weight_loss, muscle_gain, endurance_bui
 ### 4. Login After Profile Completion
 Test 1: Login with complete profile
 ```bash
-curl -X POST "http://localhost:8080/api/users/login?username=newuser1&password=password123"
+curl -X POST http://localhost:8080/api/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "newuser1",
+    "password": "password123"
+  }'
 ```
 Expected: "Login successful"
 
 Test 2: Login with incorrect password
 ```bash
-curl -X POST "http://localhost:8080/api/users/login?username=newuser1&password=wrongpassword"
+curl -X POST http://localhost:8080/api/users/login \
+  -H "Content-Type: application/json" \
+  -d '{
+    "username": "newuser1",
+    "password": "wrongpassword"
+  }'
 ```
 Expected: "Invalid credentials"
 
@@ -134,7 +149,7 @@ Expected: 404 Not Found
 
 ### 6. Get Exercise Plan
 ```bash
-curl -X GET "http://localhost:8080/api/exerciseplans?userId=682a365f3f60e4283c116e4e" \
+curl -X GET "http://localhost:8080/api/exerciseplans?userId=68307b7e13a0891f5ed54334" \
   -H "Content-Type: application/json"
 ```
 Note: Replace USER_ID with an actual user ID from your database
