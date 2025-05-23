@@ -1,8 +1,8 @@
 package dev.vintrigue.gymmate.controller;
 
-import dev.vintrigue.gymmate.config.TestSecurityConfig;
 import dev.vintrigue.gymmate.model.User;
 import dev.vintrigue.gymmate.service.UserService;
+import dev.vintrigue.gymmate.config.TestSecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,7 +11,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -42,6 +41,7 @@ public class UserControllerTest {
         testUser.setGoal(Collections.singletonList("weight_loss"));
         testUser.setActivityLevel("moderately_active");
         testUser.setGender("male");
+        testUser.setProfileCompleted(false);
 
         // Mock the service response
         when(userService.register(any(User.class))).thenReturn(testUser);
@@ -49,71 +49,21 @@ public class UserControllerTest {
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/register")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"male\"}"))
+                .content("{\"username\":\"testuser\",\"password\":\"password123\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\"}"));
-    }
-
-    @Test
-    public void testRegisterUser_MissingActivityLevel() throws Exception {
-        // Mock the service to throw exception for missing activity level
-        when(userService.register(any(User.class)))
-            .thenThrow(new IllegalArgumentException("Please put in your activityLevel with one of the following: sedentary, lightly_active, moderately_active, very_active, super_active"));
-
-        // Perform the request and validate the response
-        mockMvc.perform(post("/api/users/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"gender\":\"male\"}"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Please put in your activityLevel with one of the following: sedentary, lightly_active, moderately_active, very_active, super_active"));
-    }
-
-    @Test
-    public void testRegisterUser_InvalidActivityLevel() throws Exception {
-        // Mock the service to throw exception for invalid activity level
-        when(userService.register(any(User.class)))
-            .thenThrow(new IllegalArgumentException("Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active"));
-
-        // Perform the request and validate the response
-        mockMvc.perform(post("/api/users/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"invalid_level\",\"gender\":\"male\"}"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active"));
-    }
-
-    @Test
-    public void testRegisterUser_MissingGender() throws Exception {
-        // Mock the service to throw exception for missing gender
-        when(userService.register(any(User.class)))
-            .thenThrow(new IllegalArgumentException("Please specify your gender (male/female/other)"));
-
-        // Perform the request and validate the response
-        mockMvc.perform(post("/api/users/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\"}"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Please specify your gender (male/female/other)"));
-    }
-
-    @Test
-    public void testRegisterUser_InvalidGender() throws Exception {
-        // Mock the service to throw exception for invalid gender
-        when(userService.register(any(User.class)))
-            .thenThrow(new IllegalArgumentException("Invalid gender. Must be one of: male, female, other"));
-
-        // Perform the request and validate the response
-        mockMvc.perform(post("/api/users/register")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"invalid_gender\"}"))
-                .andExpect(status().isBadRequest())
-                .andExpect(content().string("Invalid gender. Must be one of: male, female, other"));
+                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\",\"profileCompleted\":false}"));
     }
 
     @Test
     public void testLoginUser_Success() throws Exception {
+        // Create a test user for successful login
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(true);
+
         // Mock the service response for successful login
-        when(userService.login(anyString(), anyString())).thenReturn(true);
+        when(userService.login(anyString(), anyString())).thenReturn(testUser);
 
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/login")
@@ -124,9 +74,28 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testLoginUser_ProfileSetupRequired() throws Exception {
+        // Create a test user with incomplete profile
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(false);
+
+        // Mock the service response for login with incomplete profile
+        when(userService.login(anyString(), anyString())).thenReturn(testUser);
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/login")
+                .param("username", "testuser")
+                .param("password", "password123"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Profile setup required"));
+    }
+
+    @Test
     public void testLoginUser_Failure() throws Exception {
         // Mock the service response for failed login
-        when(userService.login(anyString(), anyString())).thenReturn(false);
+        when(userService.login(anyString(), anyString())).thenReturn(null);
 
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/login")
@@ -135,4 +104,26 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Invalid credentials"));
     }
-} 
+
+    @Test
+    public void testCompleteProfile_Success() throws Exception {
+        // Create a test user
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(true);
+        testUser.setGoal(Collections.singletonList("weight_loss"));
+        testUser.setActivityLevel("moderately_active");
+        testUser.setGender("male");
+
+        // Mock the service response
+        when(userService.completeProfile(anyString(), any(User.class))).thenReturn(testUser);
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/testId/complete-profile")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"male\",\"weight\":70.5,\"height\":175.0,\"age\":25}"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\",\"profileCompleted\":true}"));
+    }
+}

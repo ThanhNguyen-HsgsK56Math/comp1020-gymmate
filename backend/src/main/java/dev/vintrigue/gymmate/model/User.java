@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Document(collection = "users")
+@Document(collection = "user")
 @Data
 public class User {
     @Id
@@ -22,4 +22,5 @@ public class User {
     private double weight; // in kg
     private double height; // in cm
     private int age;
+    private boolean profileCompleted; // Tracks if user has completed their profile setup
 }

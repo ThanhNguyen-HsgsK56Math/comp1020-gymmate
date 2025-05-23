@@ -33,28 +33,14 @@ public class MealPlanService {
      * Generates a meal plan for a user based on their goals and preferences
      * 
      * @param userId The user ID
-     * @param targetCalories The target calorie intake (if 0, will use default of 2000)
-     * @param weightLossPreference Importance of weight loss (1-10)
-     * @param muscleBuildingPreference Importance of muscle building (1-10)
-     * @param generalHealthPreference Importance of general health (1-10)
      * @return The generated meal plan
+     * @throws RuntimeException if user not found or meal plan cannot be generated
      */
-    public MealPlan generateMealPlan(
-            String userId, 
-            int targetCalories,
-            int weightLossPreference, 
-            int muscleBuildingPreference, 
-            int generalHealthPreference) {
-        
+    public MealPlan generateMealPlan(String userId) {
         // Fetch user
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
                 
-        // Use default calorie target if not specified
-        if (targetCalories <= 0) {
-            targetCalories = 2000; // Default daily calorie intake
-        }
-
         // Calculate BMR and TDEE
         double bmr = FitnessCalculator.calculateBMR(
             user.getWeight(),
@@ -64,16 +50,28 @@ public class MealPlanService {
         );
         double tdee = FitnessCalculator.calculateTDEE(bmr, user.getActivityLevel());
 
+        // Set target calories based on user's goals
+        int targetCalories = calculateTargetCalories(user.getGoal(), tdee);
+
+        // Calculate preference weights based on user's goals
+        Map<String, Integer> preferences = calculatePreferences(user.getGoal());
+
         // Fetch all meals
         List<Meal> meals = mealRepository.findAll();
         if (meals.isEmpty()) {
-            System.out.println("No meals found in database. Creating sample meals for this session.");
-            //meals = createSampleMeals();
+            throw new RuntimeException("No meals found in database. Please ensure meals are properly configured.");
         }
 
         // Calculate suitability scores and weights for each meal
         List<String> userGoals = user.getGoal();
+        if (userGoals == null || userGoals.isEmpty()) {
+            throw new RuntimeException("User has no defined goals");
+        }
+        
         for (Meal meal : meals) {
+            if (meal.getParameters() == null) {
+                meal.setParameters(new HashMap<>());
+            }
             double suitability = FitnessCalculator.calculateSuitabilityScore(meal.getParameters(), userGoals);
             double weight = FitnessCalculator.calculateMealWeight(suitability, meal.getCalories(), bmr);
             meal.getParameters().put("calculated_weight", (int)(weight * 100)); // Store as integer percentage
@@ -83,9 +81,9 @@ public class MealPlanService {
         MealGenerator.MealPlanResult result = MealGenerator.generateMealPlan(
                 targetCalories, 
                 meals, 
-                weightLossPreference, 
-                muscleBuildingPreference,
-                generalHealthPreference);
+                preferences.get("weightLoss"),
+                preferences.get("muscleBuilding"),
+                preferences.get("health"));
         
         if (result == null) {
             throw new RuntimeException("Cannot generate meal plan to meet the target calories");
@@ -101,4 +99,39 @@ public class MealPlanService {
 
         return mealPlanRepository.save(plan);
     }
-} 
+
+    private int calculateTargetCalories(List<String> goals, double tdee) {
+        // Default to maintenance calories
+        double calorieMultiplier = 1.0;
+        
+        if (goals.contains("weight_loss")) {
+            calorieMultiplier = 0.8; // 20% deficit for weight loss
+        } else if (goals.contains("muscle_gain")) {
+            calorieMultiplier = 1.1; // 10% surplus for muscle gain
+        }
+        
+        return (int)(tdee * calorieMultiplier);
+    }
+
+    private Map<String, Integer> calculatePreferences(List<String> goals) {
+        Map<String, Integer> preferences = new HashMap<>();
+        preferences.put("weightLoss", 5);
+        preferences.put("muscleBuilding", 5);
+        preferences.put("health", 5);
+
+        // Adjust preferences based on goals
+        if (goals.contains("weight_loss")) {
+            preferences.put("weightLoss", 8);
+            preferences.put("health", 7);
+        }
+        if (goals.contains("muscle_gain")) {
+            preferences.put("muscleBuilding", 8);
+            preferences.put("health", 7);
+        }
+        if (goals.contains("healthy_lifestyle")) {
+            preferences.put("health", 9);
+        }
+
+        return preferences;
+    }
+}

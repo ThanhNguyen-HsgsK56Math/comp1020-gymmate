@@ -7,7 +7,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDate;
 import java.util.List;
 
-@Document(collection = "exercise_plans")
+@Document(collection = "dailyplan")
 @Data
 public class ExercisePlan {
     @Id

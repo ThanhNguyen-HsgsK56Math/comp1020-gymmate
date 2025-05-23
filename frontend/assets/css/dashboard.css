@@ -1,0 +1,1057 @@
+/* Welcome Section Styles */
+#welcome {
+    padding: 160px 0 80px;
+    background: linear-gradient(rgba(35,45,57,0.8), rgba(35,45,57,0.8)), url('../images/dashboard-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+}
+
+.welcome-content {
+    text-align: center;
+}
+
+.welcome-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.welcome-content h1 em {
+    font-style: normal;
+    color: #ed563b;
+}
+
+.welcome-content p {
+    font-size: 18px;
+    color: #fff;
+    margin-bottom: 30px;
+}
+
+.welcome-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.welcome-buttons .secondary-button a {
+    display: inline-block;
+    font-size: 15px;
+    padding: 12px 20px;
+    background-color: transparent;
+    color: #fff;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+    transition: all .3s;
+    border: 2px solid #fff;
+    border-radius: 5px;
+}
+
+.welcome-buttons .secondary-button a:hover {
+    background-color: #fff;
+    color: #ed563b;
+}
+
+/* Profile Form Styles */
+#profile-form {
+    background-color: #f8f9fa;
+    padding: 100px 0;
+}
+
+.profile-form-container {
+    background: #fff;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.form-group {
+    margin-bottom: 25px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: #232d39;
+    margin-bottom: 8px;
+}
+
+.tooltip-icon {
+    color: #7a7a7a;
+    margin-left: 5px;
+    cursor: help;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    height: 50px;
+    padding: 10px 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    font-size: 14px;
+    color: #232d39;
+    transition: all 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: #ed563b;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(237, 86, 59, 0.1);
+}
+
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 15px center;
+    background-size: 15px;
+    padding-right: 45px;
+}
+
+.form-footer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.spinner-border {
+    margin-right: 10px;
+    width: 1.5rem;
+    height: 1.5rem;
+    vertical-align: middle;
+}
+
+/* Responsive Styles */
+@media (max-width: 991px) {
+    #welcome {
+        padding: 140px 0 60px;
+    }
+
+    .welcome-content h1 {
+        font-size: 36px;
+    }
+
+    .welcome-buttons {
+        flex-direction: column;
+    }
+
+    .profile-form-container {
+        padding: 30px 20px;
+    }
+}
+
+/* Tooltip Styles */
+.tooltip {
+    font-family: 'Poppins', sans-serif;
+    font-size: 12px;
+}
+
+.tooltip .tooltip-inner {
+    background-color: #232d39;
+    padding: 8px 12px;
+}
+
+.tooltip .arrow::before {
+    border-top-color: #232d39;
+}
+
+/* Dashboard Specific Styles */
+
+/* Progress Card */
+.progress-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    height: 100%;
+}
+
+.achievement-badge {
+    text-align: center;
+    color: #ed563b;
+    margin-bottom: 20px;
+}
+
+.achievement-badge i {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.achievement-badge span {
+    display: block;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.daily-quote {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.daily-quote i {
+    color: #ed563b;
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.daily-quote p {
+    font-style: italic;
+    margin: 0;
+    padding-left: 25px;
+}
+
+.quick-stats .stat-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.quick-stats .stat-label {
+    display: block;
+    font-size: 14px;
+    color: #666;
+}
+
+.quick-stats .stat-value {
+    display: block;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ed563b;
+}
+
+/* Tracking Container */
+.tracking-container {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.tracking-tabs {
+    display: flex;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-button {
+    padding: 10px 20px;
+    border: none;
+    background: none;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    position: relative;
+}
+
+.tab-button.active {
+    color: #ed563b;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ed563b;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Form Elements */
+.exercise-checklist {
+    margin: 15px 0;
+}
+
+.checkbox-item {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.checkbox-item input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkbox-item .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #f8f9fa;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+}
+
+.checkbox-item:hover input ~ .checkmark {
+    background-color: #f0f0f0;
+}
+
+.checkbox-item input:checked ~ .checkmark {
+    background-color: #ed563b;
+    border-color: #ed563b;
+}
+
+.checkbox-item .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+.checkbox-item input:checked ~ .checkmark:after {
+    display: block;
+}
+
+.checkbox-item .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Charts */
+.chart-container {
+    background: #fff;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.chart-container h4 {
+    margin-bottom: 15px;
+    color: #333;
+}
+
+/* Range Input Styling */
+input[type="range"] {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.range-value {
+    display: inline-block;
+    width: 30px;
+    text-align: center;
+    background: #ed563b;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 3px;
+    margin-left: 10px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .tracking-container {
+        padding: 15px;
+    }
+
+    .tab-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
+
+    .quick-stats .stat-value {
+        font-size: 20px;
+    }
+}
+
+/* Exercise Selection Styles */
+.exercise-filter-bar.sticky {
+    position: sticky;
+    top: 80px;
+    z-index: 100;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 30px;
+}
+
+.filter-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 8px 16px;
+    border: 2px solid #ed563b;
+    border-radius: 25px;
+    background: transparent;
+    color: #ed563b;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.filter-btn:hover {
+    background: rgba(237, 86, 59, 0.1);
+}
+
+.filter-btn.active {
+    background: #ed563b;
+    color: #fff;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 10px 40px 10px 15px;
+    border: 2px solid #ddd;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.search-box input:focus {
+    border-color: #ed563b;
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(237, 86, 59, 0.1);
+}
+
+.search-box i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+/* Exercise Cards */
+.exercise-grid {
+    margin-top: 30px;
+}
+
+.exercise-item {
+    margin-bottom: 30px;
+}
+
+.exercise-card {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.exercise-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+
+.exercise-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: #ed563b;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.exercise-card:hover::before {
+    transform: scaleX(1);
+}
+
+.exercise-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(237, 86, 59, 0.1);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.exercise-icon i {
+    font-size: 24px;
+    color: #ed563b;
+}
+
+.exercise-card h4 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #232d39;
+}
+
+.exercise-card .category {
+    display: inline-block;
+    padding: 4px 12px;
+    background: rgba(237, 86, 59, 0.1);
+    color: #ed563b;
+    border-radius: 15px;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+.exercise-card p {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.exercise-checkbox {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+}
+
+/* Submit Button Area */
+.exercise-submit {
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+}
+
+.exercise-submit .main-button {
+    padding: 15px 30px;
+    font-size: 16px;
+}
+
+.exercise-submit .main-button i {
+    margin-right: 8px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .exercise-filter-bar.sticky {
+        top: 70px;
+        padding: 15px;
+    }
+
+    .filter-buttons {
+        margin-bottom: 15px;
+    }
+
+    .filter-btn {
+        padding: 6px 12px;
+        font-size: 14px;
+    }
+
+    .exercise-card {
+        padding: 20px;
+    }
+
+    .exercise-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .exercise-icon i {
+        font-size: 20px;
+    }
+
+    .exercise-card h4 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 576px) {
+    .exercise-filter-bar.sticky {
+        position: relative;
+        top: 0;
+    }
+
+    .search-box {
+        margin-top: 15px;
+    }
+}
+
+/* Plan Preview Styles */
+#plan-preview {
+    background-color: #f8f9fa;
+    padding: 100px 0;
+}
+
+.plan-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 0 15px;
+}
+
+.plan-tabs {
+    display: flex;
+    gap: 20px;
+}
+
+.plan-tab {
+    padding: 10px 25px;
+    border: none;
+    background: none;
+    font-weight: 600;
+    color: #666;
+    position: relative;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.plan-tab::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: #ed563b;
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.plan-tab.active {
+    color: #ed563b;
+}
+
+.plan-tab.active::after {
+    transform: scaleX(1);
+}
+
+.plan-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.plan-actions button i,
+.plan-actions a i {
+    margin-right: 8px;
+}
+
+/* Workout Calendar Styles */
+.weekly-calendar {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.week-navigation,
+.day-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-button {
+    width: 32px;
+    height: 32px;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    background: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.nav-button:hover {
+    background: #f8f9fa;
+    border-color: #ed563b;
+    color: #ed563b;
+}
+
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+}
+
+.day-column {
+    min-height: 200px;
+}
+
+.day-header {
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 15px;
+}
+
+.workout-slot {
+    padding: 10px;
+}
+
+.workout-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+}
+
+.workout-item.strength {
+    border-color: #ed563b;
+}
+
+.workout-item.cardio {
+    border-color: #4CAF50;
+}
+
+.workout-item.flexibility {
+    border-color: #2196F3;
+}
+
+.workout-time {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.workout-item h4 {
+    font-size: 14px;
+    margin: 0 0 5px;
+}
+
+.workout-item p {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 5px;
+}
+
+.intensity {
+    display: inline-block;
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: rgba(0,0,0,0.05);
+}
+
+.rest-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-height: 100px;
+    background: #f8f9fa;
+    border-radius: 8px;
+}
+
+.rest-indicator {
+    text-align: center;
+    color: #666;
+}
+
+.rest-indicator i {
+    font-size: 24px;
+    margin-bottom: 8px;
+    display: block;
+}
+
+/* Meal Plan Styles */
+.meal-schedule {
+    background: #fff;
+    border-radius: 15px;
+    padding: 25px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.meal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+}
+
+.daily-summary {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 30px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: #f8f9fa;
+    border-radius: 12px;
+}
+
+.macro-chart {
+    width: 100%;
+    height: 200px;
+}
+
+.daily-totals {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 15px;
+}
+
+.total-item {
+    text-align: center;
+    padding: 15px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+.total-item .label {
+    display: block;
+    font-size: 12px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.total-item .value {
+    font-size: 18px;
+    font-weight: 600;
+    color: #ed563b;
+}
+
+.meals-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.meal-card {
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.meal-card .meal-header {
+    margin-bottom: 15px;
+}
+
+.meal-card .meal-header h4 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.meal-card .meal-header i {
+    color: #ed563b;
+}
+
+.meal-time {
+    font-size: 12px;
+    color: #666;
+}
+
+.meal-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.meal-item:last-child {
+    border-bottom: none;
+}
+
+.item-name {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.item-macros {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+}
+
+.calories {
+    color: #ed563b;
+    font-weight: 600;
+}
+
+.macro {
+    color: #666;
+}
+
+/* Plan Content Display */
+.plan-content {
+    display: none;
+}
+
+.plan-content.active {
+    display: block;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 1200px) {
+    .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+
+    .meals-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .daily-summary {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .plan-navigation {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .daily-totals {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+    .calendar-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .daily-totals {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Meal Plan Specific Styles */
+.meal-slot {
+    padding: 10px;
+}
+
+.meal-item {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 10px;
+    border-left: 4px solid;
+}
+
+.meal-item.breakfast {
+    border-color: #FF9800;
+}
+
+.meal-item.lunch {
+    border-color: #4CAF50;
+}
+
+.meal-item.dinner {
+    border-color: #2196F3;
+}
+
+.meal-item .meal-time {
+    font-size: 12px;
+    color: #666;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.meal-item h4 {
+    font-size: 14px;
+    margin: 0 0 5px;
+    color: #232d39;
+}
+
+.meal-item p {
+    font-size: 12px;
+    color: #666;
+    margin: 0 0 3px;
+}
+
+/* Update calendar grid for meal plan */
+#meal-plan .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 15px;
+}
+
+#meal-plan .day-column {
+    min-height: 200px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+#meal-plan .day-header {
+    padding: 10px;
+    text-align: center;
+    font-weight: 600;
+    border-bottom: 2px solid #f0f0f0;
+    margin-bottom: 15px;
+    background: #f8f9fa;
+    border-radius: 8px 8px 0 0;
+}
+
+/* Responsive adjustments for meal plan */
+@media (max-width: 1200px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .meal-item {
+        padding: 10px;
+    }
+    
+    .meal-item h4 {
+        font-size: 13px;
+    }
+    
+    .meal-item p {
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 576px) {
+    #meal-plan .calendar-grid {
+        grid-template-columns: 1fr;
+    }
+} 
