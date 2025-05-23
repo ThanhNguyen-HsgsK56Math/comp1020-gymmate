@@ -1,11 +1,11 @@
 $(document).ready(function(){
     
 	$("#sign-in-btn").click(() => {
-        console.log("test sign in")
+        console.log("test sign in");
         const requestBody = {
-            username: document.getElementById('email').value,
+            username: document.getElementById('username').value,
             password: document.getElementById('password').value,
-          };;
+          };
         console.log(requestBody)
 		signIn(requestBody);
 	})

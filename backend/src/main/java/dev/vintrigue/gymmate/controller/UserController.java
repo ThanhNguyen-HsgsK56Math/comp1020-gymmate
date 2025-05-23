@@ -22,6 +22,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        System.out.println("register");
         try {
             User registeredUser = userService.register(user);
             return ResponseEntity.ok(registeredUser);
@@ -34,6 +35,7 @@ public class UserController {
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
+        System.out.println("Login"+ username);
         boolean isAuthenticated = userService.login(username, password);
         if (isAuthenticated) {
             return ResponseEntity.ok().body("Login successful");
