@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
@@ -22,7 +25,16 @@ public class UserController {
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody User user) {
+        System.out.println("register");
         try {
+            // Only require username and password for initial registration
+            if (user.getUsername() == null || user.getUsername().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Username is required");
+            }
+            if (user.getPassword() == null || user.getPassword().trim().isEmpty()) {
+                return ResponseEntity.badRequest().body("Password is required");
+            }
+            
             User registeredUser = userService.register(user);
             return ResponseEntity.ok(registeredUser);
         } catch (UserService.UserAlreadyExistsException e) {
@@ -33,12 +45,31 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-        boolean isAuthenticated = userService.login(username, password);
-        if (isAuthenticated) {
-            return ResponseEntity.ok().body("Login successful");
+    public ResponseEntity<?> login(@RequestBody User loginRequest) {
+        try {
+            User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
+            if (user != null) {
+                if (!user.isProfileCompleted()) {
+                    return ResponseEntity.ok().body("Profile setup required");
+                }
+                return ResponseEntity.ok().body("Login successful");
+            }
+            return ResponseEntity.badRequest().body("Invalid credentials");
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
         }
-        return ResponseEntity.badRequest().body("Invalid credentials");
+    }
+
+    @PostMapping("/{userId}/complete-profile")
+    public ResponseEntity<?> completeProfile(@PathVariable String userId, @RequestBody User profileData) {
+        try {
+            User updatedUser = userService.completeProfile(userId, profileData);
+            return ResponseEntity.ok(updatedUser);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/{userId}")
@@ -58,6 +89,27 @@ public class UserController {
             return ResponseEntity.badRequest().body(e.getMessage());
         } catch (RuntimeException e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/{userId}/test-profile")
+    public ResponseEntity<?> testUserProfile(@PathVariable String userId) {
+        try {
+            User user = userService.findById(userId);
+            Map<String, Object> profileInfo = new HashMap<>();
+            profileInfo.put("id", user.getId());
+            profileInfo.put("username", user.getUsername());
+            profileInfo.put("goals", user.getGoal());
+            profileInfo.put("activityLevel", user.getActivityLevel());
+            profileInfo.put("weight", user.getWeight());
+            profileInfo.put("height", user.getHeight());
+            profileInfo.put("age", user.getAge());
+            profileInfo.put("gender", user.getGender());
+            profileInfo.put("profileCompleted", user.isProfileCompleted());
+            
+            return ResponseEntity.ok(profileInfo);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body("Error: " + e.getMessage());
         }
     }
 

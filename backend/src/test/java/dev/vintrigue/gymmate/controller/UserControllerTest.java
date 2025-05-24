@@ -3,6 +3,7 @@ package dev.vintrigue.gymmate.controller;
 import dev.vintrigue.gymmate.config.TestSecurityConfig;
 import dev.vintrigue.gymmate.model.User;
 import dev.vintrigue.gymmate.service.UserService;
+import dev.vintrigue.gymmate.config.TestSecurityConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -11,7 +12,6 @@ import org.springframework.context.annotation.Import;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
-import java.util.Arrays;
 import java.util.Collections;
 
 import static org.mockito.ArgumentMatchers.any;
@@ -42,6 +42,7 @@ public class UserControllerTest {
         testUser.setGoal(Collections.singletonList("weight_loss"));
         testUser.setActivityLevel("moderately_active");
         testUser.setGender("male");
+        testUser.setProfileCompleted(false);
 
         // Mock the service response
         when(userService.register(any(User.class))).thenReturn(testUser);
@@ -49,9 +50,9 @@ public class UserControllerTest {
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/register")
                 .contentType(MediaType.APPLICATION_JSON)
-                .content("{\"username\":\"testuser\",\"password\":\"password123\",\"email\":\"test@example.com\",\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"male\"}"))
+                .content("{\"username\":\"testuser\",\"password\":\"password123\"}"))
                 .andExpect(status().isOk())
-                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\"}"));
+                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\",\"profileCompleted\":false}"));
     }
 
     @Test
@@ -112,8 +113,14 @@ public class UserControllerTest {
 
     @Test
     public void testLoginUser_Success() throws Exception {
+        // Create a test user for successful login
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(true);
+
         // Mock the service response for successful login
-        when(userService.login(anyString(), anyString())).thenReturn(true);
+        when(userService.login(anyString(), anyString())).thenReturn(testUser);
 
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/login")
@@ -124,9 +131,28 @@ public class UserControllerTest {
     }
 
     @Test
+    public void testLoginUser_ProfileSetupRequired() throws Exception {
+        // Create a test user with incomplete profile
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(false);
+
+        // Mock the service response for login with incomplete profile
+        when(userService.login(anyString(), anyString())).thenReturn(testUser);
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/login")
+                .param("username", "testuser")
+                .param("password", "password123"))
+                .andExpect(status().isOk())
+                .andExpect(content().string("Profile setup required"));
+    }
+
+    @Test
     public void testLoginUser_Failure() throws Exception {
         // Mock the service response for failed login
-        when(userService.login(anyString(), anyString())).thenReturn(false);
+        when(userService.login(anyString(), anyString())).thenReturn(null);
 
         // Perform the request and validate the response
         mockMvc.perform(post("/api/users/login")
@@ -135,4 +161,26 @@ public class UserControllerTest {
                 .andExpect(status().isBadRequest())
                 .andExpect(content().string("Invalid credentials"));
     }
-} 
+
+    @Test
+    public void testCompleteProfile_Success() throws Exception {
+        // Create a test user
+        User testUser = new User();
+        testUser.setId("testId");
+        testUser.setUsername("testuser");
+        testUser.setProfileCompleted(true);
+        testUser.setGoal(Collections.singletonList("weight_loss"));
+        testUser.setActivityLevel("moderately_active");
+        testUser.setGender("male");
+
+        // Mock the service response
+        when(userService.completeProfile(anyString(), any(User.class))).thenReturn(testUser);
+
+        // Perform the request and validate the response
+        mockMvc.perform(post("/api/users/testId/complete-profile")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"goal\":[\"weight_loss\"],\"activityLevel\":\"moderately_active\",\"gender\":\"male\",\"weight\":70.5,\"height\":175.0,\"age\":25}"))
+                .andExpect(status().isOk())
+                .andExpect(content().json("{\"id\":\"testId\",\"username\":\"testuser\",\"profileCompleted\":true}"));
+    }
+}

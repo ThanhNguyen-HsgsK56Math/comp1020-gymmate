@@ -1,10 +1,10 @@
 $(document).ready(function(){
     
-	$("#sign-in-btn").click(() => {
+	$("#sign-up-btn").click(() => {
         console.log("test sign in")
         const requestBody = {
-            username: document.getElementById('fulname').value,
-            email: document.getElementById('email').value,
+            username: document.getElementById('fullname').value,
+            // email: document.getElementById('email').value,
             password: document.getElementById('password').value,
           };;
         console.log(requestBody)
@@ -28,7 +28,7 @@ async function signUp(requestBody) {
         body: JSON.stringify(requestBody)
       });
       
-      if (response.ok) {
+      if (response.status == 200) {
         const data = await response.text();
         console.log("Sign up successful!", data);
         // Store token or navigate user here

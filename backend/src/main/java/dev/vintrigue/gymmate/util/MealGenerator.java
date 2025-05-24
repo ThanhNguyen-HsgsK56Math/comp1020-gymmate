@@ -98,11 +98,16 @@ public class MealGenerator {
             for (int i = 0; i < meals.size(); i++) {
                 Meal meal = meals.get(i);
                 
-                // Factor in meal scores - adjust prep time based on preference match
-                // (Better matches are "faster" to prepare in our algorithm)
+                // Calculate edge weight based on suitability and calories
                 double mealScore = mealScores.get(i);
-                double scoreAdjustment = 1.0 - (mealScore / 5.0); // 0.0 for perfect score, 0.8 for worst
-                int adjustedPrepTime = (int) Math.round(meal.getPrepTime() * scoreAdjustment);
+                double edgeWeight = FitnessCalculator.calculateMealWeight(
+                    mealScore,
+                    meal.getCalories(),
+                    targetCalories
+                );
+                
+                // Use edge weight to adjust prep time
+                int adjustedPrepTime = (int) Math.round(meal.getPrepTime() * edgeWeight);
                 
                 // Ensure minimum prep time of 1 minute
                 adjustedPrepTime = Math.max(1, adjustedPrepTime);

@@ -97,11 +97,16 @@ public class ExercisePlanGenerator {
             for (int i = 0; i < exercises.size(); i++) {
                 Exercise exercise = exercises.get(i);
                 
-                // Factor in exercise scores - adjust duration based on preference match
-                // (Better matches are "faster" to complete in our algorithm)
+                // Calculate edge weight based on suitability and calories
                 double exerciseScore = exerciseScores.get(i);
-                double scoreAdjustment = 1.0 - (exerciseScore / 5.0); // 0.0 for perfect score, 0.8 for worst
-                int adjustedDuration = (int) Math.round(exercise.getDuration() * scoreAdjustment);
+                double edgeWeight = FitnessCalculator.calculateExerciseWeight(
+                    exerciseScore,
+                    exercise.getCaloriesBurned(),
+                    targetCaloriesBurned
+                );
+                
+                // Use edge weight to adjust duration
+                int adjustedDuration = (int) Math.round(exercise.getDuration() * edgeWeight);
                 
                 // Ensure minimum duration of 1 minute
                 adjustedDuration = Math.max(1, adjustedDuration);

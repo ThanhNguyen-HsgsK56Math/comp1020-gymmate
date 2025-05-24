@@ -90,6 +90,9 @@ public class FitnessCalculator {
      * @return edge weight
      */
     public static double calculateExerciseWeight(double suitability, int caloriesBurned, double tdee) {
+        if (suitability <= 0 || caloriesBurned <= 0 || tdee <= 0) {
+            return Double.MAX_VALUE; // Return maximum value for invalid inputs
+        }
         return 1.0 / (suitability * (caloriesBurned / tdee));
     }
 
@@ -101,6 +104,9 @@ public class FitnessCalculator {
      * @return edge weight
      */
     public static double calculateMealWeight(double suitability, int caloriesIntake, double bmr) {
+        if (suitability <= 0 || caloriesIntake <= 0 || bmr <= 0) {
+            return Double.MAX_VALUE; // Return maximum value for invalid inputs
+        }
         return 1.0 / (suitability * (caloriesIntake / bmr));
     }
 } 
