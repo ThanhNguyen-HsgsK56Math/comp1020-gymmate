@@ -47,7 +47,7 @@ function handleSignUp(event) {
     }));
 
     // Redirect to dashboard
-    window.location.href = 'dashboard.html';
+    // window.location.href = 'dashboard.html';
 }
 
 // Function to handle user sign in
@@ -76,7 +76,7 @@ function handleSignIn(event) {
     }));
 
     // Redirect to dashboard
-    window.location.href = 'dashboard.html';
+    // window.location.href = 'dashboard.html';
 }
 
 // Function to handle sign out

@@ -48,7 +48,6 @@ async function signIn(requestBody) {
         const data = await response.text();
         writeCookie(data);
         console.log("Login successful!", data);
-        window.location.href = "./dashboard.html";
         // Store token or navigate user here
       } else {
         const error = await response.text();
