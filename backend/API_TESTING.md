@@ -15,7 +15,7 @@ Test 1: Create a user with just username and password
 curl -X POST http://localhost:8080/api/users/register \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser1",
+    "username": "newuser3",
     "password": "password123"
   }'
 ```
@@ -26,7 +26,7 @@ Test 2: Create a user with duplicate username
 curl -X POST http://localhost:8080/api/users/register \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser1",
+    "username": "newuser3",
     "password": "password123"
   }'
 ```
@@ -38,7 +38,7 @@ Test 1: Login with incomplete profile
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser1",
+    "username": "newuser3",
     "password": "password123"
   }'
 ```
@@ -47,7 +47,7 @@ Expected: "Profile setup required"
 ### 3. Complete Profile (Step 2)
 Test 1: Complete profile with valid data
 ```bash
-curl -X POST http://localhost:8080/api/users/{userId}/complete-profile \
+curl -X POST http://localhost:8080/api/users/newuser3/complete-profile \
   -H "Content-Type: application/json" \
   -d '{
     "goal": ["weight_loss", "muscle_gain"],
@@ -62,7 +62,7 @@ Expected: Returns updated user information with profileCompleted=true
 
 Test 2: Complete profile with invalid activity level
 ```bash
-curl -X POST http://localhost:8080/api/users/{userId}/complete-profile \
+curl -X POST http://localhost:8080/api/users/newuser1/complete-profile \
   -H "Content-Type: application/json" \
   -d '{
     "goal": ["weight_loss"],
@@ -77,7 +77,7 @@ Expected: "Invalid activity level. Must be one of: sedentary, lightly_active, mo
 
 Test 3: Complete profile with invalid gender
 ```bash
-curl -X POST http://localhost:8080/api/users/{userId}/complete-profile \
+curl -X POST http://localhost:8080/api/users/newuser1/complete-profile \
   -H "Content-Type: application/json" \
   -d '{
     "goal": ["weight_loss"],
@@ -92,7 +92,7 @@ Expected: "Invalid gender. Must be one of: male, female, other"
 
 Test 4: Complete profile with invalid goal
 ```bash
-curl -X POST http://localhost:8080/api/users/{userId}/complete-profile \
+curl -X POST http://localhost:8080/api/users/newuser1/complete-profile \
   -H "Content-Type: application/json" \
   -d '{
     "goal": ["invalid_goal"],
@@ -111,11 +111,11 @@ Test 1: Login with complete profile
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser1",
+    "username": "newuser3",
     "password": "password123"
   }'
 ```
-Expected: "Login successful"
+Expected: Returns the username "newuser1"
 
 Test 2: Login with incorrect password
 ```bash
@@ -131,25 +131,25 @@ Expected: "Invalid credentials"
 ### 5. Update Activity Level
 Test 1: Update with valid activity level
 ```bash
-curl -X PUT "http://localhost:8080/api/users/{userId}/activity-level?activityLevel=very_active"
+curl -X PUT "http://localhost:8080/api/users/newuser1/activity-level?activityLevel=very_active"
 ```
 Expected: Returns updated user information
 
 Test 2: Update with invalid activity level
 ```bash
-curl -X PUT "http://localhost:8080/api/users/{userId}/activity-level?activityLevel=invalid_level"
+curl -X PUT "http://localhost:8080/api/users/newuser1/activity-level?activityLevel=invalid_level"
 ```
 Expected: "Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active"
 
 Test 3: Update non-existent user
 ```bash
-curl -X PUT "http://localhost:8080/api/users/nonexistentid/activity-level?activityLevel=moderately_active"
+curl -X PUT "http://localhost:8080/api/users/nonexistentuser/activity-level?activityLevel=moderately_active"
 ```
 Expected: 404 Not Found
 
 ### 6. Get Exercise Plan
 ```bash
-curl -X GET "http://localhost:8080/api/exerciseplans?userId=USER_ID" \
+curl -X GET "http://localhost:8080/api/exerciseplans?username=newuser3" \
   -H "Content-Type: application/json"
 ```
 Expected: Returns exercise plan based on user's profile and goals
@@ -157,7 +157,7 @@ Note: User must have completed their profile and have valid goals set
 
 ### 7. Get Meal Plan
 ```bash
-curl -X GET "http://localhost:8080/api/mealplans?userId=USER_ID" \
+curl -X GET "http://localhost:8080/api/mealplans?username=newuser3" \
   -H "Content-Type: application/json"
 ```
 Expected: Returns meal plan based on user's profile and goals
@@ -205,49 +205,49 @@ Expected: Returns exercises suitable for the specified goal
 
 ### Test Case 1: Basic Exercise Plan Generation
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=500&weightLoss=8&muscleBuilding=0&endurance=0&health=0
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500&weightLoss=8&muscleBuilding=0&endurance=0&health=0
 ```
 Expected: Plan with exercises optimized for weight loss, total calories close to 500
 
 ### Test Case 2: Multiple Goals Exercise Plan
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=600&weightLoss=7&muscleBuilding=7&endurance=0&health=0
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=600&weightLoss=7&muscleBuilding=7&endurance=0&health=0
 ```
 Expected: Plan balancing weight loss and muscle building exercises
 
 ### Test Case 3: Health-Focused Exercise Plan
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=400&weightLoss=0&muscleBuilding=0&endurance=0&health=8
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=400&weightLoss=0&muscleBuilding=0&endurance=0&health=8
 ```
 Expected: Plan with exercises optimized for general health
 
 ### Test Case 4: Endurance-Focused Exercise Plan
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=700&weightLoss=0&muscleBuilding=0&endurance=8&health=0
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=700&weightLoss=0&muscleBuilding=0&endurance=8&health=0
 ```
 Expected: Plan with exercises optimized for endurance building
 
 ### Test Case 5: All Goals Exercise Plan
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=800&weightLoss=6&muscleBuilding=6&endurance=6&health=6
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=800&weightLoss=6&muscleBuilding=6&endurance=6&health=6
 ```
 Expected: Balanced plan considering all fitness goals
 
 ### Test Case 6: Default Preferences Exercise Plan
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=500
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500
 ```
 Expected: Balanced plan using default preferences (all set to 5)
 
-### Test Case 7: Invalid User ID
+### Test Case 7: Invalid Username
 ```http
-GET /api/exerciseplans?userId=invalid_id&targetCaloriesBurned=500
+GET /api/exerciseplans?username=invalid_user&targetCaloriesBurned=500
 ```
 Expected: 404 Not Found with error message "User not found"
 
 ### Test Case 8: No Exercises Available
 ```http
-GET /api/exerciseplans?userId=USER_ID&targetCaloriesBurned=500
+GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500
 ```
 Expected: 404 Not Found with error message "No exercises found in database"
 
@@ -259,6 +259,7 @@ POST /api/meal/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCalories": 2000,
     "weightLossPreference": 8,
     "muscleBuildingPreference": 0,
@@ -273,6 +274,7 @@ POST /api/meal/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCalories": 2500,
     "weightLossPreference": 0,
     "muscleBuildingPreference": 8,
@@ -287,6 +289,7 @@ POST /api/meal/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCalories": 1800,
     "weightLossPreference": 0,
     "muscleBuildingPreference": 0,
@@ -301,6 +304,7 @@ POST /api/meal/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCalories": 2200,
     "weightLossPreference": 6,
     "muscleBuildingPreference": 6,
@@ -317,6 +321,7 @@ POST /api/exercise/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCaloriesBurned": 100,
     "weightLossPreference": 8,
     "muscleBuildingPreference": 0,
@@ -332,6 +337,7 @@ POST /api/meal/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCalories": 5000,
     "weightLossPreference": 8,
     "muscleBuildingPreference": 0,
@@ -346,6 +352,7 @@ POST /api/exercise/plan
 Content-Type: application/json
 
 {
+    "username": "newuser1",
     "targetCaloriesBurned": 500,
     "weightLossPreference": 0,
     "muscleBuildingPreference": 0,

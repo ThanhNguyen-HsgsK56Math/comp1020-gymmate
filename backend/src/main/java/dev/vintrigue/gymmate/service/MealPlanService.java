@@ -32,13 +32,13 @@ public class MealPlanService {
     /**
      * Generates a meal plan for a user based on their goals and preferences
      * 
-     * @param userId The user ID
+     * @param username The user's username
      * @return The generated meal plan
      * @throws RuntimeException if user not found or meal plan cannot be generated
      */
-    public MealPlan generateMealPlan(String userId) {
+    public MealPlan generateMealPlan(String username) {
         // Fetch user
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
                 
         // Calculate BMR and TDEE
@@ -95,7 +95,7 @@ public class MealPlanService {
 
         // Create and save the meal plan
         MealPlan plan = new MealPlan();
-        plan.setUserId(userId);
+        plan.setUserId(user.getId());
         plan.setDate(LocalDate.now());
         plan.setMealSequence(result.mealSequence);
         plan.setTotalCalories(result.totalCalories);

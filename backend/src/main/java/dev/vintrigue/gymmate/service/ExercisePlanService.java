@@ -34,16 +34,16 @@ public class ExercisePlanService {
     /**
      * Generates an exercise plan for a user based on their goals and preferences
      * 
-     * @param userId The user ID
+     * @param username The user's username
      * @return The generated exercise plan
      * @throws RuntimeException if user not found or exercise plan cannot be generated
      */
-    public ExercisePlan generateExercisePlan(String userId) {
+    public ExercisePlan generateExercisePlan(String username) {
         // Fetch user
-        User user = userRepository.findById(userId)
+        User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        logger.info("Generating exercise plan for user: {}", userId);
+        logger.info("Generating exercise plan for user: {}", username);
         logger.info("User goals: {}", user.getGoal());
         logger.info("User activity level: {}", user.getActivityLevel());
 
@@ -94,7 +94,7 @@ public class ExercisePlanService {
 
         // Create and save the exercise plan
         ExercisePlan plan = new ExercisePlan();
-        plan.setUserId(userId);
+        plan.setUserId(user.getId());
         plan.setDate(LocalDate.now());
         plan.setExercises(result.exerciseSequence);
         plan.setTotalCaloriesBurned(result.totalCaloriesBurned);

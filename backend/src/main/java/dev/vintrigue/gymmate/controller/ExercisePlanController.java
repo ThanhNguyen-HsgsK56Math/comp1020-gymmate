@@ -31,13 +31,13 @@ public class ExercisePlanController {
     /**
      * Generates an exercise plan for a user based on their profile and goals
      *
-     * @param userId The user ID
+     * @param username The username
      * @return The generated exercise plan
      */
     @GetMapping
-    public ResponseEntity<?> getExercisePlan(@RequestParam String userId) {
+    public ResponseEntity<?> getExercisePlan(@RequestParam String username) {
         try {
-            ExercisePlan plan = exercisePlanService.generateExercisePlan(userId);
+            ExercisePlan plan = exercisePlanService.generateExercisePlan(username);
             if (plan == null) {
                 return ResponseEntity.badRequest().body("No suitable exercise plan could be generated. Please ensure you have completed your profile and have valid goals set.");
             }

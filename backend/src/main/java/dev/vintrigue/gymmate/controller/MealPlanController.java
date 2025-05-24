@@ -31,13 +31,13 @@ public class MealPlanController {
     /**
      * Generates a meal plan for a user based on their profile and goals
      *
-     * @param userId The user ID
+     * @param username The username
      * @return The generated meal plan
      */
     @GetMapping
-    public ResponseEntity<?> getMealPlan(@RequestParam String userId) {
+    public ResponseEntity<?> getMealPlan(@RequestParam String username) {
         try {
-            MealPlan plan = mealPlanService.generateMealPlan(userId);
+            MealPlan plan = mealPlanService.generateMealPlan(username);
             if (plan == null) {
                 return ResponseEntity.badRequest().body("No suitable meal plan could be generated. Please ensure you have completed your profile and have valid goals set.");
             }

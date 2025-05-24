@@ -40,8 +40,8 @@ public class UserService {
         return null;
     }
 
-    public User completeProfile(String userId, User profileData) {
-        User user = findById(userId);
+    public User completeProfile(String username, User profileData) {
+        User user = findByUsername(username);
         
         // Validate activity level
         if (profileData.getActivityLevel() == null || profileData.getActivityLevel().trim().isEmpty()) {
@@ -89,13 +89,13 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User findById(String userId) {
-        return userRepository.findById(userId)
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
     }
 
-    public User updateActivityLevel(String userId, String activityLevel) {
-        User user = findById(userId);
+    public User updateActivityLevel(String username, String activityLevel) {
+        User user = findByUsername(username);
         if (!isValidActivityLevel(activityLevel)) {
             throw new IllegalArgumentException("Invalid activity level. Must be one of: sedentary, lightly_active, moderately_active, very_active, super_active");
         }

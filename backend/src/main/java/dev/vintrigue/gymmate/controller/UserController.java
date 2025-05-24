@@ -52,7 +52,7 @@ public class UserController {
                 if (!user.isProfileCompleted()) {
                     return ResponseEntity.ok().body("Profile setup required");
                 }
-                return ResponseEntity.ok().body("Login successful");
+                return ResponseEntity.ok().body(user.getUsername());
             }
             return ResponseEntity.badRequest().body("Invalid credentials");
         } catch (RuntimeException e) {
@@ -60,10 +60,10 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{userId}/complete-profile")
-    public ResponseEntity<?> completeProfile(@PathVariable String userId, @RequestBody User profileData) {
+    @PostMapping("/{username}/complete-profile")
+    public ResponseEntity<?> completeProfile(@PathVariable String username, @RequestBody User profileData) {
         try {
-            User updatedUser = userService.completeProfile(userId, profileData);
+            User updatedUser = userService.completeProfile(username, profileData);
             return ResponseEntity.ok(updatedUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -72,18 +72,18 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<User> getUserById(@PathVariable String userId) {
-        User user = userService.findById(userId);
+    @GetMapping("/{username}")
+    public ResponseEntity<User> getUserByUsername(@PathVariable String username) {
+        User user = userService.findByUsername(username);
         return ResponseEntity.ok(user);
     }
 
-    @PutMapping("/{userId}/activity-level")
+    @PutMapping("/{username}/activity-level")
     public ResponseEntity<?> updateActivityLevel(
-            @PathVariable String userId,
+            @PathVariable String username,
             @RequestParam String activityLevel) {
         try {
-            User updatedUser = userService.updateActivityLevel(userId, activityLevel);
+            User updatedUser = userService.updateActivityLevel(username, activityLevel);
             return ResponseEntity.ok(updatedUser);
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
@@ -92,12 +92,11 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{userId}/test-profile")
-    public ResponseEntity<?> testUserProfile(@PathVariable String userId) {
+    @GetMapping("/{username}/test-profile")
+    public ResponseEntity<?> testUserProfile(@PathVariable String username) {
         try {
-            User user = userService.findById(userId);
+            User user = userService.findByUsername(username);
             Map<String, Object> profileInfo = new HashMap<>();
-            profileInfo.put("id", user.getId());
             profileInfo.put("username", user.getUsername());
             profileInfo.put("goals", user.getGoal());
             profileInfo.put("activityLevel", user.getActivityLevel());
