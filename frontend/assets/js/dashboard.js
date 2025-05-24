@@ -1,5 +1,66 @@
 // Dashboard JavaScript
+$(document).ready(function(){
+    
+	document.getElementById("user-name").innerHTML = readCookie();
+    $("#gen-btn").click(() => {
+        console.log("generate plan");
+        function convert(str) {
+            var ar = str.toLowerCase().split(" ");
+            return ar.join("_")
+        }
+        function getFromDropDown(id) {
+            var e = document.getElementById(id);
+            var value = e.value;
+            var text = e.options[e.selectedIndex].text;
+            
+            return convert(text)
+        }
+        var username = readCookie();
+        const requestBody = {
+            goal: [getFromDropDown('goal')],
+            activityLevel: getFromDropDown('activity'),
+            gender: getFromDropDown('diet'),
+            weight: Number(document.getElementById('weight').value),
+            height: Number(document.getElementById('height').value),
+            age: Number(document.getElementById('age').value),
+          };
+        console.log(requestBody)
+		completeProfile(username, requestBody);
+	})
+})
 
+async function completeProfile(username, requestBody){
+    // Helper function to build the request body
+
+    // console.log(requestBody);
+    try {
+      const response = await fetch('http://localhost:8080/api/users/'+username+'/complete-profile', {
+        method: 'POST',
+        mode: 'cors',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+
+        },
+        body: JSON.stringify(requestBody)
+      });
+      
+      if (response.status == 200) {
+        const data = await response.text();
+        window.alert("Update profile complete");
+        
+        // window.location.href = "./dashboard.html";
+        // Store token or navigate user here
+      } else {
+        const error = await response.text();
+        console.error(error);
+        window.alert(error);
+      }
+    } catch (err) {
+      console.error("Error:", err);
+    }
+  }
+  
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Charts
     initializeCharts();
