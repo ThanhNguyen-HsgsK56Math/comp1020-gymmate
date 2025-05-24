@@ -195,58 +195,64 @@ document.addEventListener('DOMContentLoaded', function() {
     const workoutLog = document.getElementById('workout-log');
     const metricsLog = document.getElementById('metrics-log');
 
-    workoutLog.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const formData = new FormData(workoutLog);
-        const exercises = formData.getAll('completed_exercises[]');
-        const notes = document.getElementById('workout-notes').value;
-        
-        // TODO: Send to backend
-        console.log('Logged exercises:', exercises);
-        console.log('Workout notes:', notes);
-        
-        // Show success message
-        alert('Workout logged successfully!');
-    });
+    if (workoutLog) {
+        workoutLog.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const formData = new FormData(workoutLog);
+            const exercises = formData.getAll('completed_exercises[]');
+            const notes = document.getElementById('workout-notes').value;
+            
+            // TODO: Send to backend
+            console.log('Logged exercises:', exercises);
+            console.log('Workout notes:', notes);
+            
+            // Show success message
+            alert('Workout logged successfully!');
+        });
+    }
 
-    metricsLog.addEventListener('submit', (e) => {
-        e.preventDefault();
-        const weight = document.getElementById('current-weight').value;
-        const energy = document.getElementById('energy-level').value;
-        const notes = document.getElementById('health-notes').value;
-        
-        // TODO: Send to backend
-        console.log('Logged metrics:', { weight, energy, notes });
-        
-        // Show success message
-        alert('Health metrics logged successfully!');
-    });
+    if (metricsLog) {
+        metricsLog.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const weight = document.getElementById('current-weight').value;
+            const energy = document.getElementById('energy-level').value;
+            const notes = document.getElementById('health-notes').value;
+            
+            // TODO: Send to backend
+            console.log('Logged metrics:', { weight, energy, notes });
+            
+            // Show success message
+            alert('Health metrics logged successfully!');
+        });
+    }
 
     // Create Workout Plan Button
     const createPlanButton = document.getElementById('create-plan');
-    createPlanButton.addEventListener('click', () => {
-        const selectedExercises = Array.from(document.querySelectorAll('input[name="exercises[]"]:checked'))
-            .map(checkbox => checkbox.value);
+    if (createPlanButton) {
+        createPlanButton.addEventListener('click', () => {
+            const selectedExercises = Array.from(document.querySelectorAll('input[name="exercises[]"]:checked'))
+                .map(checkbox => checkbox.value);
 
-        if (selectedExercises.length === 0) {
-            alert('Please select at least one exercise to create your plan.');
-            return;
-        }
+            if (selectedExercises.length === 0) {
+                alert('Please select at least one exercise to create your plan.');
+                return;
+            }
 
-        // TODO: Send to backend
-        console.log('Creating plan with exercises:', selectedExercises);
-        
-        // Show loading state
-        createPlanButton.disabled = true;
-        createPlanButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Creating Your Plan...';
+            // TODO: Send to backend
+            console.log('Creating plan with exercises:', selectedExercises);
+            
+            // Show loading state
+            createPlanButton.disabled = true;
+            createPlanButton.innerHTML = '<i class="fa fa-spinner fa-spin"></i> Creating Your Plan...';
 
-        // Simulate API call
-        setTimeout(() => {
-            createPlanButton.disabled = false;
-            createPlanButton.innerHTML = '<i class="fa fa-check-circle"></i> Create My Workout Plan';
-            alert('Your personalized workout plan has been created!');
-        }, 2000);
-    });
+            // Simulate API call
+            setTimeout(() => {
+                createPlanButton.disabled = false;
+                createPlanButton.innerHTML = '<i class="fa fa-check-circle"></i> Create My Workout Plan';
+                alert('Your personalized workout plan has been created!');
+            }, 2000);
+        });
+    }
 
     // Random Motivational Quotes
     const quotes = [
@@ -269,7 +275,20 @@ document.addEventListener('DOMContentLoaded', function() {
     updateQuote();
     setInterval(updateQuote, 24 * 60 * 60 * 1000);
 });
-
+function readCookie() {
+    var i, c, ca, nameEQ = "username=";
+    ca = document.cookie.split(';');
+    for(i=0;i < ca.length;i++) {
+        c = ca[i];
+        while (c.charAt(0)==' ') {
+            c = c.substring(1,c.length);
+        }
+        if (c.indexOf(nameEQ) == 0) {
+            return c.substring(nameEQ.length,c.length);
+        }
+    }
+    return '';
+}
 // Initialize Charts function (if needed)
 function initializeCharts() {
     // Weight Progress Chart

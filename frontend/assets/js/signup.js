@@ -31,7 +31,6 @@ async function signUp(requestBody) {
       if (response.status == 200) {
         const data = await response.text();
         console.log("Sign up successful!", data);
-        window.location.href = "./dashboard.html";
         // Store token or navigate user here
       } else {
         const error = await response.text();

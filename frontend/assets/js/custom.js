@@ -85,12 +85,28 @@
 	    var scrollPos = $(document).scrollTop();
 	    $('.nav a').each(function () {
 	        var currLink = $(this);
-	        var refElement = $(currLink.attr("href"));
-	        if (refElement.position().top <= scrollPos && refElement.position().top + refElement.height() > scrollPos) {
-	            $('.nav ul li a').removeClass("active");
-	            currLink.addClass("active");
+	        var href = currLink.attr("href");
+	        
+	        // Skip if href is not a hash link or is a relative path
+	        if (!href || href.startsWith('../') || href.startsWith('./') || !href.startsWith('#')) {
+	            return true; // continue to next iteration
 	        }
-	        else{
+	        
+	        var refElement = $(href);
+	        if (refElement && refElement.length) {
+	            try {
+	                var refPosition = refElement.position();
+	                if (refPosition && refPosition.top <= scrollPos && refPosition.top + refElement.height() > scrollPos) {
+	                    $('.nav ul li a').removeClass("active");
+	                    currLink.addClass("active");
+	                } else {
+	                    currLink.removeClass("active");
+	                }
+	            } catch (e) {
+	                console.log('Error calculating position:', e);
+	                currLink.removeClass("active");
+	            }
+	        } else {
 	            currLink.removeClass("active");
 	        }
 	    });
