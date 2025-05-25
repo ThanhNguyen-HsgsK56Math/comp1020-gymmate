@@ -66,7 +66,8 @@
             <div class="row">
                 <div class="col-lg-8 offset-lg-2">
                     <div class="welcome-content">
-                        <h1>Welcome, <em id="user-name">Thanh</em>!</h1>
+                        <h1>Welcome, <em id="user-name"></em></h1>
+
                         <p>Let's build your personalized fitness journey. Update your profile or explore your tailored plans.</p>
                         <div class="welcome-buttons">
                             <div class="main-button">
@@ -159,7 +160,7 @@
                                 <div id="loading-spinner" class="spinner-border text-primary" role="status" style="display: none;">
                                     <span class="sr-only">Loading...</span>
                                 </div>
-                                <button type="submit" class="main-button">Generate My Plan</button>
+                                <button type="submit" class="main-button" id="gen-btn">Generate My Plan</button>
                             </div>
                         </form>
                     </div>
@@ -1806,7 +1807,7 @@
         </div>
     </section>
     <!-- ***** Progress Tracking End ***** -->
-
+    
     <!-- jQuery -->
     <script src="assets/js/jquery-2.1.0.min.js"></script>
     <!-- Bootstrap -->

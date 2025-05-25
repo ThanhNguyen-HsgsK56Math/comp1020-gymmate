@@ -10,12 +10,12 @@ $(document).ready(function(){
 		signIn(requestBody);
 	})
 })
-function writeCookie(userId) {
+function writeCookie(username) {
     // var date, expires;
-    document.cookie = 'userId' + "=" + userId;
+    document.cookie = 'username' + "=" + username;
 }
 function readCookie() {
-    var i, c, ca, nameEQ = "userId=";
+    var i, c, ca, nameEQ = "username=";
     ca = document.cookie.split(';');
     for(i=0;i < ca.length;i++) {
         c = ca[i];
@@ -46,8 +46,9 @@ async function signIn(requestBody) {
       
       if (response.status == 200) {
         const data = await response.text();
-        writeCookie(data);
-        console.log("Login successful!", data);
+        writeCookie(requestBody.username);
+        console.log(data, requestBody.username);
+        window.location.href = "./dashboard.html";
         // Store token or navigate user here
       } else {
         const error = await response.text();
