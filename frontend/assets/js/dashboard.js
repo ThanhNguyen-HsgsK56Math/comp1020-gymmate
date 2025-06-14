@@ -2,6 +2,11 @@
 $(document).ready(function(){
     
 	document.getElementById("user-name").innerHTML = readCookie();
+    // Prevent form submission from reloading the page
+    $("#profile-update").on("submit", function(e) {
+        e.preventDefault();
+        $("#gen-btn").trigger("click");
+    });
     $("#gen-btn").click(() => {
         console.log("generate plan");
         function convert(str) {
@@ -16,6 +21,12 @@ $(document).ready(function(){
             return convert(text)
         }
         var username = readCookie();
+        if (!username) {
+            window.alert("Username not found. Please sign in again.");
+            return;
+        }
+        // Store username in localStorage for later use
+        localStorage.setItem('username', username);
         const requestBody = {
             goal: [getFromDropDown('goal')],
             activityLevel: getFromDropDown('activity'),
@@ -29,10 +40,25 @@ $(document).ready(function(){
 	})
 })
 
-async function completeProfile(username, requestBody){
-    // Helper function to build the request body
+// Function to display the exercise plan
+function displayExercisePlan(plan) {
+    const weeklyPlanContainer = document.querySelector('.weekly-plan');
+    weeklyPlanContainer.innerHTML = ''; // Clear existing content
 
-    // console.log(requestBody);
+    // Create a simple list of exercise names
+    const exerciseList = document.createElement('ul');
+    exerciseList.className = 'exercise-list';
+    plan.exercises.forEach(exercise => {
+        const exerciseItem = document.createElement('li');
+        exerciseItem.className = 'exercise-item';
+        exerciseItem.innerHTML = `<i class="fas fa-dumbbell"></i> ${exercise.name}`;
+        exerciseList.appendChild(exerciseItem);
+    });
+    weeklyPlanContainer.appendChild(exerciseList);
+}
+
+// Update the completeProfile function to display the plan
+async function completeProfile(username, requestBody){
     try {
       const response = await fetch('http://localhost:8080/api/users/'+username+'/complete-profile', {
         method: 'POST',
@@ -40,17 +66,63 @@ async function completeProfile(username, requestBody){
         credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
-
         },
         body: JSON.stringify(requestBody)
       });
       
       if (response.status == 200) {
         const data = await response.text();
-        window.alert("Update profile complete");
+        // Removed alert for profile update
         
-        // window.location.href = "./dashboard.html";
-        // Store token or navigate user here
+        // Generate exercise plan after profile completion
+        try {
+            const exerciseResponse = await fetch(`http://localhost:8080/api/exerciseplans?username=${encodeURIComponent(username)}`, {
+                method: 'GET',
+                mode: 'cors',
+                credentials: 'include',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            // Log the response status and text for debugging
+            console.log("Exercise plan response status:", exerciseResponse.status);
+            const responseText = await exerciseResponse.text();
+            console.log("Exercise plan response text:", responseText);
+
+            if (exerciseResponse.ok) {
+                const exercisePlan = JSON.parse(responseText);
+                // Store the exercise plan in localStorage
+                localStorage.setItem('exercisePlan', JSON.stringify(exercisePlan));
+                
+                // Display the exercise plan
+                displayExercisePlan(exercisePlan);
+                
+                // Removed alert for exercise plan generation
+                
+                // Navigate to the plans section
+                const plansSection = document.getElementById('my-plans');
+                if (plansSection) {
+                    // Remove any existing hash from the URL
+                    history.pushState("", document.title, window.location.pathname);
+                    // Scroll to the plans section
+                    plansSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Activate the plans tab if it exists
+                    const plansTab = document.querySelector('.plan-tab[data-plan="exercise"]');
+                    if (plansTab) {
+                        plansTab.click();
+                    }
+                }
+            } else {
+                console.error('Exercise plan generation failed:', responseText);
+                window.alert("Failed to generate exercise plan: " + responseText);
+            }
+        } catch (err) {
+            console.error("Error generating exercise plan:", err);
+            window.alert("Failed to generate exercise plan. Please try again.");
+        }
       } else {
         const error = await response.text();
         console.error(error);
@@ -58,8 +130,9 @@ async function completeProfile(username, requestBody){
       }
     } catch (err) {
       console.error("Error:", err);
+      window.alert("An error occurred. Please try again.");
     }
-  }
+}
   
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize Charts
@@ -335,6 +408,40 @@ document.addEventListener('DOMContentLoaded', function() {
     // Update quote every day
     updateQuote();
     setInterval(updateQuote, 24 * 60 * 60 * 1000);
+
+    // Print plan button
+    const printPlanBtn = document.getElementById('print-plan');
+    if (printPlanBtn) {
+        printPlanBtn.addEventListener('click', () => {
+            window.print();
+        });
+    }
+
+    // Regenerate plan button
+    const regeneratePlanBtn = document.getElementById('regenerate-plan');
+    if (regeneratePlanBtn) {
+        regeneratePlanBtn.addEventListener('click', () => {
+            const username = readCookie();
+            if (username) {
+                // Get the current profile data
+                const profileData = {
+                    goal: [document.getElementById('goal').value],
+                    activityLevel: document.getElementById('activity').value,
+                    gender: document.getElementById('diet').value,
+                    weight: Number(document.getElementById('weight').value),
+                    height: Number(document.getElementById('height').value),
+                    age: Number(document.getElementById('age').value),
+                };
+                completeProfile(username, profileData);
+            }
+        });
+    }
+
+    // Load existing plan if available
+    const savedPlan = localStorage.getItem('exercisePlan');
+    if (savedPlan) {
+        displayExercisePlan(JSON.parse(savedPlan));
+    }
 });
 function readCookie() {
     var i, c, ca, nameEQ = "username=";
