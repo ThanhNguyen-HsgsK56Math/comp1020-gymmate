@@ -15,7 +15,7 @@ Test 1: Create a user with just username and password
 curl -X POST http://localhost:8080/api/users/register \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser3",
+    "username": "thanh-gay",
     "password": "password123"
   }'
 ```
@@ -38,16 +38,24 @@ Test 1: Login with incomplete profile
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser3",
+    "username": "thanh-gay",
     "password": "password123"
   }'
 ```
-Expected: "Profile setup required"
+Expected: Returns JSON with username, both passwords, and status:
+```json
+{
+    "username": "thanh-gay",
+    "realPassword": "password123",
+    "encodedPassword": "$2a$10$encoded_password_hash",
+    "status": "Profile setup required"
+}
+```
 
 ### 3. Complete Profile (Step 2)
 Test 1: Complete profile with valid data
 ```bash
-curl -X POST http://localhost:8080/api/users/newuser3/complete-profile \
+curl -X POST http://localhost:8080/api/users/thanh-gay/complete-profile \
   -H "Content-Type: application/json" \
   -d '{
     "goal": ["weight_loss", "muscle_gain"],
@@ -111,18 +119,26 @@ Test 1: Login with complete profile
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser3",
+    "username": "thanh-gay",
     "password": "password123"
   }'
 ```
-Expected: Returns the username "newuser1"
+Expected: Returns JSON with username, both passwords, and status:
+```json
+{
+    "username": "thanh-gay",
+    "realPassword": "password123",
+    "encodedPassword": "$2a$10$encoded_password_hash",
+    "status": "Login successful"
+}
+```
 
 Test 2: Login with incorrect password
 ```bash
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "newuser1",
+    "username": "thanh-gay",
     "password": "wrongpassword"
   }'
 ```

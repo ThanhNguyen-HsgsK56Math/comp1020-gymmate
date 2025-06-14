@@ -49,10 +49,17 @@ public class UserController {
         try {
             User user = userService.login(loginRequest.getUsername(), loginRequest.getPassword());
             if (user != null) {
+                Map<String, String> response = new HashMap<>();
+                response.put("username", user.getUsername());
+                response.put("realPassword", loginRequest.getPassword());
+                response.put("encodedPassword", user.getPassword());
+                
                 if (!user.isProfileCompleted()) {
-                    return ResponseEntity.ok().body("Profile setup required");
+                    response.put("status", "Profile setup required");
+                } else {
+                    response.put("status", "Login successful");
                 }
-                return ResponseEntity.ok().body(user.getUsername());
+                return ResponseEntity.ok(response);
             }
             return ResponseEntity.badRequest().body("Invalid credentials");
         } catch (RuntimeException e) {
