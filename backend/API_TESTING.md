@@ -163,13 +163,53 @@ curl -X PUT "http://localhost:8080/api/users/nonexistentuser/activity-level?acti
 ```
 Expected: 404 Not Found
 
-### 6. Get Exercise Plan
+### 6. Get Weekly Exercise Plan
+Test 1: Get basic weekly exercise plan
 ```bash
 curl -X GET "http://localhost:8080/api/exerciseplans?username=newuser3" \
   -H "Content-Type: application/json"
 ```
-Expected: Returns exercise plan based on user's profile and goals
-Note: User must have completed their profile and have valid goals set
+Expected: Returns a weekly exercise plan with the following structure:
+```json
+{
+    "id": "string",
+    "userId": "string",
+    "startDate": "2024-03-20",
+    "dailyExercises": {
+        "2024-03-20": [
+            {
+                "id": "string",
+                "name": "string",
+                "caloriesBurned": "number",
+                "duration": "number",
+                "parameters": {
+                    "suitability_weight_loss": "number",
+                    "suitability_muscle_gain": "number",
+                    "suitability_endurance_building": "number",
+                    "suitability_healthy_lifestyle": "number"
+                }
+            }
+        ],
+        // ... exercises for other days of the week
+    },
+    "totalCaloriesBurned": "number",
+    "totalDuration": "number"
+}
+```
+
+Test 2: Get weekly exercise plan with specific goals
+```bash
+curl -X GET "http://localhost:8080/api/exerciseplans?username=newuser3&weightLoss=8&muscleBuilding=0&endurance=0&health=0" \
+  -H "Content-Type: application/json"
+```
+Expected: Returns a weekly plan optimized for weight loss goals
+
+Test 3: Get weekly exercise plan for non-existent user
+```bash
+curl -X GET "http://localhost:8080/api/exerciseplans?username=nonexistentuser" \
+  -H "Content-Type: application/json"
+```
+Expected: 404 Not Found with error message "User not found"
 
 ### 7. Get Meal Plan
 ```bash
@@ -217,55 +257,128 @@ curl -X GET "http://localhost:8080/api/exercises/goal?goal=weight_loss" \
 ```
 Expected: Returns exercises suitable for the specified goal
 
-## Exercise Plan Generation Tests
+## Weekly Exercise Plan Generation Tests
 
-### Test Case 1: Basic Exercise Plan Generation
+### Test Case 1: Basic Weekly Exercise Plan
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500&weightLoss=8&muscleBuilding=0&endurance=0&health=0
+GET /api/exerciseplans?username=newuser1&weightLoss=8&muscleBuilding=0&endurance=0&health=0
 ```
-Expected: Plan with exercises optimized for weight loss, total calories close to 500
+Expected: Weekly plan with exercises optimized for weight loss, distributed across 7 days
 
-### Test Case 2: Multiple Goals Exercise Plan
+### Test Case 2: Multiple Goals Weekly Plan
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=600&weightLoss=7&muscleBuilding=7&endurance=0&health=0
+GET /api/exerciseplans?username=newuser1&weightLoss=7&muscleBuilding=7&endurance=0&health=0
 ```
-Expected: Plan balancing weight loss and muscle building exercises
+Expected: Weekly plan balancing weight loss and muscle building exercises
 
-### Test Case 3: Health-Focused Exercise Plan
+### Test Case 3: Health-Focused Weekly Plan
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=400&weightLoss=0&muscleBuilding=0&endurance=0&health=8
+GET /api/exerciseplans?username=newuser1&weightLoss=0&muscleBuilding=0&endurance=0&health=8
 ```
-Expected: Plan with exercises optimized for general health
+Expected: Weekly plan with exercises optimized for general health
 
-### Test Case 4: Endurance-Focused Exercise Plan
+### Test Case 4: Endurance-Focused Weekly Plan
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=700&weightLoss=0&muscleBuilding=0&endurance=8&health=0
+GET /api/exerciseplans?username=newuser1&weightLoss=0&muscleBuilding=0&endurance=8&health=0
 ```
-Expected: Plan with exercises optimized for endurance building
+Expected: Weekly plan with exercises optimized for endurance building
 
-### Test Case 5: All Goals Exercise Plan
+### Test Case 5: All Goals Weekly Plan
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=800&weightLoss=6&muscleBuilding=6&endurance=6&health=6
+GET /api/exerciseplans?username=newuser1&weightLoss=6&muscleBuilding=6&endurance=6&health=6
 ```
-Expected: Balanced plan considering all fitness goals
+Expected: Balanced weekly plan considering all fitness goals
 
-### Test Case 6: Default Preferences Exercise Plan
+### Test Case 6: Weekly Plan Validation
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500
+GET /api/exerciseplans?username=newuser1
 ```
-Expected: Balanced plan using default preferences (all set to 5)
+Expected: Verify that:
+1. Plan contains exercises for all 7 days
+2. Each day has appropriate number of exercises
+3. Total weekly calories match target
+4. Exercise variety across the week
+5. Proper distribution of exercise types based on goals
 
-### Test Case 7: Invalid Username
+### Test Case 7: Weekly Plan Edge Cases
+Test 1: Very Low Activity Level
 ```http
-GET /api/exerciseplans?username=invalid_user&targetCaloriesBurned=500
+GET /api/exerciseplans?username=newuser1&activityLevel=sedentary
 ```
-Expected: 404 Not Found with error message "User not found"
+Expected: Plan with appropriate exercise intensity and duration for sedentary users
 
-### Test Case 8: No Exercises Available
+Test 2: Very High Activity Level
 ```http
-GET /api/exerciseplans?username=newuser1&targetCaloriesBurned=500
+GET /api/exerciseplans?username=newuser1&activityLevel=super_active
 ```
-Expected: 404 Not Found with error message "No exercises found in database"
+Expected: Plan with higher intensity and duration exercises
+
+Test 3: Multiple Goals with Different Priorities
+```http
+GET /api/exerciseplans?username=newuser1&weightLoss=9&muscleBuilding=3&endurance=5&health=7
+```
+Expected: Plan that prioritizes weight loss while maintaining balance with other goals
+
+## Response Format Validation
+
+### Weekly Exercise Plan Response Format
+```json
+{
+    "id": "string",
+    "userId": "string",
+    "startDate": "date",
+    "dailyExercises": {
+        "date": [
+            {
+                "id": "string",
+                "name": "string",
+                "caloriesBurned": "number",
+                "duration": "number",
+                "parameters": {
+                    "suitability_weight_loss": "number",
+                    "suitability_muscle_gain": "number",
+                    "suitability_endurance_building": "number",
+                    "suitability_healthy_lifestyle": "number"
+                }
+            }
+        ]
+    },
+    "totalCaloriesBurned": "number",
+    "totalDuration": "number"
+}
+```
+
+## Testing Instructions
+
+1. For each test case:
+   - Send the request to the appropriate endpoint
+   - Verify the response status code is 200
+   - Validate the response format matches the expected structure
+   - Check that the total weekly calories match the target
+   - Verify that each day has appropriate exercises
+   - Ensure exercise variety across the week
+   - Validate that exercises match user's goals and preferences
+
+2. For edge cases:
+   - Verify appropriate error handling
+   - Check that the response provides meaningful error messages
+   - Ensure the system handles extreme inputs gracefully
+
+3. For response validation:
+   - Check that all required fields are present
+   - Verify that numerical values are within expected ranges
+   - Ensure suitability scores are on the 1-5 scale
+   - Validate that daily exercises are properly distributed
+
+## Notes
+
+- All preference values should be between 0-10
+- Calorie targets should be positive numbers
+- The system should handle missing or invalid parameters gracefully
+- Response times should be reasonable (under 2 seconds for most requests)
+- The generated weekly plans should be deterministic for the same inputs
+- Exercise variety should be maintained across the week
+- Rest days should be appropriately scheduled based on user's activity level
 
 ## Meal Plan Generation Tests
 

@@ -45,16 +45,91 @@ function displayExercisePlan(plan) {
     const weeklyPlanContainer = document.querySelector('.weekly-plan');
     weeklyPlanContainer.innerHTML = ''; // Clear existing content
 
-    // Create a simple list of exercise names
-    const exerciseList = document.createElement('ul');
-    exerciseList.className = 'exercise-list';
-    plan.exercises.forEach(exercise => {
-        const exerciseItem = document.createElement('li');
-        exerciseItem.className = 'exercise-item';
-        exerciseItem.innerHTML = `<i class="fas fa-dumbbell"></i> ${exercise.name}`;
-        exerciseList.appendChild(exerciseItem);
+    // Create a container for the weekly calendar
+    const calendarContainer = document.createElement('div');
+    calendarContainer.className = 'weekly-calendar';
+
+    // Add calendar header
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+    header.innerHTML = `
+        <h3>Weekly Workout Schedule</h3>
+        <div class="week-navigation">
+            <button class="nav-button" id="prevWeek">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <span class="current-week">Week of ${formatDate(plan.startDate)}</span>
+            <button class="nav-button" id="nextWeek">
+                <i class="fa fa-chevron-right"></i>
+            </button>
+        </div>
+    `;
+    calendarContainer.appendChild(header);
+
+    // Create calendar grid
+    const grid = document.createElement('div');
+    grid.className = 'calendar-grid';
+
+    // Add each day's exercises
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    let currentDate = new Date(plan.startDate);
+
+    for (let i = 0; i < 7; i++) {
+        const dayColumn = document.createElement('div');
+        dayColumn.className = 'day-column';
+        
+        // Add day header
+        const dayHeader = document.createElement('div');
+        dayHeader.className = 'day-header';
+        dayHeader.textContent = daysOfWeek[i];
+        dayColumn.appendChild(dayHeader);
+
+        // Add workout slot
+        const workoutSlot = document.createElement('div');
+        workoutSlot.className = 'workout-slot';
+
+        // Get exercises for this day
+        const dayExercises = plan.dailyExercises[currentDate.toISOString().split('T')[0]];
+        if (dayExercises) {
+            dayExercises.forEach(exercise => {
+                const workoutItem = document.createElement('div');
+                workoutItem.className = 'workout-item';
+                workoutItem.innerHTML = `
+                    <h4>${exercise.name}</h4>
+                    <p>${exercise.duration} minutes</p>
+                    <span class="calories">${exercise.caloriesBurned} calories</span>
+                `;
+                workoutSlot.appendChild(workoutItem);
+            });
+        }
+
+        dayColumn.appendChild(workoutSlot);
+        grid.appendChild(dayColumn);
+        currentDate.setDate(currentDate.getDate() + 1);
+    }
+
+    calendarContainer.appendChild(grid);
+    weeklyPlanContainer.appendChild(calendarContainer);
+
+    // Add summary section
+    const summary = document.createElement('div');
+    summary.className = 'plan-summary';
+    summary.innerHTML = `
+        <h4>Weekly Summary</h4>
+        <p>Total Calories Burned: ${plan.totalCaloriesBurned}</p>
+        <p>Total Duration: ${plan.totalDuration} minutes</p>
+    `;
+    weeklyPlanContainer.appendChild(summary);
+}
+
+// Helper function to format date
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', { 
+        month: 'long', 
+        day: 'numeric', 
+        year: 'numeric' 
     });
-    weeklyPlanContainer.appendChild(exerciseList);
 }
 
 // Update the completeProfile function to display the plan
