@@ -43,7 +43,7 @@ public class ExercisePlanService {
         User user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        logger.info("Generating exercise plan for user: {}", username);
+        logger.info("Generating weekly exercise plan for user: {}", username);
         logger.info("User goals: {}", user.getGoal());
         logger.info("User activity level: {}", user.getActivityLevel());
 
@@ -56,11 +56,9 @@ public class ExercisePlanService {
         );
         double tdee = FitnessCalculator.calculateTDEE(bmr, user.getActivityLevel());
 
-        logger.info("Calculated BMR: {}, TDEE: {}", bmr, tdee);
-
-        // Calculate target calories to burn based on user's goals
-        int targetCaloriesBurned = calculateTargetCaloriesBurned(user.getGoal(), tdee);
-        logger.info("Target calories to burn: {}", targetCaloriesBurned);
+        // Calculate weekly target calories to burn based on user's goals
+        int weeklyTargetCaloriesBurned = calculateTargetCaloriesBurned(user.getGoal(), tdee) * 7;
+        logger.info("Weekly target calories to burn: {}", weeklyTargetCaloriesBurned);
 
         // Calculate preference weights based on user's goals
         Map<String, Integer> preferences = calculatePreferences(user.getGoal());
@@ -70,34 +68,45 @@ public class ExercisePlanService {
         List<Exercise> exercises = exerciseRepository.findAll();
         if (exercises.isEmpty()) {
             logger.error("No exercises found in database");
-            throw new RuntimeException("No exercises found in database. Please ensure MongoDB is properly configured and exercise data is loaded.");
-        }
-        logger.info("Found {} exercises in database", exercises.size());
-
-        // Generate exercise plan using the algorithm
-        ExercisePlanGenerator.ExercisePlanResult result = ExercisePlanGenerator.generateExercisePlan(
-                targetCaloriesBurned,
-                exercises,
-                preferences.get("weightLoss"),
-                preferences.get("muscleBuilding"),
-                preferences.get("endurance"),
-                preferences.get("health"));
-
-        if (result == null) {
-            logger.error("Failed to generate exercise plan. Target calories: {}, Available exercises: {}", 
-                targetCaloriesBurned, exercises.size());
-            throw new RuntimeException("Cannot generate exercise plan to meet the target calories");
+            throw new RuntimeException("No exercises found in database");
         }
 
-        logger.info("Successfully generated exercise plan with {} exercises, total calories: {}", 
-            result.exerciseSequence.size(), result.totalCaloriesBurned);
+        // Generate exercise plan for each day of the week
+        Map<LocalDate, List<Exercise>> dailyExercises = new HashMap<>();
+        int totalCaloriesBurned = 0;
+        int totalDuration = 0;
+        LocalDate startDate = LocalDate.now();
 
-        // Create and save the exercise plan
+        for (int i = 0; i < 7; i++) {
+            LocalDate currentDate = startDate.plusDays(i);
+            int dailyTargetCalories = weeklyTargetCaloriesBurned / 7;
+
+            // Generate daily plan
+            ExercisePlanGenerator.ExercisePlanResult result = ExercisePlanGenerator.generateExercisePlan(
+                    dailyTargetCalories,
+                    exercises,
+                    preferences.get("weightLoss"),
+                    preferences.get("muscleBuilding"),
+                    preferences.get("endurance"),
+                    preferences.get("health"));
+
+            if (result == null) {
+                logger.error("Failed to generate exercise plan for day {}", currentDate);
+                throw new RuntimeException("Cannot generate exercise plan for day " + currentDate);
+            }
+
+            dailyExercises.put(currentDate, result.exerciseSequence);
+            totalCaloriesBurned += result.totalCaloriesBurned;
+            totalDuration += result.totalDuration;
+        }
+
+        // Create and save the weekly exercise plan
         ExercisePlan plan = new ExercisePlan();
         plan.setUserId(user.getId());
-        plan.setDate(LocalDate.now());
-        plan.setExercises(result.exerciseSequence);
-        plan.setTotalCaloriesBurned(result.totalCaloriesBurned);
+        plan.setStartDate(startDate);
+        plan.setDailyExercises(dailyExercises);
+        plan.setTotalCaloriesBurned(totalCaloriesBurned);
+        plan.setTotalDuration(totalDuration);
 
         return exercisePlanRepository.save(plan);
     }
