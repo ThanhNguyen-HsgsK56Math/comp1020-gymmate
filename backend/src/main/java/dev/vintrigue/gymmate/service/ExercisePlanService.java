@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,6 +20,7 @@ import java.util.Map;
 @Service
 public class ExercisePlanService {
     private static final Logger logger = LoggerFactory.getLogger(ExercisePlanService.class);
+    private static final String[] DAYS_OF_WEEK = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
 
     @Autowired
     private UserRepository userRepository;
@@ -72,13 +72,11 @@ public class ExercisePlanService {
         }
 
         // Generate exercise plan for each day of the week
-        Map<LocalDate, List<Exercise>> dailyExercises = new HashMap<>();
+        Map<String, List<Exercise>> dailyExercises = new HashMap<>();
         int totalCaloriesBurned = 0;
         int totalDuration = 0;
-        LocalDate startDate = LocalDate.now();
 
-        for (int i = 0; i < 7; i++) {
-            LocalDate currentDate = startDate.plusDays(i);
+        for (String day : DAYS_OF_WEEK) {
             int dailyTargetCalories = weeklyTargetCaloriesBurned / 7;
 
             // Generate daily plan
@@ -91,11 +89,11 @@ public class ExercisePlanService {
                     preferences.get("health"));
 
             if (result == null) {
-                logger.error("Failed to generate exercise plan for day {}", currentDate);
-                throw new RuntimeException("Cannot generate exercise plan for day " + currentDate);
+                logger.error("Failed to generate exercise plan for day {}", day);
+                throw new RuntimeException("Cannot generate exercise plan for day " + day);
             }
 
-            dailyExercises.put(currentDate, result.exerciseSequence);
+            dailyExercises.put(day, result.exerciseSequence);
             totalCaloriesBurned += result.totalCaloriesBurned;
             totalDuration += result.totalDuration;
         }
@@ -103,7 +101,6 @@ public class ExercisePlanService {
         // Create and save the weekly exercise plan
         ExercisePlan plan = new ExercisePlan();
         plan.setUserId(user.getId());
-        plan.setStartDate(startDate);
         plan.setDailyExercises(dailyExercises);
         plan.setTotalCaloriesBurned(totalCaloriesBurned);
         plan.setTotalDuration(totalDuration);
