@@ -76,17 +76,48 @@ public class ExercisePlanService {
         int totalCaloriesBurned = 0;
         int totalDuration = 0;
 
+        // Define intensity patterns for each day
+        Map<String, Double> intensityMultipliers = new HashMap<>();
+        intensityMultipliers.put("Monday", 1.1);    // High intensity day
+        intensityMultipliers.put("Tuesday", 0.9);   // Medium-high intensity day
+        intensityMultipliers.put("Wednesday", 1.0); // Medium intensity day
+        intensityMultipliers.put("Thursday", 0.95); // Medium intensity day
+        intensityMultipliers.put("Friday", 1.15);   // Very high intensity day
+        intensityMultipliers.put("Saturday", 0.85); // Medium-low intensity day
+        intensityMultipliers.put("Sunday", 0.8);    // Low intensity recovery day
+
         for (String day : DAYS_OF_WEEK) {
-            int dailyTargetCalories = weeklyTargetCaloriesBurned / 7;
+            // Calculate daily target calories with intensity adjustment
+            double intensityMultiplier = intensityMultipliers.get(day);
+            int dailyTargetCalories = (int)((weeklyTargetCaloriesBurned / 7) * intensityMultiplier);
+
+            // Adjust preferences based on the day
+            Map<String, Integer> adjustedPreferences = new HashMap<>(preferences);
+            
+            if (day.equals("Sunday")) {
+                // Sunday is a recovery day - focus on light exercises and health
+                adjustedPreferences.put("health", Math.min(10, preferences.get("health") + 2));
+                adjustedPreferences.put("endurance", Math.min(10, preferences.get("endurance") + 1));
+                adjustedPreferences.put("weightLoss", Math.max(1, preferences.get("weightLoss") - 1));
+                adjustedPreferences.put("muscleBuilding", Math.max(1, preferences.get("muscleBuilding") - 1));
+            } else if (intensityMultiplier >= 1.1) {
+                // High intensity days focus more on muscle building
+                adjustedPreferences.put("muscleBuilding", Math.min(10, preferences.get("muscleBuilding") + 2));
+                adjustedPreferences.put("endurance", Math.min(10, preferences.get("endurance") + 1));
+            } else if (intensityMultiplier <= 0.9) {
+                // Low intensity days focus more on health and weight loss
+                adjustedPreferences.put("health", Math.min(10, preferences.get("health") + 1));
+                adjustedPreferences.put("weightLoss", Math.min(10, preferences.get("weightLoss") + 1));
+            }
 
             // Generate daily plan
             ExercisePlanGenerator.ExercisePlanResult result = ExercisePlanGenerator.generateExercisePlan(
                     dailyTargetCalories,
                     exercises,
-                    preferences.get("weightLoss"),
-                    preferences.get("muscleBuilding"),
-                    preferences.get("endurance"),
-                    preferences.get("health"));
+                    adjustedPreferences.get("weightLoss"),
+                    adjustedPreferences.get("muscleBuilding"),
+                    adjustedPreferences.get("endurance"),
+                    adjustedPreferences.get("health"));
 
             if (result == null) {
                 logger.error("Failed to generate exercise plan for day {}", day);

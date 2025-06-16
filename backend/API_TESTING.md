@@ -119,8 +119,8 @@ Test 1: Login with complete profile
 curl -X POST http://localhost:8080/api/users/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "thanh-gay",
-    "password": "password123"
+    "username": "dang",
+    "password": "123"
   }'
 ```
 Expected: Returns JSON with username, both passwords, and status:
@@ -166,7 +166,7 @@ Expected: 404 Not Found
 ### 6. Get Weekly Exercise Plan
 Test 1: Get basic weekly exercise plan
 ```bash
-curl -X GET "http://localhost:8080/api/exerciseplans?username=newuser3" \
+curl -X GET "http://localhost:8080/api/exerciseplans?username=dang" \
   -H "Content-Type: application/json"
 ```
 Expected: Returns a weekly exercise plan with the following structure:

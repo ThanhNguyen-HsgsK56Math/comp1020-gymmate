@@ -1,7 +1,7 @@
 package dev.vintrigue.gymmate.controller;
 
 import dev.vintrigue.gymmate.model.Meal;
-import dev.vintrigue.gymmate.model.MealPlan;
+import dev.vintrigue.gymmate.model.WeeklyMealPlan;
 import dev.vintrigue.gymmate.service.MealPlanService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +37,7 @@ public class MealPlanController {
     @GetMapping
     public ResponseEntity<?> getMealPlan(@RequestParam String username) {
         try {
-            MealPlan plan = mealPlanService.generateMealPlan(username);
+            WeeklyMealPlan plan = mealPlanService.generateMealPlan(username);
             if (plan == null) {
                 return ResponseEntity.badRequest().body("No suitable meal plan could be generated. Please ensure you have completed your profile and have valid goals set.");
             }

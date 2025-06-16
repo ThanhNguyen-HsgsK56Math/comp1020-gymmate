@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Map;
 
@@ -13,6 +14,7 @@ public class ExercisePlan {
     @Id
     private String id;
     private String userId;
+    private LocalDate date;
     private Map<String, List<Exercise>> dailyExercises; // Map of day of week to exercises for that day
     private int totalCaloriesBurned;
     private int totalDuration;

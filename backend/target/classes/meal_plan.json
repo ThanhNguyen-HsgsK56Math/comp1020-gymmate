@@ -1,0 +1,254 @@
+{
+    "Protein Oatmeal": {
+        "type": "breakfast",
+        "calories": 450,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Grilled Chicken Salad": {
+        "type": "lunch",
+        "calories": 550,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Protein Smoothie": {
+        "type": "breakfast",
+        "calories": 300,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Greek Yogurt", "Protein Oatmeal"]
+    },
+    "Salmon with Sweet Potato": {
+        "type": "dinner",
+        "calories": 650,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Greek Yogurt Parfait": {
+        "type": "breakfast",
+        "calories": 400,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Protein Smoothie", "Protein Oatmeal"]
+    },
+    "Turkey Wrap": {
+        "type": "lunch",
+        "calories": 500,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Protein Bar": {
+        "type": "lunch",
+        "calories": 250,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 6,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Lean Beef Stir Fry": {
+        "type": "dinner",
+        "calories": 700,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Fruit and Protein Smoothie": {
+        "type": "breakfast",
+        "calories": 350,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Oatmeal"]
+    },
+    "Quinoa Bowl": {
+        "type": "lunch",
+        "calories": 450,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Trail Mix": {
+        "type": "lunch",
+        "calories": 300,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 6,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Grilled Fish with Vegetables": {
+        "type": "dinner",
+        "calories": 550,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Protein Pancakes": {
+        "type": "breakfast",
+        "calories": 500,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Tuna Salad": {
+        "type": "lunch",
+        "calories": 450,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Protein Shake": {
+        "type": "lunch",
+        "calories": 300,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Greek Yogurt", "Protein Oatmeal"]
+    },
+    "Chicken Stir Fry": {
+        "type": "dinner",
+        "calories": 600,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Avocado Toast": {
+        "type": "breakfast",
+        "calories": 450,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Protein Pasta": {
+        "type": "lunch",
+        "calories": 550,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Greek Yogurt with Berries": {
+        "type": "lunch",
+        "calories": 300,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Protein Smoothie", "Protein Oatmeal"]
+    },
+    "Grilled Steak with Vegetables": {
+        "type": "dinner",
+        "calories": 700,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Smoothie Bowl": {
+        "type": "breakfast",
+        "calories": 400,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Mediterranean Salad": {
+        "type": "lunch",
+        "calories": 500,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Protein Cookies": {
+        "type": "lunch",
+        "calories": 250,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 6,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Baked Chicken with Rice": {
+        "type": "dinner",
+        "calories": 600,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 9,
+        "suitability_endurance_building": 8,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Overnight Oats": {
+        "type": "breakfast",
+        "calories": 400,
+        "suitability_weight_loss": 7,
+        "suitability_muscle_gain": 7,
+        "suitability_endurance_building": 6,
+        "suitability_healthy_lifestyle": 8,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    },
+    "Vegetable Soup": {
+        "type": "lunch",
+        "calories": 450,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 6,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Fruit and Nut Mix": {
+        "type": "lunch",
+        "calories": 300,
+        "suitability_weight_loss": 6,
+        "suitability_muscle_gain": 6,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 7,
+        "follow-up_meals": ["Protein Smoothie", "Greek Yogurt"]
+    },
+    "Baked Fish with Vegetables": {
+        "type": "dinner",
+        "calories": 550,
+        "suitability_weight_loss": 8,
+        "suitability_muscle_gain": 8,
+        "suitability_endurance_building": 7,
+        "suitability_healthy_lifestyle": 9,
+        "follow-up_meals": ["Greek Yogurt", "Protein Smoothie"]
+    }
+} 
