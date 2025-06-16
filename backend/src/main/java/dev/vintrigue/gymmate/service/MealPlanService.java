@@ -73,6 +73,15 @@ public class MealPlanService {
         int totalWeeklyCalories = 0;
         int totalWeeklyPrepTime = 0;
 
+        // Track meals used across the entire week to avoid repetition
+        Set<String> usedMealIds = new HashSet<>();
+        
+        // Pre-filter meals by type for better performance
+        Map<String, List<Meal>> mealsByType = new HashMap<>();
+        for (String type : MEAL_TYPES) {
+            mealsByType.put(type, filterMealsByType(allMeals, type));
+        }
+
         // Generate meals for each day
         for (String day : DAYS_OF_WEEK) {
             List<MealDetails> dayMeals = new ArrayList<>();
@@ -80,22 +89,51 @@ public class MealPlanService {
 
             // Generate meals for each meal type
             for (String mealType : MEAL_TYPES) {
+                // Get suitable meals for this type
+                List<Meal> suitableMeals = mealsByType.get(mealType);
+                
+                // Filter out meals that have been used this week
+                List<Meal> availableMeals = suitableMeals.stream()
+                    .filter(meal -> !usedMealIds.contains(meal.getId()))
+                    .collect(Collectors.toList());
+
+                // If we've used all meals of this type, reset the used meals for this type
+                if (availableMeals.isEmpty()) {
+                    logger.info("All {} meals have been used, resetting for more variety", mealType);
+                    availableMeals = new ArrayList<>(suitableMeals);
+                    // Clear only the meals of this type from usedMealIds
+                    usedMealIds.removeAll(suitableMeals.stream()
+                        .map(Meal::getId)
+                        .collect(Collectors.toSet()));
+                }
+
                 // Calculate target calories for this meal
                 int mealCalories = calculateMealCalories(mealType, remainingCalories);
-                
-                // Get suitable meals for this type
-                List<Meal> suitableMeals = filterMealsByType(allMeals, mealType);
-                
-                // Select the best meal
-                Meal selectedMeal = selectMeal(suitableMeals, mealCalories, user.getGoal());
-                
+
+                // Sort meals by how close they are to target calories
+                availableMeals.sort((m1, m2) -> {
+                    int diff1 = Math.abs(m1.getCalories() - mealCalories);
+                    int diff2 = Math.abs(m2.getCalories() - mealCalories);
+                    return diff1 - diff2;
+                });
+
+                // Take the top 3 closest meals and randomly select one
+                int numOptions = Math.min(3, availableMeals.size());
+                Meal selectedMeal = null;
+                if (numOptions > 0) {
+                    List<Meal> topMeals = availableMeals.subList(0, numOptions);
+                    Collections.shuffle(topMeals);
+                    selectedMeal = topMeals.get(0);
+                    usedMealIds.add(selectedMeal.getId());
+                }
+
                 if (selectedMeal != null) {
                     MealDetails mealDetails = MealDetails.fromMeal(selectedMeal);
                     dayMeals.add(mealDetails);
                     remainingCalories -= mealDetails.getCalories();
                     totalWeeklyCalories += mealDetails.getCalories();
                     totalWeeklyPrepTime += mealDetails.getPrepTime();
-                    
+
                     logger.info("Selected {} for {}: {} calories", mealType, day, mealDetails.getCalories());
                 }
             }
