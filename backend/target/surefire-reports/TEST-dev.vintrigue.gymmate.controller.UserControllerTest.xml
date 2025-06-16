@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://maven.apache.org/surefire/maven-surefire-plugin/xsd/surefire-test-report-3.0.xsd" version="3.0" name="dev.vintrigue.gymmate.controller.UserControllerTest" time="32.551" tests="9" errors="0" skipped="0" failures="3">
+  <properties>
+    <property name="java.specification.version" value="21"/>
+    <property name="sun.jnu.encoding" value="UTF-8"/>
+    <property name="java.class.path" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/test-classes:/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/classes:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-data-mongodb/3.2.3/spring-boot-starter-data-mongodb-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.3/spring-boot-starter-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.3/spring-boot-starter-logging-3.2.3.jar:/home/minhd/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/minhd/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/minhd/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/minhd/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/minhd/.m2/repository/org/slf4j/jul-to-slf4j/2.0.12/jul-to-slf4j-2.0.12.jar:/home/minhd/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/minhd/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/minhd/.m2/repository/org/mongodb/mongodb-driver-sync/4.11.1/mongodb-driver-sync-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/bson/4.11.1/bson-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/mongodb-driver-core/4.11.1/mongodb-driver-core-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/bson-record-codec/4.11.1/bson-record-codec-4.11.1.jar:/home/minhd/.m2/repository/org/springframework/data/spring-data-mongodb/4.2.3/spring-data-mongodb-4.2.3.jar:/home/minhd/.m2/repository/org/springframework/spring-tx/6.1.4/spring-tx-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-context/6.1.4/spring-context-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-beans/6.1.4/spring-beans-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-expression/6.1.4/spring-expression-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/data/spring-data-commons/3.2.3/spring-data-commons-3.2.3.jar:/home/minhd/.m2/repository/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.2.3/spring-boot-starter-security-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/spring-aop/6.1.4/spring-aop-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-config/6.2.2/spring-security-config-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-web/6.2.2/spring-security-web-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.3/spring-boot-starter-web-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.3/spring-boot-starter-json-3.2.3.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.4/jackson-datatype-jdk8-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.4/jackson-datatype-jsr310-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.4/jackson-module-parameter-names-2.15.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.3/spring-boot-starter-tomcat-3.2.3.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.19/tomcat-embed-el-10.1.19.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.19/tomcat-embed-websocket-10.1.19.jar:/home/minhd/.m2/repository/org/springframework/spring-web/6.1.4/spring-web-6.1.4.jar:/home/minhd/.m2/repository/io/micrometer/micrometer-observation/1.12.3/micrometer-observation-1.12.3.jar:/home/minhd/.m2/repository/io/micrometer/micrometer-commons/1.12.3/micrometer-commons-1.12.3.jar:/home/minhd/.m2/repository/org/springframework/spring-webmvc/6.1.4/spring-webmvc-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/3.2.3/spring-boot-starter-webflux-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/3.2.3/spring-boot-starter-reactor-netty-3.2.3.jar:/home/minhd/.m2/repository/io/projectreactor/netty/reactor-netty-http/1.1.16/reactor-netty-http-1.1.16.jar:/home/minhd/.m2/repository/io/netty/netty-codec-http/4.1.107.Final/netty-codec-http-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-common/4.1.107.Final/netty-common-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-buffer/4.1.107.Final/netty-buffer-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport/4.1.107.Final/netty-transport-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec/4.1.107.Final/netty-codec-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-handler/4.1.107.Final/netty-handler-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-http2/4.1.107.Final/netty-codec-http2-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns/4.1.107.Final/netty-resolver-dns-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver/4.1.107.Final/netty-resolver-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-dns/4.1.107.Final/netty-codec-dns-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns-native-macos/4.1.107.Final/netty-resolver-dns-native-macos-4.1.107.Final-osx-x86_64.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns-classes-macos/4.1.107.Final/netty-resolver-dns-classes-macos-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport-native-epoll/4.1.107.Final/netty-transport-native-epoll-4.1.107.Final-linux-x86_64.jar:/home/minhd/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.107.Final/netty-transport-native-unix-common-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.107.Final/netty-transport-classes-epoll-4.1.107.Final.jar:/home/minhd/.m2/repository/io/projectreactor/netty/reactor-netty-core/1.1.16/reactor-netty-core-1.1.16.jar:/home/minhd/.m2/repository/io/netty/netty-handler-proxy/4.1.107.Final/netty-handler-proxy-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-socks/4.1.107.Final/netty-codec-socks-4.1.107.Final.jar:/home/minhd/.m2/repository/org/springframework/spring-webflux/6.1.4/spring-webflux-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-devtools/3.2.3/spring-boot-devtools-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot/3.2.3/spring-boot-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.3/spring-boot-autoconfigure-3.2.3.jar:/home/minhd/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.3/spring-boot-starter-test-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-test/3.2.3/spring-boot-test-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.3/spring-boot-test-autoconfigure-3.2.3.jar:/home/minhd/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/home/minhd/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/minhd/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/minhd/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/minhd/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/minhd/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/minhd/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/minhd/.m2/repository/net/bytebuddy/byte-buddy/1.14.12/byte-buddy-1.14.12.jar:/home/minhd/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/minhd/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/minhd/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/minhd/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/minhd/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/minhd/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/minhd/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/minhd/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.12/byte-buddy-agent-1.14.12.jar:/home/minhd/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/minhd/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/minhd/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/minhd/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/minhd/.m2/repository/org/springframework/spring-core/6.1.4/spring-core-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-jcl/6.1.4/spring-jcl-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-test/6.1.4/spring-test-6.1.4.jar:/home/minhd/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/minhd/.m2/repository/io/projectreactor/reactor-test/3.6.3/reactor-test-3.6.3.jar:/home/minhd/.m2/repository/io/projectreactor/reactor-core/3.6.3/reactor-core-3.6.3.jar:/home/minhd/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-test/6.2.2/spring-security-test-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-core/6.2.2/spring-security-core-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-crypto/6.2.2/spring-security-crypto-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/3.2.3/spring-boot-starter-thymeleaf-3.2.3.jar:/home/minhd/.m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.2.RELEASE/thymeleaf-spring6-3.1.2.RELEASE.jar:/home/minhd/.m2/repository/org/thymeleaf/thymeleaf/3.1.2.RELEASE/thymeleaf-3.1.2.RELEASE.jar:/home/minhd/.m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar:/home/minhd/.m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.4/jackson-databind-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.4/jackson-annotations-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.4/jackson-core-2.15.4.jar:"/>
+    <property name="java.vm.vendor" value="Ubuntu"/>
+    <property name="sun.arch.data.model" value="64"/>
+    <property name="java.vendor.url" value="https://ubuntu.com/"/>
+    <property name="user.timezone" value="Etc/UTC"/>
+    <property name="os.name" value="Linux"/>
+    <property name="java.vm.specification.version" value="21"/>
+    <property name="sun.java.launcher" value="SUN_STANDARD"/>
+    <property name="sun.boot.library.path" value="/usr/lib/jvm/java-21-openjdk-amd64/lib"/>
+    <property name="sun.java.command" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/surefire/surefirebooter-20250615141829259_3.jar /mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/surefire 2025-06-15T14-18-28_998-jvmRun1 surefire-20250615141829259_1tmp surefire_0-20250615141829259_2tmp"/>
+    <property name="jdk.debug" value="release"/>
+    <property name="surefire.test.class.path" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/test-classes:/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/classes:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-data-mongodb/3.2.3/spring-boot-starter-data-mongodb-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter/3.2.3/spring-boot-starter-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-logging/3.2.3/spring-boot-starter-logging-3.2.3.jar:/home/minhd/.m2/repository/ch/qos/logback/logback-classic/1.4.14/logback-classic-1.4.14.jar:/home/minhd/.m2/repository/ch/qos/logback/logback-core/1.4.14/logback-core-1.4.14.jar:/home/minhd/.m2/repository/org/apache/logging/log4j/log4j-to-slf4j/2.21.1/log4j-to-slf4j-2.21.1.jar:/home/minhd/.m2/repository/org/apache/logging/log4j/log4j-api/2.21.1/log4j-api-2.21.1.jar:/home/minhd/.m2/repository/org/slf4j/jul-to-slf4j/2.0.12/jul-to-slf4j-2.0.12.jar:/home/minhd/.m2/repository/jakarta/annotation/jakarta.annotation-api/2.1.1/jakarta.annotation-api-2.1.1.jar:/home/minhd/.m2/repository/org/yaml/snakeyaml/2.2/snakeyaml-2.2.jar:/home/minhd/.m2/repository/org/mongodb/mongodb-driver-sync/4.11.1/mongodb-driver-sync-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/bson/4.11.1/bson-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/mongodb-driver-core/4.11.1/mongodb-driver-core-4.11.1.jar:/home/minhd/.m2/repository/org/mongodb/bson-record-codec/4.11.1/bson-record-codec-4.11.1.jar:/home/minhd/.m2/repository/org/springframework/data/spring-data-mongodb/4.2.3/spring-data-mongodb-4.2.3.jar:/home/minhd/.m2/repository/org/springframework/spring-tx/6.1.4/spring-tx-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-context/6.1.4/spring-context-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-beans/6.1.4/spring-beans-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-expression/6.1.4/spring-expression-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/data/spring-data-commons/3.2.3/spring-data-commons-3.2.3.jar:/home/minhd/.m2/repository/org/slf4j/slf4j-api/2.0.12/slf4j-api-2.0.12.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-security/3.2.3/spring-boot-starter-security-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/spring-aop/6.1.4/spring-aop-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-config/6.2.2/spring-security-config-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-web/6.2.2/spring-security-web-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-web/3.2.3/spring-boot-starter-web-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-json/3.2.3/spring-boot-starter-json-3.2.3.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jdk8/2.15.4/jackson-datatype-jdk8-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/datatype/jackson-datatype-jsr310/2.15.4/jackson-datatype-jsr310-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/module/jackson-module-parameter-names/2.15.4/jackson-module-parameter-names-2.15.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-tomcat/3.2.3/spring-boot-starter-tomcat-3.2.3.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-core/10.1.19/tomcat-embed-core-10.1.19.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-el/10.1.19/tomcat-embed-el-10.1.19.jar:/home/minhd/.m2/repository/org/apache/tomcat/embed/tomcat-embed-websocket/10.1.19/tomcat-embed-websocket-10.1.19.jar:/home/minhd/.m2/repository/org/springframework/spring-web/6.1.4/spring-web-6.1.4.jar:/home/minhd/.m2/repository/io/micrometer/micrometer-observation/1.12.3/micrometer-observation-1.12.3.jar:/home/minhd/.m2/repository/io/micrometer/micrometer-commons/1.12.3/micrometer-commons-1.12.3.jar:/home/minhd/.m2/repository/org/springframework/spring-webmvc/6.1.4/spring-webmvc-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-webflux/3.2.3/spring-boot-starter-webflux-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-reactor-netty/3.2.3/spring-boot-starter-reactor-netty-3.2.3.jar:/home/minhd/.m2/repository/io/projectreactor/netty/reactor-netty-http/1.1.16/reactor-netty-http-1.1.16.jar:/home/minhd/.m2/repository/io/netty/netty-codec-http/4.1.107.Final/netty-codec-http-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-common/4.1.107.Final/netty-common-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-buffer/4.1.107.Final/netty-buffer-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport/4.1.107.Final/netty-transport-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec/4.1.107.Final/netty-codec-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-handler/4.1.107.Final/netty-handler-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-http2/4.1.107.Final/netty-codec-http2-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns/4.1.107.Final/netty-resolver-dns-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver/4.1.107.Final/netty-resolver-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-dns/4.1.107.Final/netty-codec-dns-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns-native-macos/4.1.107.Final/netty-resolver-dns-native-macos-4.1.107.Final-osx-x86_64.jar:/home/minhd/.m2/repository/io/netty/netty-resolver-dns-classes-macos/4.1.107.Final/netty-resolver-dns-classes-macos-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport-native-epoll/4.1.107.Final/netty-transport-native-epoll-4.1.107.Final-linux-x86_64.jar:/home/minhd/.m2/repository/io/netty/netty-transport-native-unix-common/4.1.107.Final/netty-transport-native-unix-common-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-transport-classes-epoll/4.1.107.Final/netty-transport-classes-epoll-4.1.107.Final.jar:/home/minhd/.m2/repository/io/projectreactor/netty/reactor-netty-core/1.1.16/reactor-netty-core-1.1.16.jar:/home/minhd/.m2/repository/io/netty/netty-handler-proxy/4.1.107.Final/netty-handler-proxy-4.1.107.Final.jar:/home/minhd/.m2/repository/io/netty/netty-codec-socks/4.1.107.Final/netty-codec-socks-4.1.107.Final.jar:/home/minhd/.m2/repository/org/springframework/spring-webflux/6.1.4/spring-webflux-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-devtools/3.2.3/spring-boot-devtools-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot/3.2.3/spring-boot-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-autoconfigure/3.2.3/spring-boot-autoconfigure-3.2.3.jar:/home/minhd/.m2/repository/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-test/3.2.3/spring-boot-starter-test-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-test/3.2.3/spring-boot-test-3.2.3.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-test-autoconfigure/3.2.3/spring-boot-test-autoconfigure-3.2.3.jar:/home/minhd/.m2/repository/com/jayway/jsonpath/json-path/2.9.0/json-path-2.9.0.jar:/home/minhd/.m2/repository/jakarta/xml/bind/jakarta.xml.bind-api/4.0.1/jakarta.xml.bind-api-4.0.1.jar:/home/minhd/.m2/repository/jakarta/activation/jakarta.activation-api/2.1.2/jakarta.activation-api-2.1.2.jar:/home/minhd/.m2/repository/net/minidev/json-smart/2.5.0/json-smart-2.5.0.jar:/home/minhd/.m2/repository/net/minidev/accessors-smart/2.5.0/accessors-smart-2.5.0.jar:/home/minhd/.m2/repository/org/ow2/asm/asm/9.3/asm-9.3.jar:/home/minhd/.m2/repository/org/assertj/assertj-core/3.24.2/assertj-core-3.24.2.jar:/home/minhd/.m2/repository/net/bytebuddy/byte-buddy/1.14.12/byte-buddy-1.14.12.jar:/home/minhd/.m2/repository/org/awaitility/awaitility/4.2.0/awaitility-4.2.0.jar:/home/minhd/.m2/repository/org/hamcrest/hamcrest/2.2/hamcrest-2.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter/5.10.2/junit-jupiter-5.10.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-api/5.10.2/junit-jupiter-api-5.10.2.jar:/home/minhd/.m2/repository/org/opentest4j/opentest4j/1.3.0/opentest4j-1.3.0.jar:/home/minhd/.m2/repository/org/junit/platform/junit-platform-commons/1.10.2/junit-platform-commons-1.10.2.jar:/home/minhd/.m2/repository/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-params/5.10.2/junit-jupiter-params-5.10.2.jar:/home/minhd/.m2/repository/org/junit/jupiter/junit-jupiter-engine/5.10.2/junit-jupiter-engine-5.10.2.jar:/home/minhd/.m2/repository/org/junit/platform/junit-platform-engine/1.10.2/junit-platform-engine-1.10.2.jar:/home/minhd/.m2/repository/org/mockito/mockito-core/5.7.0/mockito-core-5.7.0.jar:/home/minhd/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.12/byte-buddy-agent-1.14.12.jar:/home/minhd/.m2/repository/org/objenesis/objenesis/3.3/objenesis-3.3.jar:/home/minhd/.m2/repository/org/mockito/mockito-junit-jupiter/5.7.0/mockito-junit-jupiter-5.7.0.jar:/home/minhd/.m2/repository/org/skyscreamer/jsonassert/1.5.1/jsonassert-1.5.1.jar:/home/minhd/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar:/home/minhd/.m2/repository/org/springframework/spring-core/6.1.4/spring-core-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-jcl/6.1.4/spring-jcl-6.1.4.jar:/home/minhd/.m2/repository/org/springframework/spring-test/6.1.4/spring-test-6.1.4.jar:/home/minhd/.m2/repository/org/xmlunit/xmlunit-core/2.9.1/xmlunit-core-2.9.1.jar:/home/minhd/.m2/repository/io/projectreactor/reactor-test/3.6.3/reactor-test-3.6.3.jar:/home/minhd/.m2/repository/io/projectreactor/reactor-core/3.6.3/reactor-core-3.6.3.jar:/home/minhd/.m2/repository/org/reactivestreams/reactive-streams/1.0.4/reactive-streams-1.0.4.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-test/6.2.2/spring-security-test-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-core/6.2.2/spring-security-core-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/security/spring-security-crypto/6.2.2/spring-security-crypto-6.2.2.jar:/home/minhd/.m2/repository/org/springframework/boot/spring-boot-starter-thymeleaf/3.2.3/spring-boot-starter-thymeleaf-3.2.3.jar:/home/minhd/.m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.2.RELEASE/thymeleaf-spring6-3.1.2.RELEASE.jar:/home/minhd/.m2/repository/org/thymeleaf/thymeleaf/3.1.2.RELEASE/thymeleaf-3.1.2.RELEASE.jar:/home/minhd/.m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar:/home/minhd/.m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-api/0.11.5/jjwt-api-0.11.5.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-impl/0.11.5/jjwt-impl-0.11.5.jar:/home/minhd/.m2/repository/io/jsonwebtoken/jjwt-jackson/0.11.5/jjwt-jackson-0.11.5.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.4/jackson-databind-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.4/jackson-annotations-2.15.4.jar:/home/minhd/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.4/jackson-core-2.15.4.jar:"/>
+    <property name="sun.cpu.endian" value="little"/>
+    <property name="user.home" value="/home/minhd"/>
+    <property name="user.language" value="en"/>
+    <property name="java.specification.vendor" value="Oracle Corporation"/>
+    <property name="java.version.date" value="2025-04-15"/>
+    <property name="java.home" value="/usr/lib/jvm/java-21-openjdk-amd64"/>
+    <property name="file.separator" value="/"/>
+    <property name="basedir" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend"/>
+    <property name="java.vm.compressedOopsMode" value="32-bit"/>
+    <property name="line.separator" value="&#10;"/>
+    <property name="java.specification.name" value="Java Platform API Specification"/>
+    <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
+    <property name="FILE_LOG_CHARSET" value="UTF-8"/>
+    <property name="java.awt.headless" value="true"/>
+    <property name="surefire.real.class.path" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend/target/surefire/surefirebooter-20250615141829259_3.jar"/>
+    <property name="sun.management.compiler" value="HotSpot 64-Bit Tiered Compilers"/>
+    <property name="java.runtime.version" value="21.0.7+6-Ubuntu-0ubuntu124.04"/>
+    <property name="user.name" value="minhd"/>
+    <property name="stdout.encoding" value="UTF-8"/>
+    <property name="path.separator" value=":"/>
+    <property name="os.version" value="5.15.167.4-microsoft-standard-WSL2"/>
+    <property name="java.runtime.name" value="OpenJDK Runtime Environment"/>
+    <property name="file.encoding" value="UTF-8"/>
+    <property name="java.vm.name" value="OpenJDK 64-Bit Server VM"/>
+    <property name="localRepository" value="/home/minhd/.m2/repository"/>
+    <property name="java.vendor.url.bug" value="https://bugs.launchpad.net/ubuntu/+source/openjdk-21"/>
+    <property name="java.io.tmpdir" value="/tmp"/>
+    <property name="java.version" value="21.0.7"/>
+    <property name="user.dir" value="/mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend"/>
+    <property name="os.arch" value="amd64"/>
+    <property name="java.vm.specification.name" value="Java Virtual Machine Specification"/>
+    <property name="PID" value="688"/>
+    <property name="CONSOLE_LOG_CHARSET" value="UTF-8"/>
+    <property name="native.encoding" value="UTF-8"/>
+    <property name="java.library.path" value="/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib"/>
+    <property name="stderr.encoding" value="UTF-8"/>
+    <property name="java.vm.info" value="mixed mode, sharing"/>
+    <property name="java.vendor" value="Ubuntu"/>
+    <property name="java.vm.version" value="21.0.7+6-Ubuntu-0ubuntu124.04"/>
+    <property name="sun.io.unicode.encoding" value="UnicodeLittle"/>
+    <property name="java.class.version" value="65.0"/>
+    <property name="LOGGED_APPLICATION_NAME" value="[backend] "/>
+  </properties>
+  <testcase name="testRegisterUser_MissingGender" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="1.379">
+    <system-out><![CDATA[14:18:34.252 [main] INFO org.springframework.test.context.support.AnnotationConfigContextLoaderUtils -- Could not detect default configuration classes for test class [dev.vintrigue.gymmate.controller.UserControllerTest]: UserControllerTest does not declare any static, non-private, non-final, nested classes annotated with @Configuration.
+14:18:36.498 [main] INFO org.springframework.boot.test.context.SpringBootTestContextBootstrapper -- Found @SpringBootConfiguration dev.vintrigue.gymmate.GymmateApplication for test class dev.vintrigue.gymmate.controller.UserControllerTest
+14:18:37.702 [main] INFO org.springframework.boot.devtools.restart.RestartApplicationListener -- Restart disabled due to context in which it is running
+
+  .   ____          _            __ _ _
+ /\\ / ___'_ __ _ _(_)_ __  __ _ \ \ \ \
+( ( )\___ | '_ | '_| | '_ \/ _` | \ \ \ \
+ \\/  ___)| |_)| | | | | || (_| |  ) ) ) )
+  '  |____| .__|_| |_|_| |_\__, | / / / /
+ =========|_|==============|___/=/_/_/_/
+ :: Spring Boot ::                (v3.2.3)
+
+2025-06-15T14:18:41.295Z  INFO 688 --- [backend] [           main] d.v.g.controller.UserControllerTest      : Starting UserControllerTest using Java 21.0.7 with PID 688 (started by minhd in /mnt/d/AI SPACE/VSCode/comp1020-gymmate/backend)
+2025-06-15T14:18:41.305Z  INFO 688 --- [backend] [           main] d.v.g.controller.UserControllerTest      : No active profile set, falling back to 1 default profile: "default"
+2025-06-15T14:18:55.535Z  WARN 688 --- [backend] [           main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a97247e7-5e72-4c16-8186-c5a9efcc70ef
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-06-15T14:18:58.912Z  INFO 688 --- [backend] [           main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@72eed547, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@69ffdaa8, org.springframework.security.web.context.SecurityContextHolderFilter@62cf6a84, org.springframework.security.web.header.HeaderWriterFilter@4d81e83a, org.springframework.web.filter.CorsFilter@2a1e57c6, org.springframework.security.web.authentication.logout.LogoutFilter@684ce74c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6b2aafbc, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@50cbcca7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@68d6f48e, org.springframework.security.web.access.ExceptionTranslationFilter@1be52861, org.springframework.security.web.access.intercept.AuthorizationFilter@1934339]
+2025-06-15T14:19:01.514Z  WARN 688 --- [backend] [           main] ion$DefaultTemplateResolverConfiguration : Cannot find template location: classpath:/templates/ (please add some templates, check your Thymeleaf configuration, or set spring.thymeleaf.check-template-location=false)
+2025-06-15T14:19:02.190Z  INFO 688 --- [backend] [           main] o.s.b.t.m.w.SpringBootMockServletContext : Initializing Spring TestDispatcherServlet ''
+2025-06-15T14:19:02.191Z  INFO 688 --- [backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Initializing Servlet ''
+2025-06-15T14:19:02.196Z  INFO 688 --- [backend] [           main] o.s.t.web.servlet.TestDispatcherServlet  : Completed initialization in 5 ms
+2025-06-15T14:19:03.084Z  INFO 688 --- [backend] [           main] d.v.g.controller.UserControllerTest      : Started UserControllerTest in 25.578 seconds (process running for 32.921)
+register
+]]></system-out>
+    <system-err><![CDATA[WARNING: A Java agent has been loaded dynamically (/home/minhd/.m2/repository/net/bytebuddy/byte-buddy-agent/1.14.12/byte-buddy-agent-1.14.12.jar)
+WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+WARNING: Dynamic loading of agents will be disallowed by default in a future release
+]]></system-err>
+  </testcase>
+  <testcase name="testRegisterUser_InvalidGender" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.031">
+    <system-out><![CDATA[register
+]]></system-out>
+  </testcase>
+  <testcase name="testRegisterUser_Success" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.344">
+    <system-out><![CDATA[register
+]]></system-out>
+  </testcase>
+  <testcase name="testCompleteProfile_Success" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.113"/>
+  <testcase name="testLoginUser_Success" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.071">
+    <failure message="Status expected:&lt;200&gt; but was:&lt;400&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Status expected:<200> but was:<400>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at dev.vintrigue.gymmate.controller.UserControllerTest.testLoginUser_Success(UserControllerTest.java:129)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[2025-06-15T14:19:05.053Z  WARN 688 --- [backend] [           main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<?> dev.vintrigue.gymmate.controller.UserController.login(dev.vintrigue.gymmate.model.User)]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/users/login
+       Parameters = {username=[testuser], password=[password123]}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = dev.vintrigue.gymmate.controller.UserController
+           Method = dev.vintrigue.gymmate.controller.UserController#login(User)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.http.converter.HttpMessageNotReadableException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+  <testcase name="testRegisterUser_MissingActivityLevel" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.024">
+    <system-out><![CDATA[register
+]]></system-out>
+  </testcase>
+  <testcase name="testLoginUser_Failure" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.02">
+    <failure message="Response content expected:&lt;Invalid credentials&gt; but was:&lt;&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Response content expected:<Invalid credentials> but was:<>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.ContentResultMatchers.lambda$string$4(ContentResultMatchers.java:148)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at dev.vintrigue.gymmate.controller.UserControllerTest.testLoginUser_Failure(UserControllerTest.java:162)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[2025-06-15T14:19:05.139Z  WARN 688 --- [backend] [           main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<?> dev.vintrigue.gymmate.controller.UserController.login(dev.vintrigue.gymmate.model.User)]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/users/login
+       Parameters = {username=[testuser], password=[wrongpassword]}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = dev.vintrigue.gymmate.controller.UserController
+           Method = dev.vintrigue.gymmate.controller.UserController#login(User)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.http.converter.HttpMessageNotReadableException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+  <testcase name="testRegisterUser_InvalidActivityLevel" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.026">
+    <system-out><![CDATA[register
+]]></system-out>
+  </testcase>
+  <testcase name="testLoginUser_ProfileSetupRequired" classname="dev.vintrigue.gymmate.controller.UserControllerTest" time="0.017">
+    <failure message="Status expected:&lt;200&gt; but was:&lt;400&gt;" type="java.lang.AssertionError"><![CDATA[java.lang.AssertionError: Status expected:<200> but was:<400>
+	at org.springframework.test.util.AssertionErrors.fail(AssertionErrors.java:59)
+	at org.springframework.test.util.AssertionErrors.assertEquals(AssertionErrors.java:122)
+	at org.springframework.test.web.servlet.result.StatusResultMatchers.lambda$matcher$9(StatusResultMatchers.java:637)
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:214)
+	at dev.vintrigue.gymmate.controller.UserControllerTest.testLoginUser_ProfileSetupRequired(UserControllerTest.java:148)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596)
+]]></failure>
+    <system-out><![CDATA[2025-06-15T14:19:05.201Z  WARN 688 --- [backend] [           main] .w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.http.converter.HttpMessageNotReadableException: Required request body is missing: public org.springframework.http.ResponseEntity<?> dev.vintrigue.gymmate.controller.UserController.login(dev.vintrigue.gymmate.model.User)]
+
+MockHttpServletRequest:
+      HTTP Method = POST
+      Request URI = /api/users/login
+       Parameters = {username=[testuser], password=[password123]}
+          Headers = []
+             Body = null
+    Session Attrs = {}
+
+Handler:
+             Type = dev.vintrigue.gymmate.controller.UserController
+           Method = dev.vintrigue.gymmate.controller.UserController#login(User)
+
+Async:
+    Async started = false
+     Async result = null
+
+Resolved Exception:
+             Type = org.springframework.http.converter.HttpMessageNotReadableException
+
+ModelAndView:
+        View name = null
+             View = null
+            Model = null
+
+FlashMap:
+       Attributes = null
+
+MockHttpServletResponse:
+           Status = 400
+    Error message = null
+          Headers = [Vary:"Origin", "Access-Control-Request-Method", "Access-Control-Request-Headers", X-Content-Type-Options:"nosniff", X-XSS-Protection:"0", Cache-Control:"no-cache, no-store, max-age=0, must-revalidate", Pragma:"no-cache", Expires:"0", X-Frame-Options:"DENY"]
+     Content type = null
+             Body = 
+    Forwarded URL = null
+   Redirected URL = null
+          Cookies = []
+]]></system-out>
+  </testcase>
+</testsuite>
