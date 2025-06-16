@@ -571,18 +571,20 @@ function displayMealPlan(plan) {
         const mealGroups = {
             breakfast: [],
             lunch: [],
-            dinner: []
+            dinner: [],
         };
-
-        // Assign meals to their types
-        dayMeals.forEach(meal => {
-            if (!meal) return;
+        mealGroups["breakfast"].push(dayMeals[0]);
+        mealGroups["lunch"].push(dayMeals[1]);
+        mealGroups["dinner"].push(dayMeals[2]);
+        // // Assign meals to their types
+        // dayMeals.forEach(meal => {
+        //     if (!meal) return;
             
-            const type = meal.type?.toLowerCase() || 'other';
-            if (mealGroups[type]) {
-                mealGroups[type].push(meal);
-            }
-        });
+        //     const idx = dayMeals.indexOf(meal);
+        //     if (mealGroups[type]) {
+        //         mealGroups[type].push(meal);
+        //     }
+        // });
 
         // Add meals for each type
         Object.entries(mealGroups).forEach(([type, meals]) => {
@@ -660,7 +662,7 @@ async function completeProfile(username, requestBody) {
         console.log("Starting profile completion for user:", username);
         console.log("Request body:", requestBody);
         
-        const response = await fetch(`/api/users/${username}/complete-profile`, {
+        const response = await fetch(`http://localhost:8080/api/users/${username}/complete-profile`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -680,7 +682,7 @@ async function completeProfile(username, requestBody) {
         
         // Generate exercise plan
         console.log("Generating exercise plan...");
-        const exerciseResponse = await fetch(`/api/exerciseplans?username=${encodeURIComponent(username)}`, {
+        const exerciseResponse = await fetch(`http://localhost:8080/api/exerciseplans?username=${encodeURIComponent(username)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -704,7 +706,7 @@ async function completeProfile(username, requestBody) {
 
         // Generate meal plan
         console.log("Generating meal plan...");
-        const mealPlanResponse = await fetch(`/api/mealplans?username=${encodeURIComponent(username)}`, {
+        const mealPlanResponse = await fetch(`http://localhost:8080/api/mealplans?username=${encodeURIComponent(username)}`, {
             method: 'GET',
             headers: {
                 'Accept': 'application/json',
@@ -726,6 +728,7 @@ async function completeProfile(username, requestBody) {
         
         // Display the meal plan
         displayMealPlan(mealPlan);
+        // mealPlan.then(result => displayMealPlan(result));
         
         // Show success message
         window.alert("Profile updated and plans generated successfully!");

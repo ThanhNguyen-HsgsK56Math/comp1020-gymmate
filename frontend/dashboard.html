@@ -1692,69 +1692,73 @@
 
     <!-- Add this before the closing body tag -->
     <script>
-        // Function to fetch and display plans
-        async function fetchAndDisplayPlans() {
-            const username = localStorage.getItem('username'); // Assuming you store username in localStorage
-            if (!username) {
-                console.error('Username not found');
-                return;
-            }
+        // // Function to fetch and display plans
+        // async function fetchAndDisplayPlans() {
+        //     const username = localStorage.getItem('username'); // Assuming you store username in localStorage
+        //     if (!username) {
+        //         console.error('Username not found');
+        //         return;
+        //     }
 
-            try {
-                // Fetch exercise plan
-                const exerciseResponse = await fetch(`http://localhost:8080/api/exerciseplans?username=${username}`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const exercisePlan = await exerciseResponse.json();
+        //     try {
+        //         // Fetch exercise plan
+        //         const exerciseResponse = await fetch(`http://localhost:8080/api/exerciseplans?username=${username}`, {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Accept': 'application/json',
+        //                 'Content-Type': 'application/json'
+        //             }
+        //         });
+        //         const exercisePlan = await exerciseResponse.json();
 
-                // Fetch meal plan
-                const mealResponse = await fetch(`http://localhost:8080/api/mealplans?username=${username}`, {
-                    headers: {
-                        'Content-Type': 'application/json'
-                    }
-                });
-                const mealPlan = await mealResponse.json();
+        //         // Fetch meal plan
+        //         const mealResponse = await fetch(`http://localhost:8080/api/mealplans?username=${username}`, {
+        //             method: 'GET',
+        //             headers: {
+        //                 'Accept': 'application/json',
+        //                 'Content-Type': 'application/json'
+        //             }
+        //         });
+        //         const mealPlan = await mealResponse.json();
 
-                // Display exercise plan
-                document.getElementById('exercise-date').textContent = new Date(exercisePlan.date).toLocaleDateString();
-                document.getElementById('total-exercise-calories').textContent = exercisePlan.totalCaloriesBurned;
+        //         // Display exercise plan
+        //         document.getElementById('exercise-date').textContent = new Date(exercisePlan.date).toLocaleDateString();
+        //         document.getElementById('total-exercise-calories').textContent = exercisePlan.totalCaloriesBurned;
                 
-                const exercisesList = document.getElementById('exercises-list');
-                exercisesList.innerHTML = exercisePlan.exercises.map(exercise => `
-                    <div class="exercise-item">
-                        <h4>${exercise.name}</h4>
-                        <div class="exercise-details">
-                            <span><i class="fas fa-fire"></i> ${exercise.caloriesBurned} calories</span>
-                            <span><i class="fas fa-clock"></i> ${exercise.duration} min</span>
-                        </div>
-                    </div>
-                `).join('');
+        //         const exercisesList = document.getElementById('exercises-list');
+        //         exercisesList.innerHTML = exercisePlan.exercises.map(exercise => `
+        //             <div class="exercise-item">
+        //                 <h4>${exercise.name}</h4>
+        //                 <div class="exercise-details">
+        //                     <span><i class="fas fa-fire"></i> ${exercise.caloriesBurned} calories</span>
+        //                     <span><i class="fas fa-clock"></i> ${exercise.duration} min</span>
+        //                 </div>
+        //             </div>`
+        //         ).join('');
 
-                // Display meal plan
-                document.getElementById('meal-date').textContent = new Date(mealPlan.date).toLocaleDateString();
-                document.getElementById('total-meal-calories').textContent = mealPlan.totalCalories;
-                document.getElementById('total-prep-time').textContent = mealPlan.totalPrepTime;
+        //         // Display meal plan
+        //         document.getElementById('meal-date').textContent = new Date(mealPlan.date).toLocaleDateString();
+        //         document.getElementById('total-meal-calories').textContent = mealPlan.totalCalories;
+        //         document.getElementById('total-prep-time').textContent = mealPlan.totalPrepTime;
 
-                const mealsList = document.getElementById('meals-list');
-                mealsList.innerHTML = mealPlan.mealSequence.map(meal => `
-                    <div class="meal-item">
-                        <h4>${meal.name}</h4>
-                        <div class="meal-details">
-                            <span><i class="fas fa-fire"></i> ${meal.calories} calories</span>
-                            <span><i class="fas fa-clock"></i> ${meal.prepTime} min prep</span>
-                        </div>
-                    </div>
-                `).join('');
+        //         const mealsList = document.getElementById('meals-list');
+        //         mealsList.innerHTML = mealPlan.mealSequence.map(meal => `
+        //             <div class="meal-item">
+        //                 <h4>${meal.name}</h4>
+        //                 <div class="meal-details">
+        //                     <span><i class="fas fa-fire"></i> ${meal.calories} calories</span>
+        //                     <span><i class="fas fa-clock"></i> ${meal.prepTime} min prep</span>
+        //                 </div>
+        //             </div>
+        //         `).join('');
 
-            } catch (error) {
-                console.error('Error fetching plans:', error);
-            }
-        }
+        //     } catch (error) {
+        //         console.error('Error fetching plans:', error);
+        //     }
+        // }
 
-        // Call the function when the page loads
-        document.addEventListener('DOMContentLoaded', fetchAndDisplayPlans);
+        // // Call the function when the page loads
+        // document.addEventListener('DOMContentLoaded', fetchAndDisplayPlans);
     </script>
 
     <style>
