@@ -5,121 +5,643 @@ $(document).ready(function(){
     // Prevent form submission from reloading the page
     $("#profile-update").on("submit", function(e) {
         e.preventDefault();
-        $("#gen-btn").trigger("click");
+        const form = e.target;
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+        generatePlan();
     });
-    $("#gen-btn").click(() => {
-        console.log("generate plan");
-        function convert(str) {
-            var ar = str.toLowerCase().split(" ");
-            return ar.join("_")
+    
+    $("#gen-btn").click((e) => {
+        e.preventDefault();
+        const form = document.getElementById('profile-update');
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
         }
-        function getFromDropDown(id) {
-            var e = document.getElementById(id);
-            var value = e.value;
-            var text = e.options[e.selectedIndex].text;
-            
-            return convert(text)
+        generatePlan();
+    });
+})
+
+// Function to generate plan
+async function generatePlan() {
+    console.log("Generating plan...");
+    
+    function getFromDropDown(id) {
+        const e = document.getElementById(id);
+        if (!e) {
+            console.error(`Element with id '${id}' not found in the DOM`);
+            return null;
         }
-        var username = readCookie();
+        if (!e.value) {
+            console.error(`Element with id '${id}' has no value selected`);
+            return null;
+        }
+        return e.value; // Return the value directly since our select options already have the correct backend values
+    }
+
+    try {
+        const username = readCookie();
         if (!username) {
             window.alert("Username not found. Please sign in again.");
             return;
         }
+
+        // Get form elements
+        const form = document.getElementById('profile-update');
+        if (!form) {
+            console.error('Profile form not found');
+            window.alert('Profile form not found. Please refresh the page and try again.');
+            return;
+        }
+
+        // Validate form
+        if (!form.checkValidity()) {
+            form.reportValidity();
+            return;
+        }
+
+        // Get form values
+        const weight = form.querySelector('#weight')?.value;
+        const height = form.querySelector('#height')?.value;
+        const age = form.querySelector('#age')?.value;
+        const goal = getFromDropDown('goal');
+        const activity = getFromDropDown('activity');
+        const gender = getFromDropDown('gender');
+
+        // Validate all required fields
+        if (!weight || !height || !age || !goal || !activity || !gender) {
+            const missingFields = [];
+            if (!weight) missingFields.push('weight');
+            if (!height) missingFields.push('height');
+            if (!age) missingFields.push('age');
+            if (!goal) missingFields.push('goal');
+            if (!activity) missingFields.push('activity level');
+            if (!gender) missingFields.push('gender');
+            window.alert(`Please fill in all required fields: ${missingFields.join(', ')}`);
+            return;
+        }
+
         // Store username in localStorage for later use
         localStorage.setItem('username', username);
+        
         const requestBody = {
-            goal: [getFromDropDown('goal')],
-            activityLevel: getFromDropDown('activity'),
-            gender: getFromDropDown('diet'),
-            weight: Number(document.getElementById('weight').value),
-            height: Number(document.getElementById('height').value),
-            age: Number(document.getElementById('age').value),
-          };
-        console.log(requestBody)
-		completeProfile(username, requestBody);
-	})
-})
+            goal: [goal], // Use the goal value directly since it's already in the correct format
+            activityLevel: activity, // Use the activity value directly since it's already in the correct format
+            gender: gender,
+            weight: Number(weight),
+            height: Number(height),
+            age: Number(age),
+        };
+        
+        console.log("Sending request with body:", requestBody);
+        await completeProfile(username, requestBody);
+
+    } catch (error) {
+        console.error("Error generating plan:", error);
+        if (error.message.includes("Failed to fetch")) {
+            window.alert("Cannot connect to the server. Please make sure the backend server is running at http://localhost:8080");
+        } else {
+            window.alert("Error generating plan: " + error.message);
+        }
+    }
+}
 
 // Function to display the exercise plan
 function displayExercisePlan(plan) {
-    const weeklyPlanContainer = document.querySelector('.weekly-plan');
-    weeklyPlanContainer.innerHTML = ''; // Clear existing content
+    const container = document.getElementById('workout-plan');
+    if (!container) return;
 
-    // Create a container for the weekly calendar
+    // Create calendar container
     const calendarContainer = document.createElement('div');
     calendarContainer.className = 'weekly-calendar';
+    calendarContainer.style.width = '100%';
+    calendarContainer.style.padding = '20px';
 
-    // Add calendar header
+    // Add header
     const header = document.createElement('div');
     header.className = 'calendar-header';
     header.innerHTML = `
         <h3>Weekly Workout Schedule</h3>
         <div class="week-navigation">
             <button class="nav-button" id="prevWeek">
-                <i class="fa fa-chevron-left"></i>
+                <i class="fas fa-chevron-left"></i>
             </button>
-            <span class="current-week">Week of ${formatDate(plan.startDate)}</span>
+            <span class="current-week">Week of ${formatDate(new Date())}</span>
             <button class="nav-button" id="nextWeek">
-                <i class="fa fa-chevron-right"></i>
+                <i class="fas fa-chevron-right"></i>
             </button>
         </div>
     `;
     calendarContainer.appendChild(header);
 
+    // Add weekly summary
+    const weeklySummary = document.createElement('div');
+    weeklySummary.className = 'weekly-summary';
+    
+    // Calculate weekly totals
+    let totalWeeklyCalories = 0;
+    let totalWeeklyDuration = 0;
+    let totalWorkouts = 0;
+    
+    Object.values(plan.dailyExercises).forEach(dayExercises => {
+        if (dayExercises && dayExercises.length > 0) {
+            totalWorkouts++;
+            dayExercises.forEach(exercise => {
+                // Calculate calories based on exercise type and duration
+                let caloriesPerMinute = 0;
+                const exerciseType = exercise.type?.toLowerCase() || '';
+                const duration = exercise.duration || 0;
+                
+                switch(exerciseType) {
+                    case 'cardio':
+                        caloriesPerMinute = 10; // Average calories burned per minute for cardio
+                        break;
+                    case 'strength':
+                        caloriesPerMinute = 7; // Average calories burned per minute for strength training
+                        break;
+                    case 'hiit':
+                        caloriesPerMinute = 12; // Average calories burned per minute for HIIT
+                        break;
+                    case 'bodyweight':
+                        caloriesPerMinute = 8; // Average calories burned per minute for bodyweight exercises
+                        break;
+                    default:
+                        caloriesPerMinute = 6; // Default calories burned per minute
+                }
+                
+                // Calculate total calories for this exercise
+                const exerciseCalories = Math.round(caloriesPerMinute * duration);
+                totalWeeklyCalories += exerciseCalories;
+                totalWeeklyDuration += duration;
+            });
+        }
+    });
+
+    weeklySummary.innerHTML = `
+        <div class="summary-item">
+            <i class="fas fa-fire"></i>
+            <span>Weekly Calories: ${totalWeeklyCalories}</span>
+        </div>
+        <div class="summary-item">
+            <i class="fas fa-clock"></i>
+            <span>Total Duration: ${totalWeeklyDuration} minutes</span>
+        </div>
+        <div class="summary-item">
+            <i class="fas fa-dumbbell"></i>
+            <span>Workout Days: ${totalWorkouts}</span>
+        </div>
+    `;
+    calendarContainer.appendChild(weeklySummary);
+
     // Create calendar grid
     const grid = document.createElement('div');
-    grid.className = 'calendar-grid';
+    grid.style.display = 'flex';
+    grid.style.flexDirection = 'row';
+    grid.style.justifyContent = 'space-between';
+    grid.style.gap = '10px';
+    grid.style.width = '100%';
+    grid.style.overflowX = 'auto';
 
     // Add each day's exercises
     const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-    let currentDate = new Date(plan.startDate);
-
-    for (let i = 0; i < 7; i++) {
+    
+    daysOfWeek.forEach(day => {
         const dayColumn = document.createElement('div');
-        dayColumn.className = 'day-column';
+        dayColumn.style.flex = '1';
+        dayColumn.style.minWidth = '0';
+        dayColumn.style.background = '#f8f9fa';
+        dayColumn.style.borderRadius = '8px';
+        dayColumn.style.padding = '10px';
+        dayColumn.style.minHeight = '200px';
         
         // Add day header
         const dayHeader = document.createElement('div');
-        dayHeader.className = 'day-header';
-        dayHeader.textContent = daysOfWeek[i];
+        dayHeader.style.fontWeight = 'bold';
+        dayHeader.style.textAlign = 'center';
+        dayHeader.style.padding = '5px';
+        dayHeader.style.borderBottom = '1px solid #dee2e6';
+        dayHeader.style.marginBottom = '10px';
+        dayHeader.textContent = day;
         dayColumn.appendChild(dayHeader);
 
-        // Add workout slot
-        const workoutSlot = document.createElement('div');
-        workoutSlot.className = 'workout-slot';
+        // Add exercise slot
+        const exerciseSlot = document.createElement('div');
+        exerciseSlot.style.minHeight = '100px';
 
         // Get exercises for this day
-        const dayExercises = plan.dailyExercises[currentDate.toISOString().split('T')[0]];
-        if (dayExercises) {
+        const dayExercises = plan.dailyExercises[day] || [];
+        if (day === 'Sunday' || dayExercises.length === 0) {
+            exerciseSlot.innerHTML = `
+                <div style="background-color: #f5f5f5; border-left: 3px solid #ed563b; text-align: center; padding: 15px; border-radius: 4px;">
+                    <i class="fa fa-bed" style="color: #ed563b;"></i>
+                    <span>Rest</span>
+                </div>
+            `;
+        } else {
+            // Group exercises by type
+            const exerciseGroups = {
+                cardio: [],
+                strength: [],
+                flexibility: [],
+                balance: [],
+                other: []
+            };
+
             dayExercises.forEach(exercise => {
-                const workoutItem = document.createElement('div');
-                workoutItem.className = 'workout-item';
-                workoutItem.innerHTML = `
-                    <h4>${exercise.name}</h4>
-                    <p>${exercise.duration} minutes</p>
-                    <span class="calories">${exercise.caloriesBurned} calories</span>
-                `;
-                workoutSlot.appendChild(workoutItem);
+                const type = exercise.type?.toLowerCase() || 'other';
+                if (exerciseGroups[type]) {
+                    exerciseGroups[type].push(exercise);
+                } else {
+                    exerciseGroups.other.push(exercise);
+                }
+            });
+
+            // Add each exercise group
+            Object.entries(exerciseGroups).forEach(([type, exercises]) => {
+                if (exercises.length > 0) {
+                    const groupContainer = document.createElement('div');
+                    groupContainer.style.marginBottom = '10px';
+                    
+                    exercises.forEach(exercise => {
+                        const exerciseItem = document.createElement('div');
+                        let bgColor;
+                        let exerciseIcon;
+                        
+                        // Determine icon based on exercise name
+                        const exerciseName = exercise.name.toLowerCase();
+                        if (exerciseName.includes('run') || exerciseName.includes('jog') || exerciseName.includes('sprint')) {
+                            exerciseIcon = 'fa-running';
+                        } else if (exerciseName.includes('bike') || exerciseName.includes('cycle') || exerciseName.includes('cycling')) {
+                            exerciseIcon = 'fa-bicycle';
+                        } else if (exerciseName.includes('swim')) {
+                            exerciseIcon = 'fa-swimmer';
+                        } else if (exerciseName.includes('weight') || exerciseName.includes('lift') || exerciseName.includes('press') || 
+                                 exerciseName.includes('bench') || exerciseName.includes('shoulder') || exerciseName.includes('clean') ||
+                                 exerciseName.includes('cable') || exerciseName.includes('fly') || exerciseName.includes('row') ||
+                                 exerciseName.includes('curl') || exerciseName.includes('extension') || exerciseName.includes('raise')) {
+                            exerciseIcon = 'fa-dumbbell';
+                        } else if (exerciseName.includes('yoga') || exerciseName.includes('stretch') || exerciseName.includes('flex')) {
+                            exerciseIcon = 'fa-child';
+                        } else if (exerciseName.includes('balance') || exerciseName.includes('core') || exerciseName.includes('stability') ||
+                                 exerciseName.includes('plank') || exerciseName.includes('twist') || exerciseName.includes('crunch') ||
+                                 exerciseName.includes('situp') || exerciseName.includes('leg raise')) {
+                            exerciseIcon = 'fa-bullseye';
+                        } else if (exerciseName.includes('hiit') || exerciseName.includes('burpee') || exerciseName.includes('mountain') ||
+                                 exerciseName.includes('box') || exerciseName.includes('battle') || exerciseName.includes('rope') ||
+                                 exerciseName.includes('jump') || exerciseName.includes('sprint')) {
+                            exerciseIcon = 'fa-bolt';
+                        } else if (exerciseName.includes('push') || exerciseName.includes('pull') || exerciseName.includes('up') ||
+                                 exerciseName.includes('dip')) {
+                            exerciseIcon = 'fa-user';
+                        } else if (exerciseName.includes('ball') || exerciseName.includes('medicine')) {
+                            exerciseIcon = 'fa-basketball-ball';
+                        } else if (exerciseName.includes('sled') || exerciseName.includes('carry')) {
+                            exerciseIcon = 'fa-weight';
+                        } else {
+                            // Default icons based on type
+                            switch(type) {
+                                case 'cardio':
+                                    exerciseIcon = 'fa-running';
+                                    break;
+                                case 'strength':
+                                    exerciseIcon = 'fa-dumbbell';
+                                    break;
+                                case 'flexibility':
+                                    exerciseIcon = 'fa-child';
+                                    break;
+                                case 'balance':
+                                    exerciseIcon = 'fa-bullseye';
+                                    break;
+                                case 'hiit':
+                                    exerciseIcon = 'fa-bolt';
+                                    break;
+                                case 'bodyweight':
+                                    exerciseIcon = 'fa-user';
+                                    break;
+                                default:
+                                    exerciseIcon = 'fa-running';
+                            }
+                        }
+
+                        switch(type) {
+                            case 'cardio':
+                                bgColor = '#ffebee';
+                                break;
+                            case 'strength':
+                                bgColor = '#e8f5e9';
+                                break;
+                            case 'flexibility':
+                                bgColor = '#e3f2fd';
+                                break;
+                            case 'balance':
+                                bgColor = '#fff3e0';
+                                break;
+                            default:
+                                bgColor = '#f5f5f5';
+                        }
+                        
+                        exerciseItem.style.padding = '8px';
+                        exerciseItem.style.borderRadius = '4px';
+                        exerciseItem.style.marginBottom = '5px';
+                        exerciseItem.style.fontSize = '0.9em';
+                        exerciseItem.style.backgroundColor = bgColor;
+                        exerciseItem.style.borderLeft = '3px solid #ed563b';
+                        
+                        exerciseItem.innerHTML = `
+                            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 5px;">
+                                <i class="fa ${exerciseIcon}" style="color: #ed563b; font-size: 1.1em;"></i>
+                                <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${exercise.name}</span>
+                            </div>
+                            <div style="display: flex; gap: 10px; font-size: 0.85em; color: #666; flex-wrap: wrap;">
+                                ${exercise.duration ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-clock" style="color: #1e90ff;"></i>${exercise.duration}m</span>` : ''}
+                                ${exercise.sets ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-dumbbell" style="color: #ed563b;"></i>${exercise.sets}×${exercise.reps}</span>` : ''}
+                                ${exercise.calories ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-fire" style="color: #ed563b;"></i>${exercise.calories}</span>` : ''}
+                            </div>
+                        `;
+                        groupContainer.appendChild(exerciseItem);
+                    });
+                    
+                    exerciseSlot.appendChild(groupContainer);
+                }
             });
         }
 
-        dayColumn.appendChild(workoutSlot);
+        dayColumn.appendChild(exerciseSlot);
         grid.appendChild(dayColumn);
-        currentDate.setDate(currentDate.getDate() + 1);
-    }
+    });
 
     calendarContainer.appendChild(grid);
-    weeklyPlanContainer.appendChild(calendarContainer);
+    container.innerHTML = '';
+    container.appendChild(calendarContainer);
 
-    // Add summary section
-    const summary = document.createElement('div');
-    summary.className = 'plan-summary';
-    summary.innerHTML = `
-        <h4>Weekly Summary</h4>
-        <p>Total Calories Burned: ${plan.totalCaloriesBurned}</p>
-        <p>Total Duration: ${plan.totalDuration} minutes</p>
+    // Add legend
+    const legend = document.createElement('div');
+    legend.style.display = 'flex';
+    legend.style.justifyContent = 'center';
+    legend.style.gap = '20px';
+    legend.style.marginTop = '20px';
+    legend.style.padding = '10px';
+    legend.style.background = '#f8f9fa';
+    legend.style.borderRadius = '8px';
+    legend.style.flexWrap = 'wrap';
+    
+    legend.innerHTML = `
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span style="width: 12px; height: 12px; border-radius: 2px; background-color: #f44336;"></span>
+            <span>Cardio</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span style="width: 12px; height: 12px; border-radius: 2px; background-color: #4caf50;"></span>
+            <span>Strength</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span style="width: 12px; height: 12px; border-radius: 2px; background-color: #2196f3;"></span>
+            <span>Flexibility</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span style="width: 12px; height: 12px; border-radius: 2px; background-color: #ff9800;"></span>
+            <span>Balance</span>
+        </div>
+        <div style="display: flex; align-items: center; gap: 5px;">
+            <span style="width: 12px; height: 12px; border-radius: 2px; background-color: #9e9e9e;"></span>
+            <span>Rest Day</span>
+        </div>
     `;
-    weeklyPlanContainer.appendChild(summary);
+    calendarContainer.appendChild(legend);
+}
+
+// Helper function to get exercise icon based on type
+function getExerciseIcon(type) {
+    switch (type?.toLowerCase()) {
+        case 'cardio':
+            return 'fa-heartbeat';
+        case 'strength':
+            return 'fa-dumbbell';
+        case 'flexibility':
+            return 'fa-child';
+        case 'balance':
+            return 'fa-balance-scale';
+        default:
+            return 'fa-running';
+    }
+}
+
+// Function to display the meal plan
+function displayMealPlan(plan) {
+    console.log("Raw meal plan data:", JSON.stringify(plan, null, 2));
+    
+    // Print the structure of daily meals
+    if (plan && plan.dailyMeals) {
+        console.log("Daily meals structure:");
+        Object.entries(plan.dailyMeals).forEach(([day, meals]) => {
+            console.log(`${day}:`, JSON.stringify(meals, null, 2));
+            if (Array.isArray(meals)) {
+                console.log(`Number of meals for ${day}:`, meals.length);
+                meals.forEach((meal, index) => {
+                    console.log(`Meal ${index + 1} for ${day}:`, JSON.stringify(meal, null, 2));
+                });
+            } else {
+                console.log(`Invalid meals data for ${day}:`, meals);
+            }
+        });
+    } else {
+        console.log("No daily meals found in plan or invalid structure:", plan);
+    }
+    
+    const container = document.getElementById('meal-plan');
+    if (!container) {
+        console.error('Meal plan container not found');
+        return;
+    }
+
+    // Clear existing content
+    container.innerHTML = '';
+
+    // Check for valid plan data
+    if (!plan || !plan.dailyMeals) {
+        console.error("Invalid meal plan data:", plan);
+        container.innerHTML = `
+            <div style="text-align: center; padding: 20px;">
+                <i class="fa fa-exclamation-circle" style="color: #ed563b; font-size: 2em;"></i>
+                <p>No meal plan data available. Please try generating a new plan.</p>
+            </div>
+        `;
+        return;
+    }
+
+    // Create calendar container
+    const calendarContainer = document.createElement('div');
+    calendarContainer.className = 'weekly-calendar';
+    calendarContainer.style.width = '100%';
+    calendarContainer.style.padding = '20px';
+
+    // Add header
+    const header = document.createElement('div');
+    header.className = 'calendar-header';
+    header.innerHTML = `
+        <h3>Weekly Meal Schedule</h3>
+        <div class="week-navigation">
+            <button class="nav-button" id="prevWeek">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <span class="current-week">Week of ${formatDate(new Date())}</span>
+            <button class="nav-button" id="nextWeek">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    `;
+    calendarContainer.appendChild(header);
+
+    // Add weekly summary
+    const weeklySummary = document.createElement('div');
+    weeklySummary.className = 'weekly-summary';
+    
+    // Calculate weekly totals
+    let totalWeeklyCalories = 0;
+    let totalWeeklyPrepTime = 0;
+    let totalMeals = 0;
+    
+    Object.values(plan.dailyMeals).forEach(dayMeals => {
+        if (dayMeals && dayMeals.length > 0) {
+            dayMeals.forEach(meal => {
+                if (meal) {
+                    totalWeeklyCalories += meal.calories || 0;
+                    totalWeeklyPrepTime += meal.prepTime || 0;
+                    totalMeals++;
+                }
+            });
+        }
+    });
+
+    weeklySummary.innerHTML = `
+        <div class="summary-item">
+            <i class="fas fa-fire"></i>
+            <span>Weekly Calories: ${totalWeeklyCalories}</span>
+        </div>
+        <div class="summary-item">
+            <i class="fas fa-clock"></i>
+            <span>Total Prep Time: ${totalWeeklyPrepTime} minutes</span>
+        </div>
+        <div class="summary-item">
+            <i class="fas fa-utensils"></i>
+            <span>Total Meals: ${totalMeals}</span>
+        </div>
+    `;
+    calendarContainer.appendChild(weeklySummary);
+
+    // Create calendar grid
+    const grid = document.createElement('div');
+    grid.style.display = 'flex';
+    grid.style.flexDirection = 'row';
+    grid.style.justifyContent = 'space-between';
+    grid.style.gap = '10px';
+    grid.style.width = '100%';
+    grid.style.overflowX = 'auto';
+
+    // Days of the week
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    // Create day columns
+    days.forEach(day => {
+        const dayColumn = document.createElement('div');
+        dayColumn.style.flex = '1';
+        dayColumn.style.minWidth = '0';
+        dayColumn.style.background = '#f8f9fa';
+        dayColumn.style.borderRadius = '8px';
+        dayColumn.style.padding = '10px';
+        dayColumn.style.minHeight = '200px';
+        
+        // Add day header
+        const dayHeader = document.createElement('div');
+        dayHeader.style.fontWeight = 'bold';
+        dayHeader.style.textAlign = 'center';
+        dayHeader.style.padding = '5px';
+        dayHeader.style.borderBottom = '1px solid #dee2e6';
+        dayHeader.style.marginBottom = '10px';
+        dayHeader.textContent = day;
+        dayColumn.appendChild(dayHeader);
+
+        // Get meals for this day
+        const dayMeals = plan.dailyMeals[day] || [];
+        console.log(`Processing meals for ${day}:`, dayMeals);
+
+        // Group meals by type
+        const mealGroups = {
+            breakfast: [],
+            lunch: [],
+            dinner: []
+        };
+
+        // Assign meals to their types
+        dayMeals.forEach(meal => {
+            if (!meal) return;
+            
+            const type = meal.type?.toLowerCase() || 'other';
+            if (mealGroups[type]) {
+                mealGroups[type].push(meal);
+            }
+        });
+
+        // Add meals for each type
+        Object.entries(mealGroups).forEach(([type, meals]) => {
+            const mealSection = document.createElement('div');
+            mealSection.style.marginBottom = '10px';
+            
+            const mealHeader = document.createElement('div');
+            mealHeader.style.display = 'flex';
+            mealHeader.style.alignItems = 'center';
+            mealHeader.style.gap = '5px';
+            mealHeader.style.marginBottom = '5px';
+            mealHeader.style.color = '#232d39';
+            mealHeader.innerHTML = `
+                <i class="fas ${type === 'breakfast' ? 'fa-coffee' : type === 'lunch' ? 'fa-utensils' : 'fa-moon'}" style="color: #ed563b;"></i>
+                <span style="font-size: 0.9em; font-weight: 500;">${type.charAt(0).toUpperCase() + type.slice(1)}</span>
+            `;
+            mealSection.appendChild(mealHeader);
+
+            if (meals.length > 0) {
+                meals.forEach(meal => {
+                    if (!meal || !meal.name) return;
+                    
+                    const mealItem = document.createElement('div');
+                    mealItem.style.padding = '8px';
+                    mealItem.style.borderRadius = '4px';
+                    mealItem.style.marginBottom = '5px';
+                    mealItem.style.fontSize = '0.9em';
+                    mealItem.style.backgroundColor = 'white';
+                    mealItem.style.borderLeft = '3px solid #ed563b';
+                    
+                    mealItem.innerHTML = `
+                        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
+                            <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${meal.name}</span>
+                        </div>
+                        <div style="display: flex; gap: 10px; font-size: 0.85em; color: #666; flex-wrap: wrap;">
+                            ${meal.calories ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-fire" style="color: #ed563b;"></i>${meal.calories} cal</span>` : ''}
+                            ${meal.prepTime ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-clock" style="color: #1e90ff;"></i>${meal.prepTime} min</span>` : ''}
+                        </div>
+                    `;
+                    mealSection.appendChild(mealItem);
+                });
+            } else {
+                const noMeal = document.createElement('div');
+                noMeal.style.color = '#999';
+                noMeal.style.fontStyle = 'italic';
+                noMeal.style.textAlign = 'center';
+                noMeal.style.padding = '10px';
+                noMeal.textContent = 'No meal planned';
+                mealSection.appendChild(noMeal);
+            }
+
+            dayColumn.appendChild(mealSection);
+        });
+
+        grid.appendChild(dayColumn);
+    });
+
+    calendarContainer.appendChild(grid);
+    container.appendChild(calendarContainer);
 }
 
 // Helper function to format date
@@ -132,80 +654,90 @@ function formatDate(dateString) {
     });
 }
 
-// Update the completeProfile function to display the plan
-async function completeProfile(username, requestBody){
+// Update the completeProfile function to handle both exercise and meal plans
+async function completeProfile(username, requestBody) {
     try {
-      const response = await fetch('http://localhost:8080/api/users/'+username+'/complete-profile', {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody)
-      });
-      
-      if (response.status == 200) {
-        const data = await response.text();
-        // Removed alert for profile update
+        console.log("Starting profile completion for user:", username);
+        console.log("Request body:", requestBody);
         
-        // Generate exercise plan after profile completion
-        try {
-            const exerciseResponse = await fetch(`http://localhost:8080/api/exerciseplans?username=${encodeURIComponent(username)}`, {
-                method: 'GET',
-                mode: 'cors',
-                credentials: 'include',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                }
-            });
-
-            // Log the response status and text for debugging
-            console.log("Exercise plan response status:", exerciseResponse.status);
-            const responseText = await exerciseResponse.text();
-            console.log("Exercise plan response text:", responseText);
-
-            if (exerciseResponse.ok) {
-                const exercisePlan = JSON.parse(responseText);
-                // Store the exercise plan in localStorage
-                localStorage.setItem('exercisePlan', JSON.stringify(exercisePlan));
-                
-                // Display the exercise plan
-                displayExercisePlan(exercisePlan);
-                
-                // Removed alert for exercise plan generation
-                
-                // Navigate to the plans section
-                const plansSection = document.getElementById('my-plans');
-                if (plansSection) {
-                    // Remove any existing hash from the URL
-                    history.pushState("", document.title, window.location.pathname);
-                    // Scroll to the plans section
-                    plansSection.scrollIntoView({ behavior: 'smooth' });
-                    
-                    // Activate the plans tab if it exists
-                    const plansTab = document.querySelector('.plan-tab[data-plan="exercise"]');
-                    if (plansTab) {
-                        plansTab.click();
-                    }
-                }
-            } else {
-                console.error('Exercise plan generation failed:', responseText);
-                window.alert("Failed to generate exercise plan: " + responseText);
-            }
-        } catch (err) {
-            console.error("Error generating exercise plan:", err);
-            window.alert("Failed to generate exercise plan. Please try again.");
+        const response = await fetch(`/api/users/${username}/complete-profile`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(requestBody)
+        });
+        
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error("Profile completion failed with status:", response.status);
+            console.error("Error response:", errorText);
+            throw new Error(errorText || "Profile completion failed");
         }
-      } else {
-        const error = await response.text();
-        console.error(error);
-        window.alert(error);
-      }
-    } catch (err) {
-      console.error("Error:", err);
-      window.alert("An error occurred. Please try again.");
+
+        const updatedUser = await response.json();
+        console.log("Profile completed successfully:", updatedUser);
+        
+        // Generate exercise plan
+        console.log("Generating exercise plan...");
+        const exerciseResponse = await fetch(`/api/exerciseplans?username=${encodeURIComponent(username)}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!exerciseResponse.ok) {
+            const errorText = await exerciseResponse.text();
+            throw new Error(`Exercise plan generation failed: ${errorText}`);
+        }
+
+        const exercisePlan = await exerciseResponse.json();
+        console.log("Exercise plan generated:", exercisePlan);
+        
+        // Store the exercise plan in localStorage
+        localStorage.setItem('exercisePlan', JSON.stringify(exercisePlan));
+        
+        // Display the exercise plan
+        displayExercisePlan(exercisePlan);
+
+        // Generate meal plan
+        console.log("Generating meal plan...");
+        const mealPlanResponse = await fetch(`/api/mealplans?username=${encodeURIComponent(username)}`, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!mealPlanResponse.ok) {
+            const errorText = await mealPlanResponse.text();
+            console.error("Meal plan generation failed:", errorText);
+            throw new Error(`Failed to generate meal plan: ${errorText}`);
+        }
+
+        const mealPlan = await mealPlanResponse.json();
+        console.log("Meal plan generated:", mealPlan);
+        
+        // Store the meal plan in localStorage
+        localStorage.setItem('mealPlan', JSON.stringify(mealPlan));
+        
+        // Display the meal plan
+        displayMealPlan(mealPlan);
+        
+        // Show success message
+        window.alert("Profile updated and plans generated successfully!");
+        
+        // Navigate to the plans section
+        const plansSection = document.getElementById('my-plans');
+        if (plansSection) {
+            plansSection.scrollIntoView({ behavior: 'smooth' });
+        }
+    } catch (error) {
+        console.error("Error in completeProfile:", error);
+        throw error; // Re-throw the error to be handled by the caller
     }
 }
   
@@ -266,14 +798,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Scroll to the last visible card if we're below it
                 const lastVisibleCard = visibleCards[5];
-                if (lastVisibleCard) {
-                    const lastCardBottom = lastVisibleCard.getBoundingClientRect().bottom + window.scrollY;
-                    if (currentScroll > lastCardBottom) {
-                        window.scrollTo({
-                            top: lastCardBottom - 100,
-                            behavior: 'smooth'
-                        });
-                    }
+                if (currentScroll > lastVisibleCard.getBoundingClientRect().bottom + window.scrollY) {
+                    window.scrollTo({
+                        top: lastVisibleCard.getBoundingClientRect().bottom + window.scrollY - 100,
+                        behavior: 'smooth'
+                    });
                 }
             }
             
@@ -330,14 +859,25 @@ document.addEventListener('DOMContentLoaded', function() {
     // Search functionality
     function filterBySearch(searchTerm) {
         exerciseCards.forEach(card => {
-            if (card.style.display !== 'none') { // Only search visible cards (respecting category filter)
-                const exerciseTitle = card.querySelector('.exercise-title').textContent.toLowerCase();
-                const exerciseDetails = card.querySelector('.exercise-details').textContent.toLowerCase();
-                
-                if (exerciseTitle.includes(searchTerm) || exerciseDetails.includes(searchTerm)) {
+            // If search term is empty, show all cards that match the current category filter
+            if (!searchTerm) {
+                const currentCategory = document.querySelector('.category-item.active').getAttribute('data-filter');
+                if (currentCategory === 'all' || card.getAttribute('data-category') === currentCategory) {
                     card.style.display = 'block';
                 } else {
                     card.style.display = 'none';
+                }
+            } else {
+                // If there's a search term, only search within visible cards (respecting category filter)
+                if (card.style.display !== 'none') {
+                    const exerciseTitle = card.querySelector('.exercise-title').textContent.toLowerCase();
+                    const exerciseDetails = card.querySelector('.exercise-details').textContent.toLowerCase();
+                    
+                    if (exerciseTitle.includes(searchTerm) || exerciseDetails.includes(searchTerm)) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 }
             }
         });
@@ -383,12 +923,24 @@ document.addEventListener('DOMContentLoaded', function() {
         tab.addEventListener('click', () => {
             // Remove active class from all tabs and contents
             planTabs.forEach(t => t.classList.remove('active'));
-            planContents.forEach(content => content.classList.remove('active'));
+            planContents.forEach(c => c.classList.remove('active'));
             
             // Add active class to clicked tab and corresponding content
             tab.classList.add('active');
             const planType = tab.getAttribute('data-plan');
-            document.getElementById(`${planType}-plan`).classList.add('active');
+            const contentId = `${planType}-plan`;
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.add('active');
+                
+                // If switching to meal plan, ensure it's displayed
+                if (planType === 'meal') {
+                    const savedMealPlan = localStorage.getItem('mealPlan');
+                    if (savedMealPlan) {
+                        displayMealPlan(JSON.parse(savedMealPlan));
+                    }
+                }
+            }
         });
     });
 
@@ -502,7 +1054,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 const profileData = {
                     goal: [document.getElementById('goal').value],
                     activityLevel: document.getElementById('activity').value,
-                    gender: document.getElementById('diet').value,
+                    gender: document.getElementById('gender').value,
                     weight: Number(document.getElementById('weight').value),
                     height: Number(document.getElementById('height').value),
                     age: Number(document.getElementById('age').value),
@@ -512,10 +1064,15 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Load existing plan if available
-    const savedPlan = localStorage.getItem('exercisePlan');
-    if (savedPlan) {
-        displayExercisePlan(JSON.parse(savedPlan));
+    // Load existing plans if available
+    const savedExercisePlan = localStorage.getItem('exercisePlan');
+    if (savedExercisePlan) {
+        displayExercisePlan(JSON.parse(savedExercisePlan));
+    }
+
+    const savedMealPlan = localStorage.getItem('mealPlan');
+    if (savedMealPlan) {
+        displayMealPlan(JSON.parse(savedMealPlan));
     }
 });
 function readCookie() {

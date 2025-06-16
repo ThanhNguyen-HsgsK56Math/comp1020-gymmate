@@ -1,10 +1,10 @@
 // User Authentication and Storage Management
 
 // Function to handle user registration
-function handleSignUp(event) {
+async function handleSignUp(event) {
     event.preventDefault();
     
-    const fullname = document.getElementById('fullname').value;
+    const username = document.getElementById('fullname').value;
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     const confirmPassword = document.getElementById('confirm-password').value;
@@ -15,68 +15,76 @@ function handleSignUp(event) {
         return;
     }
 
-    // Get existing users or initialize empty array
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    try {
+        const response = await fetch('http://localhost:8080/api/users/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password,
+                email: email
+            })
+        });
 
-    // Check if user already exists
-    if (users.some(user => user.email === email)) {
-        alert('A user with this email already exists!');
-        return;
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(error);
+        }
+
+        const user = await response.json();
+        
+        // Save current user session
+        localStorage.setItem('currentUser', JSON.stringify({
+            username: user.username,
+            email: user.email
+        }));
+
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
+    } catch (error) {
+        alert(error.message || 'Registration failed. Please try again.');
     }
-
-    // Create new user object
-    const newUser = {
-        id: Date.now().toString(),
-        fullname,
-        email,
-        password: btoa(password), // Basic encoding (not secure for production)
-        createdAt: new Date().toISOString()
-    };
-
-    // Add new user to array
-    users.push(newUser);
-
-    // Save updated users array
-    localStorage.setItem('users', JSON.stringify(users));
-
-    // Save current user session
-    localStorage.setItem('currentUser', JSON.stringify({
-        id: newUser.id,
-        fullname: newUser.fullname,
-        email: newUser.email
-    }));
-
-    // Redirect to dashboard
-    // window.location.href = 'dashboard.html';
 }
 
 // Function to handle user sign in
-function handleSignIn(event) {
+async function handleSignIn(event) {
     event.preventDefault();
     
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
 
-    // Get users from localStorage
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
+    try {
+        const response = await fetch('http://localhost:8080/api/users/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                password: password
+            })
+        });
 
-    // Find user by username (which can be either username or email)
-    const user = users.find(u => u.email === username || u.fullname === username);
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(error);
+        }
 
-    if (!user || btoa(password) !== user.password) {
-        alert('Invalid username or password!');
-        return;
+        const data = await response.json();
+        
+        // Save current user session
+        localStorage.setItem('currentUser', JSON.stringify({
+            username: data.username,
+            status: data.status
+        }));
+
+        // Redirect to dashboard
+        window.location.href = 'dashboard.html';
+    } catch (error) {
+        alert(error.message || 'Invalid username or password!');
     }
-
-    // Save current user session
-    localStorage.setItem('currentUser', JSON.stringify({
-        id: user.id,
-        fullname: user.fullname,
-        email: user.email
-    }));
-
-    // Redirect to dashboard
-    // window.location.href = 'dashboard.html';
 }
 
 // Function to handle sign out
@@ -99,7 +107,7 @@ function updateUserInfo() {
     const userNameElement = document.getElementById('user-name');
     
     if (currentUser && userNameElement) {
-        userNameElement.textContent = currentUser.fullname;
+        userNameElement.textContent = currentUser.username;
     }
 }
 
