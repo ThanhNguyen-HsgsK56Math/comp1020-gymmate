@@ -22,12 +22,15 @@ GymMate is a personalized fitness web application that provides custom exercise 
 
 | Layer       | Tools & Technologies                                |
 |------------|-----------------------------------------------------|
-| Language    | Java, HTML, CSS, JavaScript                         |
-| Backend     | Spring Boot (RESTful API)                           |
+| Language    | Java 17, HTML5, CSS3, JavaScript                    |
+| Backend     | Spring Boot 3.3.0 (RESTful API)                     |
 | Frontend    | HTML5, CSS3, JavaScript                             |
-| Database    | SQL (local storage), XML (data transfer)            |
+| Database    | MongoDB Atlas (Cloud Database)                      |
+| Security    | Spring Security, JWT Authentication                 |
 | Algorithms  | Merge Sort, Binary Search, Custom Optimization      |
 | Structures  | HashMaps, Arrays, Lists, Graphs                     |
+| Build Tool  | Maven 3.12.1                                        |
+| Dependencies| Lombok 1.18.30, Spring Web, Spring Data MongoDB     |
 
 ## 🧪 Installation & Usage
 
