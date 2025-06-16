@@ -190,7 +190,7 @@ function displayExercisePlan(plan) {
         </div>
         <div class="summary-item">
             <i class="fas fa-dumbbell"></i>
-            <span>Workout Days: ${totalWorkouts}</span>
+            <span>Workout Days: ${totalWorkouts-1}</span>
         </div>
     `;
     calendarContainer.appendChild(weeklySummary);
@@ -432,24 +432,6 @@ function getExerciseIcon(type) {
 function displayMealPlan(plan) {
     console.log("Raw meal plan data:", JSON.stringify(plan, null, 2));
     
-    // Print the structure of daily meals
-    if (plan && plan.dailyMeals) {
-        console.log("Daily meals structure:");
-        Object.entries(plan.dailyMeals).forEach(([day, meals]) => {
-            console.log(`${day}:`, JSON.stringify(meals, null, 2));
-            if (Array.isArray(meals)) {
-                console.log(`Number of meals for ${day}:`, meals.length);
-                meals.forEach((meal, index) => {
-                    console.log(`Meal ${index + 1} for ${day}:`, JSON.stringify(meal, null, 2));
-                });
-            } else {
-                console.log(`Invalid meals data for ${day}:`, meals);
-            }
-        });
-    } else {
-        console.log("No daily meals found in plan or invalid structure:", plan);
-    }
-    
     const container = document.getElementById('meal-plan');
     if (!container) {
         console.error('Meal plan container not found');
@@ -540,11 +522,11 @@ function displayMealPlan(plan) {
     grid.style.width = '100%';
     grid.style.overflowX = 'auto';
 
-    // Days of the week
-    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    // Days of the week in order
+    const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
     // Create day columns
-    days.forEach(day => {
+    daysOfWeek.forEach(day => {
         const dayColumn = document.createElement('div');
         dayColumn.style.flex = '1';
         dayColumn.style.minWidth = '0';
@@ -563,34 +545,22 @@ function displayMealPlan(plan) {
         dayHeader.textContent = day;
         dayColumn.appendChild(dayHeader);
 
-        // Get meals for this day
+        // Get meals for this day from the dailyMeals dictionary
         const dayMeals = plan.dailyMeals[day] || [];
         console.log(`Processing meals for ${day}:`, dayMeals);
 
-        // Group meals by type
-        const mealGroups = {
-            breakfast: [],
-            lunch: [],
-            dinner: [],
-        };
-        mealGroups["breakfast"].push(dayMeals[0]);
-        mealGroups["lunch"].push(dayMeals[1]);
-        mealGroups["dinner"].push(dayMeals[2]);
-        // // Assign meals to their types
-        // dayMeals.forEach(meal => {
-        //     if (!meal) return;
-            
-        //     const idx = dayMeals.indexOf(meal);
-        //     if (mealGroups[type]) {
-        //         mealGroups[type].push(meal);
-        //     }
-        // });
+        // Create sections for each meal type
+        const mealTypes = [
+            { type: 'breakfast', index: 0, icon: 'fa-coffee' },
+            { type: 'lunch', index: 1, icon: 'fa-utensils' },
+            { type: 'dinner', index: 2, icon: 'fa-moon' }
+        ];
 
-        // Add meals for each type
-        Object.entries(mealGroups).forEach(([type, meals]) => {
+        mealTypes.forEach(({ type, index, icon }) => {
             const mealSection = document.createElement('div');
             mealSection.style.marginBottom = '10px';
             
+            // Add meal type header
             const mealHeader = document.createElement('div');
             mealHeader.style.display = 'flex';
             mealHeader.style.alignItems = 'center';
@@ -598,34 +568,32 @@ function displayMealPlan(plan) {
             mealHeader.style.marginBottom = '5px';
             mealHeader.style.color = '#232d39';
             mealHeader.innerHTML = `
-                <i class="fas ${type === 'breakfast' ? 'fa-coffee' : type === 'lunch' ? 'fa-utensils' : 'fa-moon'}" style="color: #ed563b;"></i>
+                <i class="fas ${icon}" style="color: #ed563b;"></i>
                 <span style="font-size: 0.9em; font-weight: 500;">${type.charAt(0).toUpperCase() + type.slice(1)}</span>
             `;
             mealSection.appendChild(mealHeader);
 
-            if (meals.length > 0) {
-                meals.forEach(meal => {
-                    if (!meal || !meal.name) return;
-                    
-                    const mealItem = document.createElement('div');
-                    mealItem.style.padding = '8px';
-                    mealItem.style.borderRadius = '4px';
-                    mealItem.style.marginBottom = '5px';
-                    mealItem.style.fontSize = '0.9em';
-                    mealItem.style.backgroundColor = 'white';
-                    mealItem.style.borderLeft = '3px solid #ed563b';
-                    
-                    mealItem.innerHTML = `
-                        <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
-                            <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${meal.name}</span>
-                        </div>
-                        <div style="display: flex; gap: 10px; font-size: 0.85em; color: #666; flex-wrap: wrap;">
-                            ${meal.calories ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-fire" style="color: #ed563b;"></i>${meal.calories} cal</span>` : ''}
-                            ${meal.prepTime ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-clock" style="color: #1e90ff;"></i>${meal.prepTime} min</span>` : ''}
-                        </div>
-                    `;
-                    mealSection.appendChild(mealItem);
-                });
+            // Get the meal for this type from the day's meals array
+            const meal = dayMeals[index];
+            if (meal && meal.name) {
+                const mealItem = document.createElement('div');
+                mealItem.style.padding = '8px';
+                mealItem.style.borderRadius = '4px';
+                mealItem.style.marginBottom = '5px';
+                mealItem.style.fontSize = '0.9em';
+                mealItem.style.backgroundColor = 'white';
+                mealItem.style.borderLeft = '3px solid #ed563b';
+                
+                mealItem.innerHTML = `
+                    <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 5px;">
+                        <span style="font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${meal.name}</span>
+                    </div>
+                    <div style="display: flex; gap: 10px; font-size: 0.85em; color: #666; flex-wrap: wrap;">
+                        ${meal.calories ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-fire" style="color: #ed563b;"></i>${meal.calories} cal</span>` : ''}
+                        ${meal.prepTime ? `<span style="display: flex; align-items: center; gap: 3px; white-space: nowrap;"><i class="fa fa-clock" style="color: #1e90ff;"></i>${meal.prepTime} min</span>` : ''}
+                    </div>
+                `;
+                mealSection.appendChild(mealItem);
             } else {
                 const noMeal = document.createElement('div');
                 noMeal.style.color = '#999';
@@ -729,9 +697,6 @@ async function completeProfile(username, requestBody) {
         // Display the meal plan
         displayMealPlan(mealPlan);
         // mealPlan.then(result => displayMealPlan(result));
-        
-        // Show success message
-        window.alert("Profile updated and plans generated successfully!");
         
         // Navigate to the plans section
         const plansSection = document.getElementById('my-plans');
